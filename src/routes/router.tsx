@@ -2,6 +2,8 @@ import App from "@/App";
 import { DashboardLayout } from "@/components/layouts/DashboardLayout";
 import { About } from "@/Pages/About";
 import Login from "@/Pages/Auth/Login";
+
+import Register from "@/Pages/Auth/Register";
 import { Homepage } from "@/Pages/Home/Homepage";
 
 import { createBrowserRouter } from "react-router";
@@ -22,6 +24,10 @@ export const router = createBrowserRouter([
   {
     path: "login",
     Component: Login,
+  },
+  {
+    path: "register",
+    Component: Register,
   },
   //Admin Routes
   {
