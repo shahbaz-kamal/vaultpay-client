@@ -5,44 +5,41 @@ import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from 
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
+
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-
-const formSchema = z.object({
-  name: z
-    .string("Name is required")
-    .min(2, "Name should be at least minimum of two characters")
-    .max(50, "Name should be maximum of 50 characters"),
-  email: z
-    .string("Email Must be string")
-    .email("Invalid Email Format")
-    .min(2, "Email should be at least minimum of two characters")
-    .max(50, "Email should be maximum of 50 characters"),
-  password: z
-    .string("Password Must be string")
-    .min(6, "Password must includes at least 6 characters")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    .optional(),
-  phone: z
-    .string("Phone number must be a string")
-    .regex(/^(\+8801[3-9][0-9]{8}|01[3-9][0-9]{8})$/, "Invalid Bangladeshi phone number format")
-    .optional(),
-
-  profilePhoto: z.string("Photo must be string").optional(),
-  address: z
-    .string("Address must be string")
-    .max(200, {
-      message: "Address can not exceed more than 200 characters",
-    })
-    .optional(),
-});
+import { registerSchema } from "@/schemas/RegisterFormSchema";
+import type z from "zod";
+import Password from "@/components/ui/Password";
+import { useRegisterMutation } from "@/redux/features/auths/auth.api";
+import { toast } from "sonner";
 
 export function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
-  const form = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const [register] = useRegisterMutation();
+
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+  const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+    const userInfo={
+        name:data.name,
+        email:data.email,
+        password:data.password,
+    }
+    try {
+      console.log(userInfo);
+      const result=await register(userInfo).unwrap();
+      console.log(result)
+      toast.success("Registration successful! Please check your email to verify your account.");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -90,7 +87,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
           </form>
           {/* original form */}
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
               <FieldGroup>
                 <Field>
                   <Button variant="outline" type="button">
@@ -110,16 +107,60 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Name *</FormLabel>
                     <FormControl>
                       <Input placeholder="Your Name" {...field} />
                     </FormControl>
-                  
+                    <FormDescription className="sr-only">This is your Public display name</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button className="mt-4 w-full" type="submit">Submit</Button>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your Email" {...field} />
+                    </FormControl>
+                    <FormDescription className="sr-only">This is your Email address</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password *</FormLabel>
+                    <FormControl>
+                      <Password {...field}></Password>
+                    </FormControl>
+                    <FormDescription className="sr-only">This is your Password</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password *</FormLabel>
+                    <FormControl>
+                      <Password {...field}></Password>
+                    </FormControl>
+                    <FormDescription className="sr-only">This is your Confirm password</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button className=" w-full" type="submit">
+                Submit
+              </Button>
             </form>
           </Form>
         </CardContent>
