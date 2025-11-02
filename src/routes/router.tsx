@@ -4,7 +4,9 @@ import { About } from "@/Pages/About";
 import Login from "@/Pages/Auth/Login";
 
 import Register from "@/Pages/Auth/Register";
-import { Homepage } from "@/Pages/Home/Homepage";
+import  Homepage  from "@/Pages/Home/Homepage";
+import Verify from "@/Pages/Verify";
+
 
 import { createBrowserRouter } from "react-router";
 
@@ -22,12 +24,16 @@ export const router = createBrowserRouter([
   },
   //auth routes
   {
-    path: "login",
+    path: "/login",
     Component: Login,
   },
   {
-    path: "register",
+    path: "/register",
     Component: Register,
+  },
+  {
+    path: "/verify",
+    Component: Verify,
   },
   //Admin Routes
   {

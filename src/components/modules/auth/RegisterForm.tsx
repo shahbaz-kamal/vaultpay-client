@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 
@@ -15,6 +15,7 @@ import { useRegisterMutation } from "@/redux/features/auths/auth.api";
 import { toast } from "sonner";
 
 export function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
+  const navigate = useNavigate();
   const [register] = useRegisterMutation();
 
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -27,18 +28,21 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
     },
   });
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
-    const userInfo={
-        name:data.name,
-        email:data.email,
-        password:data.password,
-    }
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
     try {
       console.log(userInfo);
-      const result=await register(userInfo).unwrap();
-      console.log(result)
+      const result = await register(userInfo).unwrap();
+      console.log(result);
       toast.success("Registration successful! Please check your email to verify your account.");
-    } catch (error) {
+      navigate("/verify");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error:any) {
       console.log(error);
+      toast.error(error.messagee);
     }
   };
 
@@ -85,10 +89,8 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
               </Field> */}
             </FieldGroup>
           </form>
-          {/* original form */}
-          <Form {...form}>
-            <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
-              <FieldGroup>
+
+          <FieldGroup>
                 <Field>
                   <Button variant="outline" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -102,6 +104,10 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
                 </Field>
                 <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card mb-2">Or continue with</FieldSeparator>
               </FieldGroup>
+          {/* original form */}
+          <Form {...form}>
+            <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
+            
               <FormField
                 control={form.control}
                 name="name"
@@ -158,8 +164,13 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
                   </FormItem>
                 )}
               />
+                <FieldDescription className="text-center">
+                  Already an account?  <span className="underline-offset-4 hover:underline text-primary-foreground font-semibold">
+                    <Link to="/login">Login now</Link>
+                  </span>
+                </FieldDescription>
               <Button className=" w-full" type="submit">
-                Submit
+                Register
               </Button>
             </form>
           </Form>

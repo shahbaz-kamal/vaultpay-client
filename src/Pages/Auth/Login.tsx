@@ -1,8 +1,9 @@
 import { LoginForm } from "@/components/modules/auth/LoginForm";
+
 import { Home } from "lucide-react";
 import { Link } from "react-router";
 
-export default function Login() {
+export default function Register() {
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">
