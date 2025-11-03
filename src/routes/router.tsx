@@ -1,7 +1,11 @@
 import App from "@/App";
-import {  DashboardLayout } from "@/components/layouts/DashboardLayout";
+import { DashboardLayout } from "@/components/layouts/DashboardLayout";
 import { About } from "@/Pages/About";
-import { Homepage } from "@/Pages/Home/HomePage";
+import Login from "@/Pages/Auth/Login";
+
+import Register from "@/Pages/Auth/Register";
+import  Homepage  from "@/Pages/Home/Homepage";
+import Verify from "@/Pages/Verify";
 
 
 import { createBrowserRouter } from "react-router";
@@ -11,16 +15,30 @@ export const router = createBrowserRouter([
     path: "/",
     Component: App,
     children: [
-        // public routes
+      // public routes
       { index: true, Component: Homepage },
       { path: "about", Component: About },
-       // Protected Routes
+
+      // Protected Routes
     ],
+  },
+  //auth routes
+  {
+    path: "/login",
+    Component: Login,
+  },
+  {
+    path: "/register",
+    Component: Register,
+  },
+  {
+    path: "/verify",
+    Component: Verify,
   },
   //Admin Routes
   {
-path:"/admin",
-Component:DashboardLayout,
-children:[{}]
+    path: "/admin",
+    Component: DashboardLayout,
+    children: [{}],
   },
 ]);

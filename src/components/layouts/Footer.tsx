@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="bg-gray-100">
       <div className="mx-auto container px-4 ">
         <div className="flex justify-center text-teal-600">
-        <Logo></Logo>
+          <Logo></Logo>
         </div>
 
         <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
@@ -14,7 +14,7 @@ export function Footer() {
 
         <ul className="mt-12 flex flex-wrap justify-center md:justify-between gap-6 md:gap-8 lg:gap-12 ">
           <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
+            <a className="text-gray-700 transition hover:text-gray-700/75" href="">
               {" "}
               About{" "}
             </a>
@@ -22,8 +22,7 @@ export function Footer() {
 
           <li>
             <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
-              {" "}
-              Careers{" "}
+              Careers
             </a>
           </li>
 
