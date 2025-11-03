@@ -16,19 +16,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSendOtpMutation, useVerifyOtpMutation } from "@/redux/features/auths/auth.api";
 
 export function VerifyForm({ className, ...props }: React.ComponentProps<"div">) {
+  const [sentOtp, setSentOtp] = useState(false);
+  const [timer, setTimer] = useState(120);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [sendOtp] = useSendOtpMutation();
   const [verifyOtp] = useVerifyOtpMutation();
-  const [sentOtp, setSentOtp] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location.state);
+
   const [email] = useState(location.state || "");
-  //   useEffect(() => {
-  //     if (!email) {
-  //       toast.error("No email provided for verification.");
-  //       navigate("/");
-  //     }
-  //   }, [email]);
 
   const form = useForm<z.infer<typeof otpSchema>>({
     resolver: zodResolver(otpSchema),
@@ -46,7 +43,7 @@ export function VerifyForm({ className, ...props }: React.ComponentProps<"div">)
       const result = await verifyOtp(userInfo).unwrap();
       if (result.success) {
         toast.success("OTP verified successfully.", { id: toastId });
-        navigate("/", { state: email });
+        navigate("/login");
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -62,6 +59,7 @@ export function VerifyForm({ className, ...props }: React.ComponentProps<"div">)
       if (res.success) {
         toast.success("OTP sent successfully to your email.", { id: toastId });
         setSentOtp(true);
+        setTimer(120);
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -69,13 +67,30 @@ export function VerifyForm({ className, ...props }: React.ComponentProps<"div">)
       toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    if (!email) {
+      toast.error("No email provided for verification.");
+      navigate("/");
+    }
+  }, [email]);
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      if (email && sentOtp) {
+        setTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      }
+    }, 1000);
+    return () => clearInterval(timerId);
+  }, [timer, email, sentOtp]);
+
   return (
     <div className={cn("flex flex-col gap-6 items-center", className)} {...props}>
       {sentOtp ? (
         <Card className=" w-full">
           <CardHeader className="text-center">
             <CardTitle className="text-xl font-semibold">Verify It's You</CardTitle>
-            <CardDescription>Please verify your identity with OTP </CardDescription>
+            <CardDescription>Please verify your identity by entering the one-time password sent to your email </CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -103,7 +118,20 @@ export function VerifyForm({ className, ...props }: React.ComponentProps<"div">)
                           </InputOTPGroup>
                         </InputOTP>
                       </FormControl>
-                      <FormDescription className="text-center mt-1">Please enter the one-time password sent to your email.</FormDescription>
+                      <FormDescription className="text-center mt-1 flex items-center justify-center gap-1">
+                        <Button
+                          disabled={timer !== 0}
+                          onClick={handleSendOtp}
+                          type="button"
+                          variant="link"
+                          className={cn("p-0 m-0", { "cursor-pointer": timer === 0, "text-gray-500": timer !== 0 })}
+                        >
+                          Resend OTP
+                        </Button>
+                        <div>
+                          in {timer} {timer > 1 ? "seconds" : "second"}
+                        </div>
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}

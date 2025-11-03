@@ -4,6 +4,9 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuL
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ModeToggle } from "./ModeToggler";
 import { Link } from "react-router";
+import { authApi, useGetMeQuery, useLogoutMutation } from "@/redux/features/auths/auth.api";
+import { toast } from "sonner";
+import { useAppDispatch } from "@/redux/hooks";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -12,6 +15,23 @@ const navigationLinks = [
 ];
 
 export default function Navbar() {
+  const { data } = useGetMeQuery(undefined);
+  const [logout] = useLogoutMutation();
+  const dispatch = useAppDispatch();
+  // console.log(data);
+
+  const handleLogout = async () => {
+    const toastId = toast.loading("Logging Out...");
+    try {
+      await logout(undefined);
+      dispatch(authApi.util.resetApiState());
+      toast.success("Log Out Successful", { id: toastId });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.data.message);
+    }
+  };
   return (
     <header className="border-b px-4 ">
       <div className="container mx-auto flex h-16 items-center justify-between gap-4">
@@ -54,7 +74,7 @@ export default function Navbar() {
                   {navigationLinks.map((link, index) => (
                     <NavigationMenuItem key={index} className="w-full">
                       <NavigationMenuLink asChild className="py-1.5">
-                      <Link to={link.href}>{link.label}</Link>
+                        <Link to={link.href}>{link.label}</Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   ))}
@@ -83,9 +103,16 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-          <Button asChild variant="default" size="sm" className="text-sm ">
-            <Link to={"/login"}> Login</Link>
-          </Button>
+          {!data?.data?.email && (
+            <Button asChild variant="default" size="sm" className="text-sm ">
+              <Link to={"/login"}> Login</Link>
+            </Button>
+          )}
+          {data?.data?.email && (
+            <Button onClick={handleLogout} variant="outline" size="sm" className="text-sm ">
+              Logout
+            </Button>
+          )}
           <ModeToggle></ModeToggle>
         </div>
       </div>
