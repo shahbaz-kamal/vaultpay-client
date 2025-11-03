@@ -1,5 +1,6 @@
+import type { ComponentType } from "react";
 
-export type {ISendOtp,ILogin,IRegister,IVerifyOtp} from './auth.type';
+export type { ISendOtp, ILogin, IRegister, IVerifyOtp } from "./auth.type";
 
 export interface INavigationLink {
   href: string;
@@ -12,4 +13,13 @@ export interface IResponse<T> {
   success: boolean;
   message: string;
   data: T;
+}
+
+export interface ISidebarItems {
+  title: string;
+  items: {
+    title: string;
+    url: string;
+    component: ComponentType;
+  }[];
 }
