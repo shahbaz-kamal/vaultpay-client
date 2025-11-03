@@ -13,10 +13,11 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 import { otpSchema } from "@/schemas/otpSchema";
 import type z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSendOtpMutation } from "@/redux/features/auths/auth.api";
+import { useSendOtpMutation, useVerifyOtpMutation } from "@/redux/features/auths/auth.api";
 
 export function VerifyForm({ className, ...props }: React.ComponentProps<"div">) {
-    const [sendOtp]=useSendOtpMutation()
+  const [sendOtp] = useSendOtpMutation();
+  const [verifyOtp] = useVerifyOtpMutation();
   const [sentOtp, setSentOtp] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,23 +36,39 @@ export function VerifyForm({ className, ...props }: React.ComponentProps<"div">)
   });
 
   const onSubmit = async (data: z.infer<typeof otpSchema>) => {
-    console.log(data);
+    const toastId = toast.loading("Verifying OTP");
+    try {
+      console.log(data);
+      const userInfo = {
+        email,
+        otp: data.otp,
+      };
+      const result = await verifyOtp(userInfo).unwrap();
+      if (result.success) {
+        toast.success("OTP verified successfully.", { id: toastId });
+        navigate("/", { state: email });
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
-
-  const handleSend=async()=>{
-   try {
-       const res=await sendOtp({email}).unwrap()
-       if(res.success){
+  const handleSendOtp = async () => {
+    const toastId = toast.loading("Sending OTP");
+    try {
+      const res = await sendOtp({ email }).unwrap();
+      if (res.success) {
+        toast.success("OTP sent successfully to your email.", { id: toastId });
         setSentOtp(true);
-       }
-   
-   
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-   } catch (error:any) {
-    toast.error(error.message)
-   }
-  }
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
   return (
     <div className={cn("flex flex-col gap-6 items-center", className)} {...props}>
       {sentOtp ? (
@@ -107,7 +124,9 @@ export function VerifyForm({ className, ...props }: React.ComponentProps<"div">)
             </CardDescription>
           </CardHeader>
           <CardContent className="flex justify-center">
-            <Button onClick={handleSend} className="w-1/2 mx-auto">Send OTP</Button>
+            <Button onClick={handleSendOtp} className="w-1/2 mx-auto">
+              Send OTP
+            </Button>
           </CardContent>
         </Card>
       )}

@@ -14,8 +14,8 @@ export const registerSchema = z
       .string("Password Must be string")
       .min(6, "Password must includes at least 6 characters")
       .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-      .optional(),
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter"),
+      
     confirmPassword: z
       .string("Password Must be string")
       .min(6, "Password must includes at least 6 characters")

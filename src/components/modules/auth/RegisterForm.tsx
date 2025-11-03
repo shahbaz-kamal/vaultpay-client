@@ -5,7 +5,7 @@ import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from 
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { registerSchema } from "@/schemas/RegisterFormSchema";
@@ -39,8 +39,8 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
       console.log(result);
       toast.success("Registration successful! Please check your email to verify your account.");
       navigate("/verify");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error:any) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error);
       toast.error(error.messagee);
     }
@@ -54,60 +54,23 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
           <CardDescription>Register with your Google account</CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
-            <FieldGroup>
-              {/* <Field>
-                <Button variant="outline" type="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                      d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  Register with Google
-                </Button>
-              </Field> */}
-              {/* <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">Or continue with</FieldSeparator> */}
-              {/* <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input id="email" type="email" placeholder="m@example.com" required />
-              </Field>
-              <Field>
-                <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
-                
-                </div>
-                <Input id="password" type="password" required />
-              </Field>
-              <Field>
-                <Button type="submit">Register</Button>
-                <FieldDescription className="text-center">
-                  Already an account?  <span className="underline-offset-4 hover:underline text-primary font-semibold">
-                    <Link to="/login">Login now</Link>
-                  </span>
-                </FieldDescription>
-              </Field> */}
-            </FieldGroup>
-          </form>
-
           <FieldGroup>
-                <Field>
-                  <Button variant="outline" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path
-                        d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    Register with Google
-                  </Button>
-                </Field>
-                <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card mb-2">Or continue with</FieldSeparator>
-              </FieldGroup>
+            <Field>
+              <Button variant="outline" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Register with Google
+              </Button>
+            </Field>
+            <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card mb-2">Or continue with</FieldSeparator>
+          </FieldGroup>
           {/* original form */}
           <Form {...form}>
             <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
-            
               <FormField
                 control={form.control}
                 name="name"
@@ -164,11 +127,12 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
                   </FormItem>
                 )}
               />
-                <FieldDescription className="text-center">
-                  Already an account?  <span className="underline-offset-4 hover:underline text-primary-foreground font-semibold">
-                    <Link to="/login">Login now</Link>
-                  </span>
-                </FieldDescription>
+              <FieldDescription className="text-center">
+                Already an account?{" "}
+                <span className="underline-offset-4 hover:underline dark:text-primary-foreground font-semibold">
+                  <Link to="/login">Login now</Link>
+                </span>
+              </FieldDescription>
               <Button className=" w-full" type="submit">
                 Register
               </Button>

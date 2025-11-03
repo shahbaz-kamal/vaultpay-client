@@ -103,7 +103,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
               />
               <FieldDescription className="text-center">
                 Don't Have an account?{" "}
-                <span className="underline-offset-4 hover:underline text-primary-foreground font-semibold">
+                <span className="underline-offset-4 hover:underline dark:text-primary-foreground font-semibold">
                   <Link to="/register">Register now</Link>
                 </span>
               </FieldDescription>
