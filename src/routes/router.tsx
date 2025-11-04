@@ -2,19 +2,24 @@ import App from "@/App";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 
 import { About } from "@/Pages/About";
-import AnalyticsAdmin from "@/Pages/Admin/AnalyticsAdmin";
-import ManageAgents from "@/Pages/Admin/ManageAgents";
-import ManageUsers from "@/Pages/Admin/ManageUsers";
-import AnalyticsAgent from "@/Pages/Agent/AnalyticsAgent";
 
 import Login from "@/Pages/Auth/Login";
 
 import Register from "@/Pages/Auth/Register";
 import Homepage from "@/Pages/Home/Homepage";
-import AnalyticsUser from "@/Pages/User/AnalyticsUser";
-import Verify from "@/Pages/Verify";
 
-import { createBrowserRouter } from "react-router";
+import Verify from "@/Pages/Verify";
+import { generateRoutes } from "@/utils/generateRoute";
+
+import { createBrowserRouter, Navigate } from "react-router";
+import { adminSidebarItems } from "./adminSidebarItems";
+import { userSidebarItems } from "./userSidebarItems";
+import { agentSidebarItems } from "./agentSidebarItems";
+import Unauthorized from "@/Pages/Unauthorized";
+import { checkAuth } from "@/utils/checkAuth";
+import { role } from "@/constants/role";
+import type { Trole } from "@/types";
+import LoadingPage from "@/components/layouts/LoadingPage";
 
 export const router = createBrowserRouter([
   {
@@ -31,45 +36,18 @@ export const router = createBrowserRouter([
   // Dashboard routes
   {
     path: "/admin",
-    Component: DashboardLayout,
-    children: [
-      {
-        path: "/admin/analytics",
-        Component: AnalyticsAdmin,
-      },
-      {
-        path: "/admin/manage-users",
-        Component: ManageUsers,
-      },
-      {
-        path: "/admin/manage-agents",
-        Component: ManageAgents,
-      },
-    ],
+    Component: checkAuth(DashboardLayout, [role.admin, role.superAdmin] as Trole[]),
+    children: [{ index: true, element: <Navigate to="/admin/analytics"></Navigate> }, ...generateRoutes(adminSidebarItems)],
   },
   {
     path: "/user",
-    Component: DashboardLayout,
-    children: [
-      {
-        path: "/user/analytics",
-        Component: AnalyticsUser,
-      },
-    ],
+    Component: checkAuth(DashboardLayout, [role.user] as Trole[]),
+    children: [{ index: true, element: <Navigate to="/user/wallet-summary"></Navigate> }, ...generateRoutes(userSidebarItems)],
   },
   {
     path: "/agent",
-    Component: DashboardLayout,
-    children: [
-      {
-        path: "/agent/analytics",
-        Component: AnalyticsAgent,
-      },
-      {
-        path: "/agent/analytics",
-        Component: AnalyticsAgent,
-      },
-    ],
+    Component: checkAuth(DashboardLayout, [role.agent] as Trole[]),
+    children: [{ index: true, element: <Navigate to="/agent/wallet-summary"></Navigate> }, ...generateRoutes(agentSidebarItems)],
   },
   //auth routes
   {
@@ -84,10 +62,12 @@ export const router = createBrowserRouter([
     path: "/verify",
     Component: Verify,
   },
-  //Admin Routes
   {
-    path: "/admin",
-    Component: DashboardLayout,
-    children: [{}],
+    path: "/unauthorized",
+    Component: Unauthorized,
+  },
+  {
+    path: "/loading",
+    Component: LoadingPage,
   },
 ]);
