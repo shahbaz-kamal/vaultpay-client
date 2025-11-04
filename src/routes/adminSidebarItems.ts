@@ -1,9 +1,11 @@
-import AnalyticsAdmin from "@/Pages/Admin/AnalyticsAdmin";
-import ManageAgents from "@/Pages/Admin/ManageAgents";
-import ManageUsers from "@/Pages/Admin/ManageUsers";
 import type { ISidebarItems } from "@/types";
+import { lazy } from "react";
 
-export const adminSidebarItems:ISidebarItems[] = [
+const Analytics = lazy(() => import("@/Pages/Admin/Analytics"));
+const ManageAgents = lazy(() => import("@/Pages/Admin/ManageAgents"));
+const ManageUsers = lazy(() => import("@/Pages/Admin/ManageUsers"));
+
+export const adminSidebarItems: ISidebarItems[] = [
   {
     title: "Dashboard",
 
@@ -11,7 +13,7 @@ export const adminSidebarItems:ISidebarItems[] = [
       {
         title: "Analytics",
         url: "/admin/analytics",
-        component: AnalyticsAdmin,
+        component: Analytics,
       },
     ],
   },

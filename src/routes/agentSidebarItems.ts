@@ -1,15 +1,14 @@
-import AddMoney from "@/Pages/AddMoney";
-import ManageAgents from "@/Pages/Admin/ManageAgents";
-
-import Profile from "@/Pages/Profile";
-import WalletSummary from "@/Pages/WalletSummary";
+const AddMoney = lazy(() => import("@/Pages/AddMoney"));
+const Profile = lazy(() => import("@/Pages/Profile"));
+const WalletSummary = lazy(() => import("@/Pages/WalletSummary"));
+const CashIn = lazy(() => import("@/Pages/Agent/CashIn"));
 
 import type { ISidebarItems } from "@/types";
+import { lazy } from "react";
 
 export const agentSidebarItems: ISidebarItems[] = [
   {
     title: "Overview",
-
     items: [
       {
         title: "Wallet Summary",
@@ -25,7 +24,6 @@ export const agentSidebarItems: ISidebarItems[] = [
   },
   {
     title: "Transactions",
-
     items: [
       {
         title: "Add Money",
@@ -35,7 +33,7 @@ export const agentSidebarItems: ISidebarItems[] = [
       {
         title: "Cash In",
         url: "/agent/cash-in",
-        component: ManageAgents,
+        component: CashIn,
       },
     ],
   },

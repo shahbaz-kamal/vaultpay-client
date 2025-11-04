@@ -1,7 +1,7 @@
 import AddMoney from "@/Pages/AddMoney";
 import ManageAgents from "@/Pages/Admin/ManageAgents";
 import Profile from "@/Pages/Profile";
-import AnalyticsUser from "@/Pages/User/AnalyticsUser";
+
 import CashOut from "@/Pages/User/CashOut";
 import WalletSummary from "@/Pages/WalletSummary";
 import type { ISidebarItems } from "@/types";

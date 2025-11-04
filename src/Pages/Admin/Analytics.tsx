@@ -1,7 +1,7 @@
 import SidebarHeader from "@/components/layouts/SidebarHeader";
 
 
-export default function AnalyticsAdmin() {
+export default function Analytics() {
  return (
     <div>
          <SidebarHeader heading='Dashboard' subHeading='Analytics'></SidebarHeader> 
