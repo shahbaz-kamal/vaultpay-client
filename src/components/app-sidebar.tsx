@@ -1,5 +1,4 @@
 import * as React from "react";
-import { GalleryVerticalEnd } from "lucide-react";
 
 import {
   Sidebar,
@@ -15,15 +14,20 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Link, NavLink } from "react-router";
-import { adminSidebarItems } from "@/routes/adminSidebarItems";
 import { Logo } from "@/assets/icons/Logo";
+import { getSidebarItems } from "@/utils/getSidebarItems";
+import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 
 // This is sample data.
-const data = {
-  navMain: adminSidebarItems,
-};
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+const {data:userData}=useGetMeQuery(undefined)
+
+  const data = {
+    navMain: getSidebarItems(userData?.data?.role),
+  };
   return (
     <Sidebar {...props}>
       <SidebarHeader>

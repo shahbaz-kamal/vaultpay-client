@@ -23,3 +23,5 @@ export interface ISidebarItems {
     component: ComponentType;
   }[];
 }
+
+export type Trole ="SUPER-ADMIN" |"ADMIN" | "USER" | "AGENT"

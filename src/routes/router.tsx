@@ -2,19 +2,22 @@ import App from "@/App";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 
 import { About } from "@/Pages/About";
-import AnalyticsAdmin from "@/Pages/Admin/AnalyticsAdmin";
-import ManageAgents from "@/Pages/Admin/ManageAgents";
-import ManageUsers from "@/Pages/Admin/ManageUsers";
-import AnalyticsAgent from "@/Pages/Agent/AnalyticsAgent";
+
 
 import Login from "@/Pages/Auth/Login";
 
 import Register from "@/Pages/Auth/Register";
 import Homepage from "@/Pages/Home/Homepage";
-import AnalyticsUser from "@/Pages/User/AnalyticsUser";
+
 import Verify from "@/Pages/Verify";
+import { generateRoutes } from "@/utils/generateRoute";
 
 import { createBrowserRouter } from "react-router";
+import { adminSidebarItems } from "./adminSidebarItems";
+import { userSidebarItems } from "./userSidebarItems";
+import { agentSidebarItems } from "./agentSidebarItems";
+
+
 
 export const router = createBrowserRouter([
   {
@@ -32,44 +35,17 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     Component: DashboardLayout,
-    children: [
-      {
-        path: "/admin/analytics",
-        Component: AnalyticsAdmin,
-      },
-      {
-        path: "/admin/manage-users",
-        Component: ManageUsers,
-      },
-      {
-        path: "/admin/manage-agents",
-        Component: ManageAgents,
-      },
-    ],
+    children: [...generateRoutes(adminSidebarItems)],
   },
   {
     path: "/user",
     Component: DashboardLayout,
-    children: [
-      {
-        path: "/user/analytics",
-        Component: AnalyticsUser,
-      },
-    ],
+    children: [...generateRoutes(userSidebarItems)],
   },
   {
     path: "/agent",
     Component: DashboardLayout,
-    children: [
-      {
-        path: "/agent/analytics",
-        Component: AnalyticsAgent,
-      },
-      {
-        path: "/agent/analytics",
-        Component: AnalyticsAgent,
-      },
-    ],
+    children: [...generateRoutes(agentSidebarItems)],
   },
   //auth routes
   {

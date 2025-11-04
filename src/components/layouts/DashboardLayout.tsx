@@ -5,7 +5,7 @@ import {
   SidebarProvider,
   
 } from "@/components/ui/sidebar"
-import SidebarHeader from "./SidebarHeader"
+
 import { Outlet } from "react-router"
 
 export default function DashboardLayout() {

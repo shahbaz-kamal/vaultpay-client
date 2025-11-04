@@ -7,15 +7,20 @@ import { Link } from "react-router";
 import { authApi, useGetMeQuery, useLogoutMutation } from "@/redux/features/auths/auth.api";
 import { toast } from "sonner";
 import { useAppDispatch } from "@/redux/hooks";
+import { role } from "@/constants/role";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+  { href: "/", label: "Home", role: "PUBLIC" },
+  { href: "/about", label: "About", role: "PUBLIC" },
+  { href: "/admin", label: "Dashboard", role: role.admin },
+  { href: "/admin", label: "Dashboard", role: role.superAdmin },
+  { href: "/user", label: "Dashboard", role: role.user },
+  { href: "/agent", label: "Dashboard", role: role.agent },
 ];
 
 export default function Navbar() {
-  const { data } = useGetMeQuery(undefined);
+  const { data: userData } = useGetMeQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
   // console.log(data);
@@ -91,11 +96,22 @@ export default function Navbar() {
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">
                 {navigationLinks.map((link, index) => (
-                  <NavigationMenuItem key={index}>
-                    <NavigationMenuLink asChild className="py-1.5 font-medium text-muted-foreground hover:text-primary">
-                      <Link to={link.href}>{link.label}</Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
+                  <>
+                    {link.role === "PUBLIC" && (
+                      <NavigationMenuItem key={index}>
+                        <NavigationMenuLink asChild className="py-1.5 font-medium text-muted-foreground hover:text-primary">
+                          <Link to={link.href}>{link.label}</Link>
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    )}
+                    {link.role === userData?.data?.role && (
+                      <NavigationMenuItem key={index}>
+                        <NavigationMenuLink asChild className="py-1.5 font-medium text-muted-foreground hover:text-primary">
+                          <Link to={link.href}>{link.label}</Link>
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    )}
+                  </>
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
@@ -103,12 +119,12 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-          {!data?.data?.email && (
+          {!userData?.data?.email && (
             <Button asChild variant="default" size="sm" className="text-sm ">
               <Link to={"/login"}> Login</Link>
             </Button>
           )}
-          {data?.data?.email && (
+          {userData?.data?.email && (
             <Button onClick={handleLogout} variant="outline" size="sm" className="text-sm ">
               Logout
             </Button>
