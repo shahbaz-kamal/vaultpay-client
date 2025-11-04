@@ -15,6 +15,11 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { userSidebarItems } from "./userSidebarItems";
 import { agentSidebarItems } from "./agentSidebarItems";
+import Unauthorized from "@/Pages/Unauthorized";
+import { checkAuth } from "@/utils/checkAuth";
+import { role } from "@/constants/role";
+import type { Trole } from "@/types";
+import LoadingPage from "@/components/layouts/LoadingPage";
 
 export const router = createBrowserRouter([
   {
@@ -31,17 +36,17 @@ export const router = createBrowserRouter([
   // Dashboard routes
   {
     path: "/admin",
-    Component: DashboardLayout,
-    children: [{ index: true, element: <Navigate to="/admin/analytics"></Navigate> },...generateRoutes(adminSidebarItems)],
+    Component: checkAuth(DashboardLayout, [role.admin, role.superAdmin] as Trole[]),
+    children: [{ index: true, element: <Navigate to="/admin/analytics"></Navigate> }, ...generateRoutes(adminSidebarItems)],
   },
   {
     path: "/user",
-    Component: DashboardLayout,
-    children: [{ index: true, element: <Navigate to="/user/wallet-summary"></Navigate> },...generateRoutes(userSidebarItems)],
+    Component: checkAuth(DashboardLayout, [role.user] as Trole[]),
+    children: [{ index: true, element: <Navigate to="/user/wallet-summary"></Navigate> }, ...generateRoutes(userSidebarItems)],
   },
   {
     path: "/agent",
-    Component: DashboardLayout,
+    Component: checkAuth(DashboardLayout, [role.agent] as Trole[]),
     children: [{ index: true, element: <Navigate to="/agent/wallet-summary"></Navigate> }, ...generateRoutes(agentSidebarItems)],
   },
   //auth routes
@@ -57,10 +62,12 @@ export const router = createBrowserRouter([
     path: "/verify",
     Component: Verify,
   },
-  //Admin Routes
   {
-    path: "/admin",
-    Component: DashboardLayout,
-    children: [{}],
+    path: "/unauthorized",
+    Component: Unauthorized,
+  },
+  {
+    path: "/loading",
+    Component: LoadingPage,
   },
 ]);

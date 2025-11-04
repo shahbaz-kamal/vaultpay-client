@@ -1,9 +1,11 @@
-import AddMoney from "@/Pages/AddMoney";
-import ManageAgents from "@/Pages/Admin/ManageAgents";
-import Profile from "@/Pages/Profile";
+import { lazy } from "react";
 
-import CashOut from "@/Pages/User/CashOut";
-import WalletSummary from "@/Pages/WalletSummary";
+const AddMoney = lazy(() => import("@/Pages/AddMoney"));
+const Profile = lazy(() => import("@/Pages/Profile"));
+const CashOut = lazy(() => import("@/Pages/User/CashOut"));
+const SendMoney = lazy(() => import("@/Pages/User/SendMoney"));
+const WalletSummary = lazy(() => import("@/Pages/WalletSummary"));
+
 import type { ISidebarItems } from "@/types";
 
 export const userSidebarItems: ISidebarItems[] = [
@@ -35,7 +37,7 @@ export const userSidebarItems: ISidebarItems[] = [
       {
         title: "Send Money",
         url: "/user/send-money",
-        component: ManageAgents,
+        component: SendMoney,
       },
       {
         title: "Cash Out",
