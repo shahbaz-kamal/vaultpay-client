@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import type { ComponentType, JSX } from "react";
 
 export type { ISendOtp, ILogin, IRegister, IVerifyOtp } from "./auth.type";
 
@@ -25,3 +25,16 @@ export interface ISidebarItems {
 }
 
 export type Trole ="SUPER-ADMIN" |"ADMIN" | "USER" | "AGENT"
+
+export interface DashboardCard {
+  title: string;
+  icon: JSX.Element;
+  data: number;
+  description: string;
+}
+
+
+export enum TCardDisplayDataType {
+  peopleCount = "peopleCount",
+  moneyCount = "moneyCount"
+}

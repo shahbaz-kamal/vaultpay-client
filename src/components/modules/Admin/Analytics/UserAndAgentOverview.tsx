@@ -1,6 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { UserCheck, UserPlus, Users } from "lucide-react";
+import { TCardDisplayDataType } from "@/types";
+import CardGrid from "./CardGrid";
 import { PieChartActive } from "./PieChartActive";
+import { UserCheck, UserPlus, Users } from "lucide-react";
 
 export default function UserAndAgentOverview() {
   const cardObject = [
@@ -31,23 +32,7 @@ export default function UserAndAgentOverview() {
   ];
   return (
     <div className="space-y-6">
-    
-      <div className=" grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {/* Wallet Balance */}
-
-        {cardObject.map((singleCard) => (
-          <Card className="">
-            <CardHeader className="flex items-center justify-between">
-              <CardTitle className="">{singleCard.title}</CardTitle>
-              {singleCard.icon}
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl">৳{singleCard.data}</p>
-              <p className="">{singleCard.description}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <CardGrid cardObject={cardObject} cardDisplayDataType={TCardDisplayDataType.peopleCount}></CardGrid>
       <div className=" grid gap-6 md:grid-cols-1 lg:grid-cols-2">
         {/* Wallet Balance */}
 
