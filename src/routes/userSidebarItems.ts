@@ -4,9 +4,10 @@ const AddMoney = lazy(() => import("@/Pages/AddMoney"));
 const Profile = lazy(() => import("@/Pages/Profile"));
 const CashOut = lazy(() => import("@/Pages/User/CashOut"));
 const SendMoney = lazy(() => import("@/Pages/User/SendMoney"));
-const WalletSummary = lazy(() => import("@/Pages/WalletSummary"));
+const WalletSummary = lazy(() => import("@/Pages/User/WalletInsights"));
 
 import type { ISidebarItems } from "@/types";
+import WalletInsights from "@/Pages/User/WalletInsights";
 
 export const userSidebarItems: ISidebarItems[] = [
   {
@@ -14,9 +15,9 @@ export const userSidebarItems: ISidebarItems[] = [
 
     items: [
       {
-        title: "Wallet Summary",
-        url: "/user/wallet-summary",
-        component: WalletSummary,
+        title: "Wallet Insights",
+        url: "/user/wallet-insights",
+        component: WalletInsights,
       },
       {
         title: "Profile",
