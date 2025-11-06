@@ -12,14 +12,14 @@ export default function TransactionOverview() {
       title: "Total Transactions",
       icon: <ReceiptText className="w-8 h-8" style={{ color: "var(--chart-1)" }} />,
       data: 12540,
-      description: "Total number of transactions processed so far",
+      description: "Total number of transactions processed so far by all users and agents",
       type: "count",
     },
     {
       title: "Transactions Amount",
       icon: <Banknote className="w-8 h-8" style={{ color: "var(--chart-2)" }} />,
       data: 12540,
-      description: "Total monetary value of all processed transactions",
+      description: "Total monetary value of all processed transactions by users and agents",
       type: "money",
     },
   ];
