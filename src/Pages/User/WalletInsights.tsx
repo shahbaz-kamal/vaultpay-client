@@ -63,8 +63,8 @@ export default function WalletInsights() {
         <MonthlyActivityUser></MonthlyActivityUser>
         {/* Recent Transactions*/}
         <div className="mt-6"></div>
-        <DashboardTitle title="Recent Transactions" icon={<CalendarDays size={20} />}></DashboardTitle>
-        <TransactionHistory title="user"></TransactionHistory>
+        <DashboardTitle title="Recent 5 Transactions" icon={<CalendarDays size={20} />}></DashboardTitle>
+        <TransactionHistory ></TransactionHistory>
       </div>
     </div>
   );

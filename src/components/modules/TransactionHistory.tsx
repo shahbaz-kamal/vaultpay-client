@@ -1,4 +1,7 @@
+"use client";
+
 import * as React from "react";
+import { format} from 'date-fns'
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -26,43 +29,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { CardTitle } from "@/components/ui/card";
-import AnalyticsConstants from "@/constants/analyticsConstants";
+import TransactionHistoryConstants from "@/constants/TransactionHistoryConstants";
 
-const data: TUser[] = [
+const data = [
   {
-    id: "u1",
-    profilePhoto: "https://randomuser.me/api/portraits/men/32.jpg",
-
-    name: "Ayaan Rahman",
-    transactionAmount: 15420,
-  },
-  {
-    id: "u2",
-    profilePhoto: "https://randomuser.me/api/portraits/women/45.jpg",
-    name: "Nadia Hasan",
-    transactionAmount: 9820,
-  },
-  {
-    id: "u3",
-    profilePhoto: "https://randomuser.me/api/portraits/men/18.jpg",
-    name: "Rafiul Islam",
-    transactionAmount: 21450,
-  },
-  {
-    id: "u4",
-    profilePhoto: "https://randomuser.me/api/portraits/women/66.jpg",
-    name: "Sadia Chowdhury",
-    transactionAmount: 12760,
-  },
-  {
-    id: "u5",
-    profilePhoto: "https://randomuser.me/api/portraits/men/75.jpg",
-    name: "Tanvir Ahmed",
-    transactionAmount: 18690,
+    id: "1",
+    senderEmail: "a@b.com",
+    receiverEmail: "b@c.com",
+    amount: 316,
+    status: "success",
+    type: "Add Money",
+    // email: "ken99@example.com",
+    transactionDate: "2025-11-04T17:02:21.080+00:00",
   },
 ];
-
 // const data: Payment[] = [
 //   {
 //     id: "m5gr84i9",
@@ -102,24 +82,17 @@ export type Payment = {
   status: "pending" | "processing" | "success" | "failed";
   email: string;
 };
-export type TUser = {
-  id: string;
-  profilePhoto: string;
-  name: string;
-  transactionAmount: number;
-};
 
-interface IProps {
-  title: string;
-}
 
-export function TransactionHistory({ title }: IProps) {
+
+export function TransactionHistory() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const columns = AnalyticsConstants({ title });
+  const columns=TransactionHistoryConstants()
+
   const table = useReactTable({
     data,
     columns,
@@ -140,9 +113,14 @@ export function TransactionHistory({ title }: IProps) {
   });
 
   return (
-    <div className="w-full  pt-0 mt-0">
-      <div className="flex items-center pb-4 ">
-        <CardTitle className="">Top 5 {title}s</CardTitle>
+    <div className="w-full">
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter emails..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}
+          className="max-w-sm"
+        />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -202,7 +180,7 @@ export function TransactionHistory({ title }: IProps) {
           </TableBody>
         </Table>
       </div>
-      {/* <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end space-x-2 py-4">
         <div className="text-muted-foreground flex-1 text-sm">
           {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
@@ -214,7 +192,7 @@ export function TransactionHistory({ title }: IProps) {
             Next
           </Button>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

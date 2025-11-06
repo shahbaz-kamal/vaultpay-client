@@ -38,3 +38,13 @@ export enum TCardDisplayDataType {
   peopleCount = "peopleCount",
   moneyCount = "moneyCount"
 }
+
+export interface ITransactionHistoryTableData {
+  id: string | number;
+  senderEmail: string | null;
+  receiverEmail: string | null;
+  amount: number;
+  status: string;
+  type: string;
+  transactionDate: string;
+}
