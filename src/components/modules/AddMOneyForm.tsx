@@ -17,7 +17,7 @@ import { addMoneySchema } from "@/schemas/addMoneyFormSchema";
 import { useAddMOneyMutation } from "@/redux/features/transactions/transaction.api";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 
-export function AddMOneyForm({ className, ...props }: React.ComponentProps<"div">) {
+export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div">) {
   const navigate = useNavigate();
   const [addMOney] = useAddMOneyMutation();
   const { data: userData } = useGetMeQuery(undefined);

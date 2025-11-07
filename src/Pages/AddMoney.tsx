@@ -1,15 +1,21 @@
+import DashboardTitle from "@/components/layouts/DashboardTitle";
 import SidebarHeader from "@/components/layouts/SidebarHeader";
-import { AddMOneyForm } from "@/components/modules/AddMOneyForm";
+import { AddMoneyForm } from "@/components/modules/AddMOneyForm";
+import PaymentChannels from "@/components/modules/PaymentChannels";
 
-import { Home, Link, Wallet } from "lucide-react";
+import { Home, Link, Wallet, Wallet2 } from "lucide-react";
 
 export default function AddMoney() {
   return (
     <div>
       <SidebarHeader heading="Transaction" subHeading="Add Money" subSubHeading=""></SidebarHeader>
-      <div className="container mx-auto px-5 py-6">
+      <div className="container mx-auto px-5 py-6 space-y-6">
         <div className="w-full">
-          <AddMOneyForm></AddMOneyForm>
+          <AddMoneyForm></AddMoneyForm>
+        </div>
+        <div>
+          <DashboardTitle title="Payment Channels" icon={<Wallet2 size={20}></Wallet2>}></DashboardTitle>
+          <PaymentChannels></PaymentChannels>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
-import { MonthlyTransactionAmount } from "../../MOnthlyTransactionAmount";
+
+import { MonthlyTransactionAmount } from "../../MonthlyTransactionAmount";
 import { MonthlyTransactionComparisonLineChart } from "../../MonthlyTransactionComparisonLineChart";
 
 export default function MonthlyActivityUser() {
