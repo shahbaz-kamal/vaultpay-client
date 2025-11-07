@@ -44,13 +44,13 @@ export default function SslSuccess() {
       navigate("/agent/add-money");
     }
   };
-  const handleBackToDashboard = async () => {
-    if (userData?.data.role === "USER") {
-      navigate("/user/wallet-insights");
-    } else if (userData?.data.role === "AGENT") {
-      navigate("/agent/wallet-summary");
-    }
-  };
+  // const handleBackToDashboard = async () => {
+  //   if (userData?.data.role === "USER") {
+  //     navigate("/user/wallet-insights");
+  //   } else if (userData?.data.role === "AGENT") {
+  //     navigate("/agent/wallet-summary");
+  //   }
+  // };
 
   if (isLoading || !txn || !userData?.data.email) return <LoadingPage></LoadingPage>;
 
@@ -178,10 +178,10 @@ export default function SslSuccess() {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Home
             </Button>
-            <Button variant="outline" className="w-full" onClick={handleBackToDashboard}>
+            {/* <Button variant="outline" className="w-full" onClick={handleBackToDashboard}>
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
-            </Button>
+            </Button> */}
 
             <Button
               className="w-full bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"

@@ -21,6 +21,7 @@ import { role } from "@/constants/role";
 import type { Trole } from "@/types";
 import LoadingPage from "@/components/layouts/LoadingPage";
 import SslSuccess from "@/Pages/SslCommerze/SslSuccess";
+import SslFailed from "@/Pages/SslCommerze/sslFailed";
 
 export const router = createBrowserRouter([
   {
@@ -71,5 +72,12 @@ export const router = createBrowserRouter([
     path: "/loading",
     Component: LoadingPage,
   },
-  { path: "/transaction/add-money/success", Component: SslSuccess },
+  {
+    path: "/transaction/add-money/success",
+    Component: checkAuth(SslSuccess, [role.agent, role.admin, role.superAdmin, role.user] as Trole[]),
+  },
+  {
+    path: "/transaction/add-money/fail",
+    Component: checkAuth(SslFailed, [role.agent, role.admin, role.superAdmin, role.user] as Trole[]),
+  },
 ]);
