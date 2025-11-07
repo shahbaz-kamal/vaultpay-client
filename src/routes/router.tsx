@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
   {
     path: "/user",
     Component: checkAuth(DashboardLayout, [role.user] as Trole[]),
-    children: [{ index: true, element: <Navigate to="/user/wallet-summary"></Navigate> }, ...generateRoutes(userSidebarItems)],
+    children: [{ index: true, element: <Navigate to="/user/wallet-insights"></Navigate> }, ...generateRoutes(userSidebarItems)],
   },
   {
     path: "/agent",
