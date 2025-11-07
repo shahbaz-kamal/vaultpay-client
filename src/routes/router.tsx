@@ -20,6 +20,7 @@ import { checkAuth } from "@/utils/checkAuth";
 import { role } from "@/constants/role";
 import type { Trole } from "@/types";
 import LoadingPage from "@/components/layouts/LoadingPage";
+import SslSuccess from "@/Pages/SslCommerze/SslSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -70,4 +71,5 @@ export const router = createBrowserRouter([
     path: "/loading",
     Component: LoadingPage,
   },
+  { path: "/transaction/add-money/success", Component: SslSuccess },
 ]);

@@ -25,8 +25,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 const {data:userData}=useGetMeQuery(undefined)
 
+const role=userData?.data.role
   const data = {
-    navMain: getSidebarItems(userData?.data?.role),
+    navMain: getSidebarItems(role),
   };
   return (
     <Sidebar {...props}>

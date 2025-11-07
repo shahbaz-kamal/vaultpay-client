@@ -1,5 +1,5 @@
 import { baseApi } from "@/redux/baseApi";
-import type { ILogin, IRegister, IResponse, ISendOtp, IVerifyOtp } from "@/types";
+import type { ILogin, IRegister, IResponse, ISendOtp, IUser, IVerifyOtp } from "@/types";
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,7 +32,8 @@ export const authApi = baseApi.injectEndpoints({
         data: userInfo,
       }),
     }),
-    getMe: builder.query({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getMe: builder.query<IResponse<any>, undefined>({
       query: () => ({
         url: "/user/me",
         method: "GET",
