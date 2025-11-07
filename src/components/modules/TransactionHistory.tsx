@@ -76,12 +76,7 @@ const data = [
 //   },
 // ];
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+
 
 
 
@@ -117,8 +112,8 @@ export function TransactionHistory() {
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}
+          value={(table.getColumn("senderEmail")?.getFilterValue() as string) ?? ""}
+          onChange={(event) => table.getColumn("senderEmail")?.setFilterValue(event.target.value)}
           className="max-w-sm"
         />
         <DropdownMenu>
