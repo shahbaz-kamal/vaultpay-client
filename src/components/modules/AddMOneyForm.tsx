@@ -13,9 +13,10 @@ import type z from "zod";
 
 import { toast } from "sonner";
 
-import { addMoneySchema } from "@/schemas/addMoneyFormSchema";
+
 import { useAddMOneyMutation } from "@/redux/features/transactions/transaction.api";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import  { addMoneySchema } from "@/schemas/transactionSchemas";
 
 type AddMoneyFormValues = z.infer<typeof addMoneySchema>;
 
@@ -69,7 +70,7 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
                   <FormItem>
                     <FormLabel>Amount *</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="Amount you want to add" {...field} />
+                      <Input type="number" placeholder="Amount you want to add" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
                     </FormControl>
                     <FormDescription className="sr-only">This is your Amount</FormDescription>
                     <FormMessage />

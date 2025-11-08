@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "@/redux/baseApi";
-import type { IAddMoney, IResponse, ITransaction, IVerifyOtp } from "@/types";
+import type { IAddMoney, ICashOut, IResponse, ITransaction, IVerifyOtp } from "@/types";
 export const transactionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     addMOney: builder.mutation<IResponse<any>, IAddMoney>({
       query: (addMOneyInfo) => ({
         url: "/transaction/add-money",
@@ -10,14 +10,15 @@ export const transactionApi = baseApi.injectEndpoints({
         data: addMOneyInfo,
       }),
     }),
-
-    verifyOtp: builder.mutation<IResponse<null>, IVerifyOtp>({
-      query: (userInfo) => ({
-        url: "/otp/verify",
+    cashOut: builder.mutation<IResponse<ITransaction>, ICashOut>({
+      query: (cahOutInfo) => ({
+        url: "/transaction/cash-out",
         method: "POST",
-        data: userInfo,
+        data: cahOutInfo,
       }),
+      invalidatesTags: ["TRANSACTION"]
     }),
+
     getSingleTransaction: builder.query<IResponse<ITransaction>, { transactionId: string }>({
       query: ({ transactionId }) => ({
         url: "/transaction/getSingleTransaction",
@@ -25,7 +26,15 @@ export const transactionApi = baseApi.injectEndpoints({
         params: { transactionId },
       }),
     }),
+    getMyTransaction: builder.query<IResponse<ITransaction[]>, { from?: string; to?: string }>({
+      query: (params) => ({
+        url: "/transaction/myTransactions",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["TRANSACTION"],
+    }),
   }),
 });
 
-export const { useAddMOneyMutation, useVerifyOtpMutation, useGetSingleTransactionQuery } = transactionApi;
+export const { useAddMOneyMutation, useGetSingleTransactionQuery, useCashOutMutation, useGetMyTransactionQuery } = transactionApi;

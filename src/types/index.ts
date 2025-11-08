@@ -1,7 +1,7 @@
 import type { ComponentType, JSX } from "react";
 
 export type { ISendOtp, ILogin, IRegister, IVerifyOtp } from "./auth.type";
-export type {IAddMoney,ITransaction} from "./transaction.type"
+export type {IAddMoney,ITransaction,ICashOut} from "./transaction.type"
 export type {IUser} from "./user.type"
 
 export interface INavigationLink {
@@ -9,12 +9,20 @@ export interface INavigationLink {
   label: string;
   active?: boolean;
 }
+export interface TMeta {
+  totalDocuments?: number;
+  noOfMatchedDocuments?: number;
+  pageNumber?: number;
+  totalPage?: number;
+  limit?: number;
+}
 
 export interface IResponse<T> {
   statusCode: number;
   success: boolean;
   message: string;
   data: T;
+  meta?: TMeta
 }
 
 export interface ISidebarItems {

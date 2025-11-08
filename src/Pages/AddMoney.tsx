@@ -4,9 +4,11 @@ import { AddMoneyForm } from "@/components/modules/AddMoneyForm";
 
 import PaymentChannels from "@/components/modules/PaymentChannels";
 
-import {  Wallet2 } from "lucide-react";
+import { Wallet2 } from "lucide-react";
 
 export default function AddMoney() {
+
+
   return (
     <div className="overflow-x-hidden">
       <SidebarHeader heading="Transaction" subHeading="Add Money" subSubHeading=""></SidebarHeader>
