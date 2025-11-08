@@ -1,5 +1,3 @@
-import Marquee from "react-fast-marquee";
-
 import mastercard from "@/assets/images/mastercard.svg";
 import amex from "@/assets/images/amex.svg";
 import unionpay from "@/assets/images/unionpay.svg";
@@ -38,34 +36,31 @@ export default function PaymentChannels() {
   ];
 
   return (
-    <div className="space-y-4 py-4">
-      {/* Row 1 */}
-      <Marquee pauseOnHover speed={40} gradient={false}>
-        <div className="flex items-center gap-10">
-          {paymentLogos.map((logo, index) => (
+    <div className="py-4">
+      <div
+        className="
+          grid 
+          grid-cols-2 
+          sm:grid-cols-3 
+          md:grid-cols-4 
+          lg:grid-cols-6 
+          gap-6 
+          place-items-center
+        "
+      >
+        {paymentLogos.map((logo, index) => (
+          <div
+            key={index}
+            className="p-3 rounded-lg border border-muted flex items-center justify-center w-full"
+          >
             <img
-              key={index}
               src={logo}
-              className="h-10 md:h-20 w-auto object-contain"
               alt="payment-logo"
+              className="h-10 md:h-12 w-auto object-contain"
             />
-          ))}
-        </div>
-      </Marquee>
-
-      {/* Row 2 (Reverse direction) */}
-      <Marquee pauseOnHover speed={35} gradient={false} direction="right">
-        <div className="flex items-center gap-10">
-          {paymentLogos.map((logo, index) => (
-            <img
-              key={index}
-              src={logo}
-              className="h-10 md:h-20 w-auto object-contain"
-              alt="payment-logo"
-            />
-          ))}
-        </div>
-      </Marquee>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

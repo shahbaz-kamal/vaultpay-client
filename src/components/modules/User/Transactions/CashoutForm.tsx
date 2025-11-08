@@ -17,15 +17,13 @@ import { addMoneySchema } from "@/schemas/addMoneyFormSchema";
 import { useAddMOneyMutation } from "@/redux/features/transactions/transaction.api";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 
-type AddMoneyFormValues = z.infer<typeof addMoneySchema>;
-
-export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div">) {
+export function CashOutForm({ className, ...props }: React.ComponentProps<"div">) {
   const navigate = useNavigate();
   const [addMOney] = useAddMOneyMutation();
   const { data: userData } = useGetMeQuery(undefined);
 
   //   console.log(userData);
-  const form = useForm<AddMoneyFormValues>({
+  const form = useForm<z.infer<typeof addMoneySchema>>({
     resolver: zodResolver(addMoneySchema),
     defaultValues: {
       amount: 20,
@@ -60,7 +58,6 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
       <Card>
         <CardContent>
           <Form {...form}>
-            
             <form className="space-y-3 grid grid-cols-1 md:grid-cols-2 gap-6 " onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
@@ -69,7 +66,7 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
                   <FormItem>
                     <FormLabel>Amount *</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="Amount you want to add" {...field} />
+                      <Input placeholder="Amount you want to add" {...field} />
                     </FormControl>
                     <FormDescription className="sr-only">This is your Amount</FormDescription>
                     <FormMessage />
@@ -90,7 +87,7 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
                   </FormItem>
                 )}
               />
-              <Button className=" w-full col-span-1 md:col-span-2" type="submit">
+              <Button className=" w-full col-span-2" type="submit">
                 Add Money
               </Button>
             </form>

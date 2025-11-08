@@ -28,14 +28,13 @@ export default function SidebarHeader({ heading, subHeading, subSubHeading }: IP
             </BreadcrumbItem>
             <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>
-              <BreadcrumbPage>{subHeading}</BreadcrumbPage>
+              <BreadcrumbPage className={!subSubHeading ? "text-primary font-medium" : "hidden md:block"}>{subHeading}</BreadcrumbPage>
             </BreadcrumbItem>
             {subSubHeading && (
               <>
-               
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>{subSubHeading}</BreadcrumbPage>
+                  <BreadcrumbPage className="text-primary font-medium">{subSubHeading}</BreadcrumbPage>
                 </BreadcrumbItem>
               </>
             )}
