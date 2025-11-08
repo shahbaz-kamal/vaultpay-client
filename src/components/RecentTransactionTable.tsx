@@ -1,6 +1,8 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "./ui/button";
 import { format } from "date-fns";
+import { Link } from "react-router";
+import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 
 export interface ITransactionItem {
   invoiceUrl: string;
@@ -34,10 +36,14 @@ export default function RecentTransactionTable<T extends ITransactionItem>({
   isCashIn,
   data,
 }: IProps<T>) {
+const {data:myData}=useGetMeQuery(undefined)
+
+let viewAlllink=""
+
   return (
     <div>
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableCaption><Button ><Link to={viewAlllink}>View All Transactions </Link> </Button></TableCaption>
         <TableHeader>
           <TableRow className="text-center">
             <TableHead className="w-[100px] text-center">S/N</TableHead>

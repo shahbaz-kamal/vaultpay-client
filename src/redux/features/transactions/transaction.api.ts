@@ -16,7 +16,7 @@ export const transactionApi = baseApi.injectEndpoints({
         method: "POST",
         data: cahOutInfo,
       }),
-      invalidatesTags: ["TRANSACTION"]
+      invalidatesTags: ["TRANSACTION"],
     }),
 
     getSingleTransaction: builder.query<IResponse<ITransaction>, { transactionId: string }>({
@@ -26,9 +26,17 @@ export const transactionApi = baseApi.injectEndpoints({
         params: { transactionId },
       }),
     }),
-    getMyTransaction: builder.query<IResponse<ITransaction[]>, { from?: string; to?: string }>({
+    getMyTransaction: builder.query<IResponse<ITransaction[]>, { from?: string; to?: string; searchTerm?: string }>({
       query: (params) => ({
         url: "/transaction/myTransactions",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["TRANSACTION"],
+    }),
+    getAllTransactions: builder.query<IResponse<ITransaction[]>, { from?: string; to?: string; searchTerm?: string }>({
+      query: (params) => ({
+        url: "/transaction/transactions",
         method: "GET",
         params,
       }),
@@ -37,4 +45,4 @@ export const transactionApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddMOneyMutation, useGetSingleTransactionQuery, useCashOutMutation, useGetMyTransactionQuery } = transactionApi;
+export const { useAddMOneyMutation, useGetSingleTransactionQuery, useCashOutMutation, useGetMyTransactionQuery,useGetAllTransactionsQuery } = transactionApi;
