@@ -1,3 +1,4 @@
+import CommonTransactionHistory from "@/Pages/CommonTransactionHistory";
 import type { ISidebarItems } from "@/types";
 import { lazy } from "react";
 
@@ -14,6 +15,11 @@ export const adminSidebarItems: ISidebarItems[] = [
         title: "Analytics",
         url: "/admin/analytics",
         component: Analytics,
+      },
+      {
+        title: "Transaction History",
+        url: "/admin/transaction-history",
+        component:CommonTransactionHistory,
       },
     ],
   },

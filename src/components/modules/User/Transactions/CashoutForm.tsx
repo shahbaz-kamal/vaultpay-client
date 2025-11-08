@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from "@/components/ui/field";
+import { Card, CardContent } from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
@@ -13,40 +13,41 @@ import type z from "zod";
 
 import { toast } from "sonner";
 
-
-import { useAddMOneyMutation } from "@/redux/features/transactions/transaction.api";
+import { useAddMOneyMutation, useCashOutMutation } from "@/redux/features/transactions/transaction.api";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import  { addMoneySchema } from "@/schemas/transactionSchemas";
+import { cashOutSchema } from "@/schemas/transactionSchemas";
+import type { ICashOut } from "@/types";
 
-type AddMoneyFormValues = z.infer<typeof addMoneySchema>;
+type CashOutFormValues = z.infer<typeof cashOutSchema>;
 
-export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div">) {
+export function CashOutForm({ className, ...props }: React.ComponentProps<"div">) {
   const navigate = useNavigate();
-  const [addMOney] = useAddMOneyMutation();
+  const [cashOut] = useCashOutMutation();
   const { data: userData } = useGetMeQuery(undefined);
 
   //   console.log(userData);
-  const form = useForm<AddMoneyFormValues>({
-    resolver: zodResolver(addMoneySchema),
+  const form = useForm<CashOutFormValues>({
+    resolver: zodResolver(cashOutSchema),
     defaultValues: {
+      receiverEmail: "",
       amount: 20,
       notes: "",
     },
   });
-  const onSubmit = async (data: z.infer<typeof addMoneySchema>) => {
-    const addMOneyInfo = {
+  const onSubmit = async (data: CashOutFormValues) => {
+    const cashOutInfo: ICashOut = {
+      senderEmail: userData?.data?.email as string,
       amount: data.amount,
       notes: data.notes,
-      receiverEmail: userData?.data?.email as string,
+      receiverEmail: data.receiverEmail as string,
     };
-    const toastId = toast.loading("Please Wait");
+    const toastId = toast.loading("Cash Out Is Processing");
     try {
-      console.log(addMOneyInfo);
-      const result = await addMOney(addMOneyInfo).unwrap();
+      console.log(cashOutInfo);
+      const result = await cashOut(cashOutInfo).unwrap();
       console.log(result.data);
       if (result.success) {
-        window.open(result.data.payment);
-        toast.success("Please Complete the Payment Process", { id: toastId });
+        toast.success("Cash Out Successfull", { id: toastId });
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -61,8 +62,21 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
       <Card>
         <CardContent>
           <Form {...form}>
-            
-            <form className="space-y-3 grid grid-cols-1 md:grid-cols-2 gap-6 " onSubmit={form.handleSubmit(onSubmit)}>
+            <form className="space-y-3 grid grid-cols-1 md:grid-cols-3 gap-6 " onSubmit={form.handleSubmit(onSubmit)}>
+              <FormField
+                control={form.control}
+                name="receiverEmail"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Agent Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Agent Email" {...field} />
+                    </FormControl>
+                    <FormDescription className="sr-only">This is your Amount</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="amount"
@@ -70,7 +84,7 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
                   <FormItem>
                     <FormLabel>Amount *</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="Amount you want to add" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
+                      <Input placeholder="Amount you want to add" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
                     </FormControl>
                     <FormDescription className="sr-only">This is your Amount</FormDescription>
                     <FormMessage />
@@ -91,8 +105,8 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
                   </FormItem>
                 )}
               />
-              <Button className=" w-full col-span-1 md:col-span-2" type="submit">
-                Add Money
+              <Button className=" w-full col-span-1  md:col-span-3" type="submit">
+                Cash Out
               </Button>
             </form>
           </Form>

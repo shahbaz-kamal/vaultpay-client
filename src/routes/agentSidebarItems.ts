@@ -6,6 +6,7 @@ const WalletSummary = lazy(() => import("@/Pages/User/WalletInsights"));
 const CashIn = lazy(() => import("@/Pages/Agent/CashIn"));
 
 import type { ISidebarItems } from "@/types";
+import CommonTransactionHistory from "@/Pages/CommonTransactionHistory";
 
 export const agentSidebarItems: ISidebarItems[] = [
   {
@@ -20,6 +21,11 @@ export const agentSidebarItems: ISidebarItems[] = [
         title: "Profile",
         url: "/agent/profile",
         component: Profile,
+      },
+      {
+        title: "Profile",
+        url: "/agent/transaction-history",
+        component: CommonTransactionHistory,
       },
     ],
   },

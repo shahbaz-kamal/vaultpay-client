@@ -1,5 +1,5 @@
 import { baseApi } from "@/redux/baseApi";
-import type { ILogin, IRegister, IResponse, ISendOtp, IUser, IVerifyOtp } from "@/types";
+import type { ILogin, IRegister, IResponse, ISendOtp, IVerifyOtp } from "@/types";
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
