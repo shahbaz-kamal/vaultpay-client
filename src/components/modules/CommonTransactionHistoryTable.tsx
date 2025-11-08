@@ -1,300 +1,144 @@
-import * as React from "react";
-import {
-  type ColumnDef,
-  type ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  type SortingState,
-  useReactTable,
-  type VisibilityState,
-} from "@tanstack/react-table";
-import { ArrowDownToLine, ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { TRANSACTION_SOURCE, TRANSACTION_STATUS, TRANSACTION_TYPE } from "@/types/transaction.type";
+import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Input } from "../ui/input";
+import { DatePicker } from "../DatePicker";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "../ui/label";
+import { useEffect, useState } from "react";
+import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import { useGetAllTransactionsQuery, useGetMyTransactionQuery } from "@/redux/features/transactions/transaction.api";
+import { Role } from "@/types/user.type";
+import Pagination from "./PaginationComp";
+import LoadingPage from "../layouts/LoadingPage";
+import type { ITransaction } from "@/types";
 import { format } from "date-fns";
-
-interface CommonTransacHistory {
-  id: 1;
-  status: TRANSACTION_STATUS;
-  type: TRANSACTION_TYPE; // or TRANSACTION_TYPE if you have enum
-  source: TRANSACTION_SOURCE;
-  senderEmail: string;
-  receiverEmail: string;
-  amount: number;
-  date: Date | string;
-  invoiceUrl: string;
-}
-
-const data: CommonTransacHistory[] = [
-  {
-    id: "m5gr84i9",
-    status: TRANSACTION_STATUS.COMPLETED,
-    type: TRANSACTION_TYPE.ADD_MONEY,
-    source: TRANSACTION_SOURCE.USER,
-    senderEmail: "a@b.com",
-    receiverEmail: "c@d.com",
-    amount: 316,
-    date: "2025-11-08T10:12:03.512+00:00",
-    invoiceUrl: "https://res.cloudinary.com/dxbkmcxax/image/upload/v1762596729/pdf/pdf/invoice-INV-20251108-1163E3-1762596727759.pdf",
-  },
-];
-// const data: Payment[] = [
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@example.com",
-//   },
-//   {
-//     id: "3u1reuv4",
-//     amount: 242,
-//     status: "success",
-//     email: "Abe45@example.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     amount: 837,
-//     status: "processing",
-//     email: "Monserrat44@example.com",
-//   },
-//   {
-//     id: "5kma53ae",
-//     amount: 874,
-//     status: "success",
-//     email: "Silas22@example.com",
-//   },
-//   {
-//     id: "bhqecj4p",
-//     amount: 721,
-//     status: "failed",
-//     email: "carmella@example.com",
-//   },
-// ];
-
-// export type Payment = {
-//   id: string;
-//   amount: number;
-//   status: "pending" | "processing" | "success" | "failed";
-//   email: string;
-// };
-
-export const columns: ColumnDef<CommonTransacHistory>[] = [
-  {
-    accessorKey: "id",
-    header: () => <div className="text-center"> S/N </div>,
-    cell: ({ row }) => <div className="text-center"> {row.getValue("id")}</div>,
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "status",
-    header: () => <div className="text-center"> Status</div>,
-
-    cell: ({ row }) => <div className="capitalize text-center">{row.getValue("status")}</div>,
-  },
-  {
-    accessorKey: "type",
-
-    header: () => <div className="text-center"> Type</div>,
-    cell: ({ row }) => <div className="capitalize text-center">{row.getValue("type")}</div>,
-  },
-  {
-    accessorKey: "senderEmail",
-    header: ({ column }) => {
-      return (
-        <div className="text-center">
-          {" "}
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Sender Email
-            <ArrowUpDown />
-          </Button>
-        </div>
-      );
-    },
-    cell: ({ row }) => <div className="lowercase text-center">{row.getValue("senderEmail")}</div>,
-  },
-  {
-    accessorKey: "receiverEmail",
-    header: ({ column }) => {
-      return (
-        <div className="text-center">
-          {" "}
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Receiver Email
-            <ArrowUpDown />
-          </Button>
-        </div>
-      );
-    },
-    cell: ({ row }) => <div className="lowercase text-center">{row.getValue("receiverEmail")}</div>,
-  },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-center">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "BDT",
-      }).format(amount);
-
-      return <div className="text-center font-medium">{formatted}</div>;
-    },
-  },
-
-  {
-    accessorKey: "date",
-    header: ({ column }) => {
-      return (
-        <div className="text-center">
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Date
-            <ArrowUpDown />
-          </Button>
-        </div>
-      );
-    },
-    cell: ({ row }) => {
-      const formatedDate = format(new Date(row.getValue("date")), "Pp");
-
-      return <div className="lowercase text-center">{formatedDate}</div>;
-    },
-  },
-  {
-    accessorKey: "invoiceUrl",
-    header:"",
-    enableHiding: false,
-
-    cell: ({ row }) => {
-      return <Button onClick={() => window.open(row.getValue("invoiceUrl"))}><ArrowDownToLine /> Invoice</Button>;
-    },
-  },
-];
+import { Button } from "../ui/button";
 
 export function CommonTransactionHistoryTable() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [searchText, setSearchText] = useState("");
+  const [fromDate, setFromDate] = useState<string | undefined>();
+  const [toDate, setToDate] = useState<string | undefined>();
+  const [pageNumber, setPageNumber] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
+  const [matchedData,setMatchedData]=useState(0)
 
-  const table = useReactTable({
-    data,
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
+  const { data: userData, isLoading: userLoading } = useGetMeQuery(undefined);
+
+  console.log("My transaction", userData);
+  const params = {
+    searchTerm: searchText,
+    to: toDate,
+    from: fromDate,
+    limit,
+    page: pageNumber,
+  };
+  const isUserOrAgent = userData?.data.role === Role.USER || userData?.data.role === Role.AGENT;
+
+  const { data: myTransactions, isLoading: myLoading } = useGetMyTransactionQuery(params, {
+    skip: !isUserOrAgent,
+    refetchOnMountOrArgChange: true,
+  });
+  const { data: allTransactions, isLoading: allLoading } = useGetAllTransactionsQuery(params, {
+    skip: isUserOrAgent,
+    refetchOnMountOrArgChange: true,
   });
 
+  const transactionList: ITransaction[] = isUserOrAgent ? myTransactions?.data ?? [] : allTransactions?.data ?? [];
+  console.log("My Transaction", myTransactions);
+  console.log("All Transacxtion", allTransactions);
+
+  console.log(transactionList);
+  // useEffect(() => {
+  //   console.log("Search:", searchText);
+  //   console.log("From:", fromDate);
+  //   console.log("To:", toDate);
+
+  //   // Call API or filter data here
+  // }, [searchText, fromDate, toDate]);
+
+
+  useEffect(() => {
+    const transactionMeta = isUserOrAgent ? myTransactions?.meta : allTransactions?.meta;
+    if (transactionMeta?.totalPage) {
+      setTotalPages(transactionMeta.totalPage);
+    }
+    const matchedDocument=isUserOrAgent ? myTransactions?.meta?.noOfMatchedDocuments : allTransactions?.meta?.noOfMatchedDocuments;
+
+    if (matchedDocument !== undefined) setMatchedData(matchedDocument)
+  }, [myTransactions, allTransactions, isUserOrAgent]);
+
+  if (userLoading || myLoading || allLoading) {
+    return <LoadingPage />;
+  }
+
   return (
-    <div className="w-full">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}
-          className="max-w-sm"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+    <div className="">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div>
+          <Label className="px-1 mb-3"> Search Transactions</Label>
+          {/* you can search by   "name","email","type""sources","status","notes","senderEmail","receiverEmail", "source" */}
+          <Input placeholder="Name / Email / Type / Status / Notes..." value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+        </div>
+
+        <div className="w-full">
+          <DatePicker onChange={(date) => setFromDate(date?.toISOString())} label="Filter By Date (From)"></DatePicker>
+        </div>
+        <div>
+          <DatePicker onChange={(date) => setToDate(date?.toISOString())} label="Filter By Date (TO)"></DatePicker>
+        </div>
       </div>
-      <div className="overflow-hidden rounded-md border">
+
+      <div className="mb-6">
+        {" "}
         <Table>
+          {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
+            <TableRow>
+              <TableHead className="text-center">S/ N</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Type</TableHead>
+              <TableHead className="text-center">Source</TableHead>
+              <TableHead className="text-center">Sender</TableHead>
+              <TableHead className="text-center">Receiver</TableHead>
+              <TableHead className="text-center">Amount</TableHead>
+              <TableHead className="text-center">Date</TableHead>
+              <TableHead className="text-center">Invoice</TableHead>
+            </TableRow>
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+            {transactionList.map((transaction, index) => (
+              <TableRow key={transaction._id}>
+                <TableCell className="font-medium text-center">{index + 1}</TableCell>
+                <TableCell className="text-center">{transaction.status}</TableCell>
+                <TableCell className="text-center">{transaction.type}</TableCell>
+                <TableCell className="text-center">{transaction.source}</TableCell>
+                <TableCell className="text-center">{transaction.senderEmail ? transaction.senderEmail : "N/ A"}</TableCell>
+                <TableCell className="text-center">{transaction.receiverEmail}</TableCell>
+                <TableCell className="text-center">{transaction.amount}</TableCell>
+                <TableCell className="text-center">{format(new Date(transaction.createdAt), "PPpp")}</TableCell>
+                <TableCell className="text-center">
+                  <Button onClick={() => window.open(transaction.invoiceUrl as string)}>Invoice</Button>
                 </TableCell>
               </TableRow>
-            )}
+            ))}
           </TableBody>
+          {/* <TableFooter>
+          <TableRow>
+            <TableCell colSpan={3}>Total</TableCell>
+            <TableCell className="text-right">$2,500.00</TableCell>
+          </TableRow>
+        </TableFooter> */}
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="text-muted-foreground flex-1 text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-            Previous
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-            Next
-          </Button>
-        </div>
-      </div>
+      <Pagination
+        currentPage={pageNumber}
+        totalPages={totalPages}
+        paginationItemsToDisplay={10}
+        setLimit={setLimit}
+        setPageNumber={setPageNumber}
+        matchedData={matchedData}
+        dataOnCurrentPage={transactionList.length}
+      ></Pagination>
     </div>
   );
 }
