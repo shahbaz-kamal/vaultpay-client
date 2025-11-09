@@ -10,6 +10,12 @@ export interface ICashOut {
   amount: number;
   notes: string;
 }
+export interface ISendMOney {
+  senderEmail:string,
+  receiverEmail: string;
+  amount: number;
+  notes: string;
+}
 
 export enum TRANSACTION_TYPE {
   ADD_MONEY = "ADD_MONEY", ////bank to user

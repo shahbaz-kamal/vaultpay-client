@@ -26,18 +26,9 @@ export default function CashOut() {
         date: singleData.createdAt as Date,
         invoiceUrl: singleData.invoiceUrl as string,
       }))
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) || [];
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 5) || [];
   console.log(cashOutData);
-  // const cashOutData = [
-  //   {
-  //     id: "INV001",
-  //     status: "Paid",
-  //     agentEmail: "a@b.com",
-  //     amount: 20,
-  //     date: "2025-11-04T17:02:21.080+00:00",
-  //     invoiceUrl: "invoice",
-  //   },
-  // ];
 
   if (!myTransaction) return <LoadingPage></LoadingPage>;
   return (
