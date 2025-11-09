@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from "@/components/ui/field";
+import { Card, CardContent } from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
@@ -13,15 +13,14 @@ import type z from "zod";
 
 import { toast } from "sonner";
 
-
 import { useAddMOneyMutation } from "@/redux/features/transactions/transaction.api";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import  { addMoneySchema } from "@/schemas/transactionSchemas";
+import { addMoneySchema } from "@/schemas/transactionSchemas";
 
 type AddMoneyFormValues = z.infer<typeof addMoneySchema>;
 
 export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div">) {
-  const navigate = useNavigate();
+
   const [addMOney] = useAddMOneyMutation();
   const { data: userData } = useGetMeQuery(undefined);
 
@@ -52,7 +51,7 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
-      toast.error(error.data.message);
+      toast.error(error.data.message, { id: toastId });
     }
   };
 
@@ -61,7 +60,6 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
       <Card>
         <CardContent>
           <Form {...form}>
-            
             <form className="space-y-3 grid grid-cols-1 md:grid-cols-2 gap-6 " onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
@@ -70,7 +68,12 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
                   <FormItem>
                     <FormLabel>Amount *</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="Amount you want to add" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
+                      <Input
+                        type="number"
+                        placeholder="Amount you want to add"
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
                     </FormControl>
                     <FormDescription className="sr-only">This is your Amount</FormDescription>
                     <FormMessage />

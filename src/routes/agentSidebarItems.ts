@@ -23,7 +23,7 @@ export const agentSidebarItems: ISidebarItems[] = [
         component: Profile,
       },
       {
-        title: "Profile",
+        title: "Transaction History",
         url: "/agent/transaction-history",
         component: CommonTransactionHistory,
       },

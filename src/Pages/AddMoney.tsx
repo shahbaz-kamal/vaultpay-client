@@ -25,7 +25,7 @@ export default function AddMoney() {
   
     console.log(myTransaction?.data);
   
-    const cashOutData: ITransactionItem[] =
+    const addMOneyData: ITransactionItem[] =
       myTransaction?.data
         .filter((singleData) => singleData.type === TRANSACTION_TYPE.ADD_MONEY)
         .map((singleData) => ({
@@ -37,7 +37,7 @@ export default function AddMoney() {
           invoiceUrl: singleData.invoiceUrl as string,
         }))
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0,5) || [];
-    console.log(cashOutData);
+    console.log(addMOneyData);
 
   return (
     <div className="overflow-x-hidden">
@@ -54,7 +54,7 @@ export default function AddMoney() {
             isAddMOney={true}
             isSendMoney={false}
             isCashIn={false}
-            data={cashOutData}
+            data={addMOneyData}
           ></RecentTransactionTable>
         </div>
         <div>

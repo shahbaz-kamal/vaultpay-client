@@ -1,8 +1,9 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "./ui/button";
 import { format } from "date-fns";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import { Role } from "@/types/user.type";
 
 export interface ITransactionItem {
   invoiceUrl: string;
@@ -36,14 +37,26 @@ export default function RecentTransactionTable<T extends ITransactionItem>({
   isCashIn,
   data,
 }: IProps<T>) {
-const {data:myData}=useGetMeQuery(undefined)
+  const { data: userData } = useGetMeQuery(undefined);
+  const navigate = useNavigate();
 
-let viewAlllink=""
+  let viewAlllink = "";
+
+  if (userData?.data?.role === Role.AGENT) viewAlllink = "/agent/transaction-history";
+  if (userData?.data?.role === Role.USER) viewAlllink = "/user/transaction-history";
 
   return (
     <div>
       <Table>
-        <TableCaption><Button ><Link to={viewAlllink}>View All Transactions </Link> </Button></TableCaption>
+        <TableCaption>
+          <Button
+            onClick={() => {
+              console.log(viewAlllink);
+            }}
+          >
+            <Link to={viewAlllink}>View All Transactions </Link>{" "}
+          </Button>
+        </TableCaption>
         <TableHeader>
           <TableRow className="text-center">
             <TableHead className="w-[100px] text-center">S/N</TableHead>

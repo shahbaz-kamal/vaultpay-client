@@ -24,7 +24,7 @@ export default function Navbar() {
   const { data: userData } = useGetMeQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
-  // console.log(data);
+  console.log(userData);
 
   const handleLogout = async () => {
     const toastId = toast.loading("Logging Out...");

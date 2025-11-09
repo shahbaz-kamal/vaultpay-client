@@ -1,8 +1,9 @@
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -10,44 +11,44 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 
 import type z from "zod";
 
-
 import { toast } from "sonner";
 
+import { useCashInMutation, useCashOutMutation } from "@/redux/features/transactions/transaction.api";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import { useCashOutMutation } from "@/redux/features/transactions/transaction.api";
-import { cashOutSchema } from "@/schemas/transactionSchemas";
-import type { ICashOut } from "@/types";
+import { cashInSchema } from "@/schemas/transactionSchemas";
 
-type CashOutFormValues = z.infer<typeof cashOutSchema>;
+import type { ICashIn } from "@/types/transaction.type";
 
-export function CashOutForm({ className, ...props }: React.ComponentProps<"div">) {
+type CashInFormValues = z.infer<typeof cashInSchema>;
 
-  const [cashOut] = useCashOutMutation();
+export function CashInForm({ className, ...props }: React.ComponentProps<"div">) {
+  const navigate = useNavigate();
+  const [cashIn] = useCashInMutation();
   const { data: userData } = useGetMeQuery(undefined);
 
-  //   console.log(userData);
-  const form = useForm<CashOutFormValues>({
-    resolver: zodResolver(cashOutSchema),
+    console.log(userData);
+  const form = useForm<CashInFormValues>({
+    resolver: zodResolver(cashInSchema),
     defaultValues: {
       receiverEmail: "",
       amount: 20,
       notes: "",
     },
   });
-  const onSubmit = async (data: CashOutFormValues) => {
-    const cashOutInfo: ICashOut = {
+  const onSubmit = async (data: CashInFormValues) => {
+    const cashInInfo: ICashIn = {
       senderEmail: userData?.data?.email as string,
       amount: data.amount,
       notes: data.notes,
       receiverEmail: data.receiverEmail as string,
     };
-    const toastId = toast.loading("Cash Out Is Processing");
+    const toastId = toast.loading("Cash In is Processing");
     try {
-      console.log(cashOutInfo);
-      const result = await cashOut(cashOutInfo).unwrap();
+      console.log(cashInInfo);
+      const result = await cashIn(cashInInfo).unwrap();
       console.log(result.data);
       if (result.success) {
-        toast.success("Cash Out Successfull", { id: toastId });
+        toast.success("Cash In Successfull", { id: toastId });
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -68,9 +69,9 @@ export function CashOutForm({ className, ...props }: React.ComponentProps<"div">
                 name="receiverEmail"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Agent Email</FormLabel>
+                    <FormLabel>User Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Agent Email" {...field} />
+                      <Input placeholder="User Email" {...field} />
                     </FormControl>
                     <FormDescription className="sr-only">This is your Amount</FormDescription>
                     <FormMessage />
@@ -106,7 +107,7 @@ export function CashOutForm({ className, ...props }: React.ComponentProps<"div">
                 )}
               />
               <Button className=" w-full col-span-1  md:col-span-3" type="submit">
-                Cash Out
+                Cash In
               </Button>
             </form>
           </Form>

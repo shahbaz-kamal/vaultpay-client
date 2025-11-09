@@ -1,6 +1,8 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "@/redux/baseApi";
-import type { IAddMoney, ICashOut, IResponse, ITransaction, IVerifyOtp } from "@/types";
+import type { IAddMoney, ICashOut, IResponse, ITransaction } from "@/types";
+import type { ICashIn, ISendMOney } from "@/types/transaction.type";
 export const transactionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     addMOney: builder.mutation<IResponse<any>, IAddMoney>({
@@ -9,12 +11,29 @@ export const transactionApi = baseApi.injectEndpoints({
         method: "POST",
         data: addMOneyInfo,
       }),
+      invalidatesTags: ["TRANSACTION"],
     }),
     cashOut: builder.mutation<IResponse<ITransaction>, ICashOut>({
       query: (cahOutInfo) => ({
         url: "/transaction/cash-out",
         method: "POST",
         data: cahOutInfo,
+      }),
+      invalidatesTags: ["TRANSACTION"],
+    }),
+    cashIn: builder.mutation<IResponse<ITransaction>, ICashIn>({
+      query: (cashInInfo) => ({
+        url: "/transaction/cash-in",
+        method: "POST",
+        data: cashInInfo,
+      }),
+      invalidatesTags: ["TRANSACTION"],
+    }),
+    sendMoney: builder.mutation<IResponse<ITransaction>, ISendMOney>({
+      query: (sendMoneyInfo) => ({
+        url: "/transaction/send-money",
+        method: "POST",
+        data: sendMoneyInfo,
       }),
       invalidatesTags: ["TRANSACTION"],
     }),
@@ -45,4 +64,12 @@ export const transactionApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddMOneyMutation, useGetSingleTransactionQuery, useCashOutMutation, useGetMyTransactionQuery,useGetAllTransactionsQuery } = transactionApi;
+export const {
+  useAddMOneyMutation,
+  useGetSingleTransactionQuery,
+  useCashOutMutation,
+  useGetMyTransactionQuery,
+  useGetAllTransactionsQuery,
+  useSendMoneyMutation,
+  useCashInMutation
+} = transactionApi;
