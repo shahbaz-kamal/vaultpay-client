@@ -1,59 +1,20 @@
-import { Shield, Key, Trash2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Switch } from "@/components/ui/switch";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Form } from "../ui/form";
-import { useForm } from "react-hook-form";
-import { updateUserSchema } from "@/schemas/userSchema";
-import type z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import type { IUser } from "@/types";
-import { format } from "date-fns";
 import { IsActive } from "@/types/user.type";
+import { format } from "date-fns";
+import LoadingPage from "../layouts/LoadingPage";
 
-type UpdateUserFormValues = z.infer<typeof updateUserSchema>;
+
 
 export default function ProfileContent() {
-  const { data: userData } = useGetMeQuery(undefined);
+  const { data: userData, isLoading } = useGetMeQuery(undefined);
 
-  const {
-    _id,
-    name,
-    email,
-    role,
-    phone,
-    profilePicture,
-    address,
-    isDeleted,
-    isActive,
-    isVerified,
-    auths,
-    agentRequestStatus,
-    agentRequestedAt,
-    agentApprovedAt,
-    createdAt,
-    updatedAt,
-    wallet,
-    password,
-  } = userData?.data as IUser;
-
-  const form = useForm<UpdateUserFormValues>({
-    resolver: zodResolver(updateUserSchema),
-    defaultValues: {
-      name: name || "",
-      phone: phone || "",
-      address: address || "",
-    },
-  });
-
+  if (isLoading || !userData?.data) {
+    return <LoadingPage />;
+  }
   return (
     <div>
       <Card>
@@ -67,39 +28,43 @@ export default function ProfileContent() {
             {/* PHONE */}
             <div className="space-y-1">
               <Label className="text-sm text-muted-foreground">Phone</Label>
-              <p className="font-medium">{phone || "N/A"}</p>
+              <p className="font-medium">{userData?.data.phone || "N/A"}</p>
             </div>
 
             {/* STATUS */}
             <div className="space-y-1">
               <Label className="text-sm text-muted-foreground">Account Status</Label>
-              <Badge className={`font-medium ${IsActive.ACTIVE ? "bg-green-800" : "bg-red-400"}`}>{isActive}</Badge>
+              <Badge className={`font-medium ${IsActive.ACTIVE ? "bg-green-800" : "bg-red-400"}`}>{userData?.data.isActive}</Badge>
             </div>
 
             {/* VERIFIED */}
             <div className="space-y-1">
               <Label className="text-sm text-muted-foreground">Verification</Label>
-              <Badge className={`font-medium ${isVerified ? "bg-green-800" : "bg-red-400"}`}>
-                {isVerified ? "Verified" : "Not Verified"}
+              <Badge className={`font-medium ${userData?.data.isVerified ? "bg-green-800" : "bg-red-400"}`}>
+                {userData?.data.isVerified ? "Verified" : "Not Verified"}
               </Badge>
             </div>
 
             {/* AGENT REQUEST STATUS */}
             <div className="space-y-1">
               <Label className="text-sm text-muted-foreground">Agent Request Status</Label>
-              <p className="font-medium">{agentRequestStatus || "N/A"}</p>
+              <p className="font-medium">{userData?.data.agentRequestStatus || "N/A"}</p>
             </div>
 
             {/* AGENT REQUESTED AT */}
             <div className="space-y-1">
               <Label className="text-sm text-muted-foreground">Agent Requested At</Label>
-              <p className="font-medium">{agentRequestedAt ? format(new Date(agentRequestedAt), "PPPp") : "N/A"}</p>
+              <p className="font-medium">
+                {userData?.data.agentRequestedAt ? format(new Date(userData.data.agentRequestedAt), "PPPp") : "N/A"}
+              </p>
             </div>
 
             {/* AGENT APPROVED AT */}
             <div className="space-y-1">
               <Label className="text-sm text-muted-foreground">Agent Approved At</Label>
-              <p className="font-medium">{agentApprovedAt ? format(new Date(agentApprovedAt), "PPPp") : "N/A"}</p>
+              <p className="font-medium">
+                {userData?.data.agentApprovedAt ? format(new Date(userData.data.agentApprovedAt), "PPPp") : "N/A"}
+              </p>
             </div>
           </div>
         </CardContent>
