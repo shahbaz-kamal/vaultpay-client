@@ -1,9 +1,8 @@
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
-import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -11,17 +10,18 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 
 import type z from "zod";
 
+
 import { toast } from "sonner";
 
-import { useAddMOneyMutation, useCashOutMutation } from "@/redux/features/transactions/transaction.api";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import { useCashOutMutation } from "@/redux/features/transactions/transaction.api";
 import { cashOutSchema } from "@/schemas/transactionSchemas";
 import type { ICashOut } from "@/types";
 
 type CashOutFormValues = z.infer<typeof cashOutSchema>;
 
 export function CashOutForm({ className, ...props }: React.ComponentProps<"div">) {
-  const navigate = useNavigate();
+
   const [cashOut] = useCashOutMutation();
   const { data: userData } = useGetMeQuery(undefined);
 
@@ -53,7 +53,7 @@ export function CashOutForm({ className, ...props }: React.ComponentProps<"div">
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
-      toast.error(error.data.message);
+      toast.error(error.data.message, { id: toastId });
     }
   };
 

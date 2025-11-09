@@ -1,46 +1,54 @@
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import { useSendMoneyMutation } from "@/redux/features/transactions/transaction.api";
-import { sendMoneySchema } from "@/schemas/transactionSchemas";
+import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+
 import type z from "zod";
 
-import type { ICashOut } from "@/types";
-type SendMOneyFormValues = z.infer<typeof sendMoneySchema>;
+import { toast } from "sonner";
 
-export function SendMOneyForm({ className, ...props }: React.ComponentProps<"div">) {
-  const [sendMOney] = useSendMoneyMutation();
+import { useCashInMutation, useCashOutMutation } from "@/redux/features/transactions/transaction.api";
+import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import { cashInSchema } from "@/schemas/transactionSchemas";
+
+import type { ICashIn } from "@/types/transaction.type";
+
+type CashInFormValues = z.infer<typeof cashInSchema>;
+
+export function CashInForm({ className, ...props }: React.ComponentProps<"div">) {
+  const navigate = useNavigate();
+  const [cashIn] = useCashInMutation();
   const { data: userData } = useGetMeQuery(undefined);
 
-  //   console.log(userData);
-  const form = useForm<SendMOneyFormValues>({
-    resolver: zodResolver(sendMoneySchema),
+    console.log(userData);
+  const form = useForm<CashInFormValues>({
+    resolver: zodResolver(cashInSchema),
     defaultValues: {
       receiverEmail: "",
       amount: 20,
       notes: "",
     },
   });
-  const onSubmit = async (data: SendMOneyFormValues) => {
-    const sendMoneyInfo: ICashOut = {
+  const onSubmit = async (data: CashInFormValues) => {
+    const cashInInfo: ICashIn = {
       senderEmail: userData?.data?.email as string,
       amount: data.amount,
       notes: data.notes,
       receiverEmail: data.receiverEmail as string,
     };
-    const toastId = toast.loading("Cash Out Is Processing");
+    const toastId = toast.loading("Cash In is Processing");
     try {
-      console.log(sendMoneyInfo);
-      const result = await sendMOney(sendMoneyInfo).unwrap();
+      console.log(cashInInfo);
+      const result = await cashIn(cashInInfo).unwrap();
       console.log(result.data);
       if (result.success) {
-        toast.success("Send Money Successfull", { id: toastId });
+        toast.success("Cash In Successfull", { id: toastId });
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,7 +71,7 @@ export function SendMOneyForm({ className, ...props }: React.ComponentProps<"div
                   <FormItem>
                     <FormLabel>User Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Receiver Email" {...field} />
+                      <Input placeholder="User Email" {...field} />
                     </FormControl>
                     <FormDescription className="sr-only">This is your Amount</FormDescription>
                     <FormMessage />
@@ -99,7 +107,7 @@ export function SendMOneyForm({ className, ...props }: React.ComponentProps<"div
                 )}
               />
               <Button className=" w-full col-span-1  md:col-span-3" type="submit">
-                Send Money
+                Cash In
               </Button>
             </form>
           </Form>
