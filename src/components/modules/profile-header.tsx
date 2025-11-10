@@ -6,9 +6,11 @@ import { Camera, Calendar, Mail, MapPin } from "lucide-react";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import LoadingPage from "../layouts/LoadingPage";
 import type { IUser } from "@/types";
-import ProfilePicture from "@/assets/icons/ProfilePicture";
+
 import mockProfilePicture from "@/assets/images/mockProfilePicture.jpg";
 import { format } from "date-fns";
+import { UpdateProfileModal } from "../UpdateProfileModal";
+import { Role } from "@/types/user.type";
 
 export default function ProfileHeader() {
   const { data: userData } = useGetMeQuery(undefined);
@@ -69,7 +71,8 @@ export default function ProfileHeader() {
               </div>
             </div>
           </div>
-          <Button variant="default">Edit Profile</Button>
+          {/* <Button variant="default">Edit Profile</Button> */}
+          <UpdateProfileModal userData={userData} currentUserRole={Role.USER}></UpdateProfileModal>
         </div>
       </CardContent>
     </Card>

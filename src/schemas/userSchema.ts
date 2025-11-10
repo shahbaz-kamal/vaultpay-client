@@ -7,7 +7,10 @@ export const updateUserSchema = z.object({
     .min(2, "Name should be at least minimum of two characters")
     .max(50, "Name should be maximum of 50 characters")
     .optional(),
-
+  email: z
+    .email("Invalid Email Format")
+    .min(2, "Email should be at least minimum of two characters")
+    .max(50, "Email should be maximum of 50 characters"),
   phone: z
     .string("Phone number must be a string")
     .regex(/^(\+8801[3-9][0-9]{8}|01[3-9][0-9]{8})$/, "Invalid Bangladeshi phone number format")

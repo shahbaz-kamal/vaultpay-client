@@ -120,8 +120,7 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-        
-         {/* {!userData?.data?.profilePhoto &&  <img className="h-10 w-10 rounded-full" src="https://img.icons8.com/?size=48&id=13042&format=png" alt="" />} */}
+          {/* {!userData?.data?.profilePhoto &&  <img className="h-10 w-10 rounded-full" src="https://img.icons8.com/?size=48&id=13042&format=png" alt="" />} */}
           {!userData?.data?.email && (
             <Button asChild variant="default" size="sm" className="text-sm ">
               <Link to={"/login"}> Login</Link>
@@ -133,7 +132,9 @@ export default function Navbar() {
             </Button>
           )}
           <ModeToggle></ModeToggle>
-          {userData?.data && userData?.data?.profilePicture && <img className="h-8 w-8 rounded-full" src={userData?.data?.profilePicture} alt="" />}
+          {userData?.data && userData?.data?.profilePicture && (
+            <img className="h-8 w-8 rounded-full" src={userData?.data?.profilePicture} alt="profile Picture" />
+          )}
           {userData?.data && !userData?.data?.profilePicture && <User className="text-primary " size={30} />}
         </div>
       </div>
