@@ -15,12 +15,12 @@ export default function CustomModal({ open, onClose, title, children }: CustomMo
       
       {/* BACKDROP */}
       <div
-        className="absolute inset-0 "
+        className="absolute inset-0 p-6"
         onClick={onClose}
       />
 
       {/* MODAL CARD */}
-      <div className="relative z-50 w-full max-w-lg rounded-xl bg-background p-6 shadow-lg animate-in fade-in-0 zoom-in-95">
+      <div className="relative z-50 w-full max-w-4xl rounded-xl bg-background p-6 shadow-lg animate-in fade-in-0 zoom-in-95">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">{title}</h2>
           <button onClick={onClose}>

@@ -7,10 +7,17 @@ import type z from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import type { IUser } from "@/types";
+import type { Role } from "@/types/user.type";
 
 type UpdateUserFormValues = z.infer<typeof updateUserSchema>;
 
-export default function UpdateProfileModal({ userData }) {
+interface IProps {
+  userData: IUser;
+  currentUserRole: Role;
+}
+
+export default function UpdateProfileModal({ userData, currentUserRole }) {
   const [open, setOpen] = useState(false);
 
   const form = useForm<UpdateUserFormValues>({
@@ -20,7 +27,7 @@ export default function UpdateProfileModal({ userData }) {
       email: userData.email,
       phone: userData.phone,
       address: userData.address,
-    }
+    },
   });
 
   const onSubmit = (data: UpdateUserFormValues) => {
@@ -32,14 +39,9 @@ export default function UpdateProfileModal({ userData }) {
     <>
       <Button onClick={() => setOpen(true)}>Update Profilee</Button>
 
-      <CustomModal
-        open={open}
-        onClose={() => setOpen(false)}
-        title="Update Profile"
-      >
+      <CustomModal open={open} onClose={() => setOpen(false)} title="Update Profile">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
               name="name"
@@ -47,7 +49,7 @@ export default function UpdateProfileModal({ userData }) {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input className="w-full" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -82,9 +84,14 @@ export default function UpdateProfileModal({ userData }) {
               )}
             />
 
-            <Button className="w-full" type="submit">
-              Save Changes
-            </Button>
+            <div className="w-full col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Button className="flex flex-wrap gap-3" type="button" variant="destructive">
+              Cancel
+              </Button>
+              <Button className=" md:flex-1 md:basis-[48%]" type="submit">
+                Save Changes
+              </Button>
+            </div>
           </form>
         </Form>
       </CustomModal>
