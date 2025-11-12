@@ -70,7 +70,7 @@ export default function UpdateProfileModal({ userData, currentUserRole }) {
               )}
             />
 
-            <FormField
+            {/* <FormField
               control={form.control}
               name="phone"
               render={({ field }) => (
@@ -82,7 +82,7 @@ export default function UpdateProfileModal({ userData, currentUserRole }) {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
 
             <div className="w-full col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
               <Button className="flex flex-wrap gap-3" type="button" variant="destructive">
