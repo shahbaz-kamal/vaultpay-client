@@ -8,25 +8,28 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import type { IUser } from "@/types";
-import type { Role } from "@/types/user.type";
+import { Role } from "@/types/user.type";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type UpdateUserFormValues = z.infer<typeof updateUserSchema>;
 
 interface IProps {
-  userData: IUser;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  userData: Partial<IUser>;
   currentUserRole: Role;
 }
 
-export default function UpdateProfileModal({ userData, currentUserRole }) {
+export default function UpdateProfileModal({ userData, currentUserRole }: IProps) {
   const [open, setOpen] = useState(false);
 
   const form = useForm<UpdateUserFormValues>({
     resolver: zodResolver(updateUserSchema),
     defaultValues: {
-      name: userData.name,
-      email: userData.email,
-      phone: userData.phone,
-      address: userData.address,
+      name: userData.name || "",
+      email: userData.email || "",
+      phone: userData.phone || "",
+      address: userData.address || "",
+      role: userData.role || "",
     },
   });
 
@@ -35,13 +38,20 @@ export default function UpdateProfileModal({ userData, currentUserRole }) {
     setOpen(false);
   };
 
+  // ✅ check if admin or super admin
+  const isAdmin = currentUserRole === Role.ADMIN || currentUserRole === Role.SUPER_ADMIN;
+
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Update Profilee</Button>
+      <Button onClick={() => setOpen(true)}>Update Profile</Button>
 
       <CustomModal open={open} onClose={() => setOpen(false)} title="Update Profile">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {/* NAME */}
             <FormField
               control={form.control}
               name="name"
@@ -56,6 +66,7 @@ export default function UpdateProfileModal({ userData, currentUserRole }) {
               )}
             />
 
+            {/* EMAIL */}
             <FormField
               control={form.control}
               name="email"
@@ -70,7 +81,8 @@ export default function UpdateProfileModal({ userData, currentUserRole }) {
               )}
             />
 
-            {/* <FormField
+            {/* PHONE */}
+            <FormField
               control={form.control}
               name="phone"
               render={({ field }) => (
@@ -82,13 +94,49 @@ export default function UpdateProfileModal({ userData, currentUserRole }) {
                   <FormMessage />
                 </FormItem>
               )}
-            /> */}
+            />
 
-            <div className="w-full col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Button className="flex flex-wrap gap-3" type="button" variant="destructive">
-              Cancel
+            {/* ✅ ROLE (Admin & Super Admin only) */}
+            {isAdmin && (
+              <FormField
+                control={form.control}
+                name="role"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Role</FormLabel>
+                    <FormControl>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select a role" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>Roles</SelectLabel>
+                            <SelectItem value={Role.USER}>User</SelectItem>
+                            <SelectItem value={Role.AGENT}>Agent</SelectItem>
+                            <SelectItem value={Role.ADMIN}>Admin</SelectItem>
+                            <SelectItem value={Role.SUPER_ADMIN}>Super Admin</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            {/* BUTTONS */}
+            <div className="col-span-1 md:col-span-2 flex flex-wrap gap-4">
+              <Button
+                type="button"
+                variant="destructive"
+                className="flex-1 md:basis-[48%]"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
               </Button>
-              <Button className=" md:flex-1 md:basis-[48%]" type="submit">
+              <Button onClick={()=>form.handleSubmit(onSubmit)} type="submit" className="flex-1 md:basis-[48%]">
                 Save Changes
               </Button>
             </div>

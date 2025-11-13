@@ -40,9 +40,7 @@ export default function ProfileHeader() {
     password,
   } = userData?.data as IUser;
 
-  const handleOpenModal=()=>{
-
-  }
+  const handleOpenModal = () => {};
 
   return (
     <Card>
@@ -74,16 +72,12 @@ export default function ProfileHeader() {
               </div>
               <div className="flex items-center gap-1">
                 <Calendar className="size-4" />
-                Joined {format(new Date(createdAt as Date),"PPP")}
+                Joined {format(new Date(createdAt as Date), "PPP")}
               </div>
             </div>
           </div>
           {/* <Button variant="default">Edit Profile</Button> */}
-          <UpdateProfileModal userData={userData} currentUserRole={Role.USER}></UpdateProfileModal>
-
-     
-
-     
+          <UpdateProfileModal userData={userData.data} currentUserRole={Role.USER}></UpdateProfileModal>
         </div>
       </CardContent>
     </Card>
