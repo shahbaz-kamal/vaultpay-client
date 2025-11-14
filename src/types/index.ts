@@ -2,7 +2,7 @@ import type { ComponentType, JSX } from "react";
 
 export type { ISendOtp, ILogin, IRegister, IVerifyOtp } from "./auth.type";
 export type {IAddMoney,ITransaction,ICashOut} from "./transaction.type"
-export type {IUser} from "./user.type"
+export type {IUser,IUpdateUser} from "./user.type"
 
 export interface INavigationLink {
   href: string;

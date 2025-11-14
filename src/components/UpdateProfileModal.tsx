@@ -11,6 +11,8 @@ import type { IUser } from "@/types";
 import { Role } from "@/types/user.type";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import SingleImageUploader from "./SingleImageUploader";
+import { cn } from "@/lib/utils";
+import { userApi, useUpdateUserMutation } from "@/redux/features/user/user.api";
 
 type UpdateUserFormValues = z.infer<typeof updateUserSchema>;
 
@@ -24,11 +26,13 @@ export default function UpdateProfileModal({ userData, currentUserRole }: IProps
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState<File | null>(null);
 
+  const [updateUser]=useUpdateUserMutation()
+
   const form = useForm<UpdateUserFormValues>({
     resolver: zodResolver(updateUserSchema),
     defaultValues: {
       name: "",
-      email: "",
+
       phone: "",
       address: "",
       role: "",
@@ -41,7 +45,7 @@ export default function UpdateProfileModal({ userData, currentUserRole }: IProps
     if (userData.role === Role.ADMIN || userData.role === Role.SUPER_ADMIN) {
       form.reset({
         name: userData.name || "",
-        email: userData.email || "",
+
         phone: userData.phone || "",
         address: userData.address || "",
         role: userData.role || "",
@@ -49,20 +53,31 @@ export default function UpdateProfileModal({ userData, currentUserRole }: IProps
     } else {
       form.reset({
         name: userData.name || "",
-        email: userData.email || "",
         phone: userData.phone || "",
         address: userData.address || "",
       });
     }
   }, [userData, form, open]);
-  const onSubmit = (data: UpdateUserFormValues) => {
+
+
+  const onSubmit =async (data: UpdateUserFormValues) => {
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+
     console.log("FORM SUBMITTED:", data);
+    console.log("from formdata", formData.get("data"));
+    const res = await updateUser({
+      userId: userData._id as string,
+      data: formData,
+    }).unwrap();
+
+    console.log("responseee",res)
     setOpen(false);
   };
 
   // ✅ check if admin or super admin
   const isAdmin = currentUserRole === Role.ADMIN || currentUserRole === Role.SUPER_ADMIN;
-  console.log("Inside modal",image)
+  console.log("Inside modal", image);
 
   return (
     <>
@@ -70,7 +85,7 @@ export default function UpdateProfileModal({ userData, currentUserRole }: IProps
 
       <CustomModal open={open} onClose={() => setOpen(false)} title="Update Profile">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 grid grid-cols-1 md:grid-cols-1 gap-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className={cn(!isAdmin ? " grid grid-cols-1  gap-6" : "grid-cols-2 md:grid-cols-1")}>
             {/* NAME */}
             <FormField
               control={form.control}
@@ -100,6 +115,7 @@ export default function UpdateProfileModal({ userData, currentUserRole }: IProps
                 </FormItem>
               )}
             />
+
             {/* ADDRESS */}
             <FormField
               control={form.control}
@@ -145,23 +161,9 @@ export default function UpdateProfileModal({ userData, currentUserRole }: IProps
                     </FormItem>
                   )}
                 />
-                {/* EMAIL */}
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
               </>
             )}
-            <SingleImageUploader onChange={setImage}></SingleImageUploader>
+            {/* <SingleImageUploader onChange={setImage}></SingleImageUploader> */}
             {/* BUTTONS */}
             <div className="col-span-1  flex flex-wrap gap-4">
               <Button type="button" variant="destructive" className="flex-1 md:basis-[48%]" onClick={() => setOpen(false)}>

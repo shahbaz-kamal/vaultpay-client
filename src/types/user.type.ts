@@ -49,3 +49,8 @@ export interface IUser {
   agentApprovedAt?: Date | null;
   createdAt?:Date
 }
+
+export interface IUpdateUser {
+userId:string;
+data: FormData;
+}
