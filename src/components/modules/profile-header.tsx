@@ -1,18 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Camera, Calendar, Mail, MapPin } from "lucide-react";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import LoadingPage from "../layouts/LoadingPage";
 import type { IUser } from "@/types";
+import { Calendar, Camera, Mail, MapPin } from "lucide-react";
+import LoadingPage from "../layouts/LoadingPage";
 
 import mockProfilePicture from "@/assets/images/mockProfilePicture.jpg";
 import { format } from "date-fns";
 
 import { Role } from "@/types/user.type";
-import TestModal from "../CustomModal";
-import CustomModal from "../CustomModal";
 import UpdateProfileModal from "../UpdateProfileModal";
 
 export default function ProfileHeader() {
@@ -20,27 +19,14 @@ export default function ProfileHeader() {
   if (!userData) return <LoadingPage></LoadingPage>;
 
   const {
-    _id,
     name,
     email,
     role,
-    phone,
     profilePicture,
     address,
-    isDeleted,
-    isActive,
-    isVerified,
-    auths,
-    agentRequestStatus,
-    agentRequestedAt,
-    agentApprovedAt,
     createdAt,
-    updatedAt,
-    wallet,
-    password,
   } = userData?.data as IUser;
 
-  const handleOpenModal = () => {};
 
   return (
     <Card>

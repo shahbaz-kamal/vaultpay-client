@@ -1,9 +1,9 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "./ui/button";
-import { format } from "date-fns";
-import { Link, useNavigate } from "react-router";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { Role } from "@/types/user.type";
+import { format } from "date-fns";
+import { Link } from "react-router";
+import { Button } from "./ui/button";
 
 export interface ITransactionItem {
   invoiceUrl: string;
@@ -38,7 +38,7 @@ export default function RecentTransactionTable<T extends ITransactionItem>({
   data,
 }: IProps<T>) {
   const { data: userData } = useGetMeQuery(undefined);
-  const navigate = useNavigate();
+
 
   let viewAlllink = "";
 

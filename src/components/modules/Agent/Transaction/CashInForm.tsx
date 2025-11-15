@@ -1,9 +1,8 @@
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
-import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -13,8 +12,8 @@ import type z from "zod";
 
 import { toast } from "sonner";
 
-import { useCashInMutation, useCashOutMutation } from "@/redux/features/transactions/transaction.api";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import { useCashInMutation } from "@/redux/features/transactions/transaction.api";
 import { cashInSchema } from "@/schemas/transactionSchemas";
 
 import type { ICashIn } from "@/types/transaction.type";
@@ -22,7 +21,7 @@ import type { ICashIn } from "@/types/transaction.type";
 type CashInFormValues = z.infer<typeof cashInSchema>;
 
 export function CashInForm({ className, ...props }: React.ComponentProps<"div">) {
-  const navigate = useNavigate();
+
   const [cashIn] = useCashInMutation();
   const { data: userData } = useGetMeQuery(undefined);
 

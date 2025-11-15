@@ -1,26 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { TUser } from "@/components/modules/Admin/Analytics/TopPerformerTable";
-import {
-  type ColumnDef,
-  type ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  type SortingState,
-  useReactTable,
-  type VisibilityState,
-} from "@tanstack/react-table";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import {
+  type ColumnDef
+} from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 export default function AnalyticsConstants({title}:{title:string}) {
@@ -59,7 +48,7 @@ export default function AnalyticsConstants({title}:{title:string}) {
     {
       id: "actions",
       enableHiding: false,
-      cell: ({ row }) => {
+      cell: () => {
       
   
         return (

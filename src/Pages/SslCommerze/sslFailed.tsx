@@ -1,12 +1,11 @@
-import { useSearchParams, useNavigate } from "react-router";
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useNavigate, useSearchParams } from "react-router";
 
-import { XCircle, ArrowLeft, Wallet, AlertTriangle, Receipt } from "lucide-react";
-import { toast } from "sonner";
+import { AlertTriangle, ArrowLeft, Wallet, XCircle } from "lucide-react";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 const SslFailed = () => {
   const navigate = useNavigate();

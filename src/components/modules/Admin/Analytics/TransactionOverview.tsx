@@ -1,10 +1,7 @@
-import { TCardDisplayDataType } from "@/types";
-import CardGrid from "./CardGrid";
-import { PieChartActive } from "./PieChartActive";
-import { Banknote, ReceiptText, UserCheck, UserPlus, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TransactionByTypeChart } from "./TransactionByTypeChart";
+import { Banknote, ReceiptText } from "lucide-react";
 import { TransactionBySourceChart } from "./TransactionBySourceChart";
+import { TransactionByTypeChart } from "./TransactionByTypeChart";
 
 export default function TransactionOverview() {
   const cardObject = [

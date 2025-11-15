@@ -4,12 +4,11 @@ const AddMoney = lazy(() => import("@/Pages/AddMoney"));
 const Profile = lazy(() => import("@/Pages/Profile"));
 const CashOut = lazy(() => import("@/Pages/User/CashOut"));
 const SendMoney = lazy(() => import("@/Pages/User/SendMoney"));
-const WalletSummary = lazy(() => import("@/Pages/User/WalletInsights"));
 
-import type { ISidebarItems } from "@/types";
-import WalletInsights from "@/Pages/User/WalletInsights";
-import { TransactionHistory } from "@/components/modules/TransactionHistory";
+
 import CommonTransactionHistory from "@/Pages/CommonTransactionHistory";
+import WalletInsights from "@/Pages/User/WalletInsights";
+import type { ISidebarItems } from "@/types";
 
 export const userSidebarItems: ISidebarItems[] = [
   {

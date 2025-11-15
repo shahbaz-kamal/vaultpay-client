@@ -1,20 +1,18 @@
 import { useGetSingleTransactionQuery } from "@/redux/features/transactions/transaction.api";
-import { useSearchParams, useNavigate } from "react-router";
 import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
 
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import { CheckCircle2, ArrowLeft, Wallet, Receipt, Mail, Calendar } from "lucide-react";
 import LoadingPage from "@/components/layouts/LoadingPage";
-import { format } from "date-fns";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import { Role } from "@/types/user.type";
-import type { Trole } from "@/types";
+import { format } from "date-fns";
+import { ArrowLeft, Calendar, CheckCircle2, Mail, Wallet } from "lucide-react";
 
 export default function SslSuccess() {
   const { data: userData } = useGetMeQuery(undefined);

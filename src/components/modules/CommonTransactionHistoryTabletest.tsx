@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -11,18 +10,15 @@ import {
   useReactTable,
   type VisibilityState,
 } from "@tanstack/react-table";
-import { ArrowDownToLine, ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowDownToLine, ArrowUpDown, ChevronDown } from "lucide-react";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -30,7 +26,7 @@ import { TRANSACTION_SOURCE, TRANSACTION_STATUS, TRANSACTION_TYPE } from "@/type
 import { format } from "date-fns";
 
 interface CommonTransacHistory {
-  id: 1;
+  id: string;
   status: TRANSACTION_STATUS;
   type: TRANSACTION_TYPE; // or TRANSACTION_TYPE if you have enum
   source: TRANSACTION_SOURCE;

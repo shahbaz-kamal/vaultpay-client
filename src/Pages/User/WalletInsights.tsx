@@ -6,11 +6,10 @@ import { TransactionHistory } from "@/components/modules/TransactionHistory";
 import MonthlyActivityUser from "@/components/modules/User/WalletInsights/MonthlyActivityUser";
 
 import TransactionOverViewUser from "@/components/modules/User/WalletInsights/TransactionOverViewUser";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { role } from "@/constants/role";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { TCardDisplayDataType } from "@/types";
-import { Wallet, ArrowDownCircle, ArrowUpCircle, Loader, RefreshCcw, ReceiptText, CalendarDays } from "lucide-react";
+import { ArrowDownCircle, ArrowUpCircle, CalendarDays, RefreshCcw, Wallet } from "lucide-react";
 
 export default function WalletInsights() {
   const { data: userData, isLoading } = useGetMeQuery(undefined);

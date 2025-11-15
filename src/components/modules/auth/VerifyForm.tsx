@@ -1,19 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldDescription, FieldGroup, FieldSeparator } from "@/components/ui/field";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { cn } from "@/lib/utils";
+import { useSendOtpMutation, useVerifyOtpMutation } from "@/redux/features/auths/auth.api";
+import { otpSchema } from "@/schemas/otpSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
-import Password from "@/components/ui/Password";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { otpSchema } from "@/schemas/otpSchema";
 import type z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useSendOtpMutation, useVerifyOtpMutation } from "@/redux/features/auths/auth.api";
 
 export function VerifyForm({ className, ...props }: React.ComponentProps<"div">) {
   const [sentOtp, setSentOtp] = useState(false);

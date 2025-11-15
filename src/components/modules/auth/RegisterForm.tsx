@@ -1,18 +1,18 @@
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from "@/components/ui/field";
+import { FieldDescription } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Link, useNavigate } from "react-router";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router";
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { registerSchema } from "@/schemas/RegisterFormSchema";
-import type z from "zod";
 import Password from "@/components/ui/Password";
 import { useRegisterMutation } from "@/redux/features/auths/auth.api";
+import { registerSchema } from "@/schemas/RegisterFormSchema";
 import { toast } from "sonner";
+import type z from "zod";
 import GoogleLogin from "./GoogleLogin";
 
 export function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {

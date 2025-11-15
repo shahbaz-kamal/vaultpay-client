@@ -31,6 +31,7 @@ export default function Navbar() {
     try {
       await logout(undefined);
       dispatch(authApi.util.resetApiState());
+      dispatch(authApi.util.invalidateTags(["USER"]));
       toast.success("Log Out Successful", { id: toastId });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

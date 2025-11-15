@@ -1,13 +1,14 @@
 import DashboardTitle from "@/components/layouts/DashboardTitle";
 import SidebarHeader from "@/components/layouts/SidebarHeader";
-import { AddMoneyForm } from "@/components/modules/AddMoneyForm";
+import { AddMoneyForm } from "@/components/modules/AddMOneyForm";
+
 
 import PaymentChannels from "@/components/modules/PaymentChannels";
 import RecentTransactionTable, { type ITransactionItem } from "@/components/RecentTransactionTable";
 import { useGetMyTransactionQuery } from "@/redux/features/transactions/transaction.api";
 import { TRANSACTION_TYPE } from "@/types/transaction.type";
 
-import { BanknoteArrowDown, BanknoteArrowUp, Wallet2 } from "lucide-react";
+import { BanknoteArrowDown, Wallet2 } from "lucide-react";
 
 export default function AddMoney() {
   // const cashOutData = [

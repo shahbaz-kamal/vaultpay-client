@@ -25,7 +25,7 @@ interface IProps {
 
 export default function UpdateProfileModal({ userData, currentUserRole, buttonText }: IProps) {
   const [open, setOpen] = useState(false);
-  const [image, setImage] = useState<File | null>(null);
+ 
 
 
   const [updateUser] = useUpdateUserMutation();
@@ -95,8 +95,7 @@ export default function UpdateProfileModal({ userData, currentUserRole, buttonTe
 
   // ✅ check if admin or super admin
   const isAdmin = currentUserRole === Role.ADMIN || currentUserRole === Role.SUPER_ADMIN;
-  console.log("Inside modal", image);
-  console.log(isAdmin);
+
   return (
     <>
       <Button onClick={() => setOpen(true)}>{buttonText}</Button>
@@ -252,7 +251,7 @@ export default function UpdateProfileModal({ userData, currentUserRole, buttonTe
                 />
               </>
             )}
-            {/* <SingleImageUploader onChange={setImage}></SingleImageUploader> */}
+        
             {/* BUTTONS */}
             <div className={cn("  flex flex-wrap gap-4", isAdmin ? "col-span-1 md:col-span-2" : "col-span-1")}>
               <Button type="button" variant="destructive" className="flex-1 md:basis-[48%]" onClick={() => setOpen(false)}>

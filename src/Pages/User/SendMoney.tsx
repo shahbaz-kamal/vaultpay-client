@@ -2,14 +2,12 @@ import DashboardTitle from "@/components/layouts/DashboardTitle";
 import LoadingPage from "@/components/layouts/LoadingPage";
 import SidebarHeader from "@/components/layouts/SidebarHeader";
 
-import PaymentChannels from "@/components/modules/PaymentChannels";
-import { CashOutForm } from "@/components/modules/User/Transactions/CashoutForm";
 import { SendMOneyForm } from "@/components/modules/User/Transactions/SendMoneyForm";
 import RecentTransactionTable, { type ITransactionItem } from "@/components/RecentTransactionTable";
 import { useGetMyTransactionQuery } from "@/redux/features/transactions/transaction.api";
-import { TRANSACTION_STATUS, TRANSACTION_TYPE } from "@/types/transaction.type";
+import { TRANSACTION_TYPE } from "@/types/transaction.type";
 
-import { BanknoteArrowUp, Wallet2 } from "lucide-react";
+import { BanknoteArrowUp } from "lucide-react";
 
 export default function SendMoney() {
   const { data: myTransaction } = useGetMyTransactionQuery({});

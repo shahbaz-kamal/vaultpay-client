@@ -5,9 +5,9 @@ import { CashInForm } from "@/components/modules/Agent/Transaction/CashInForm";
 
 import RecentTransactionTable, { type ITransactionItem } from "@/components/RecentTransactionTable";
 import { useGetMyTransactionQuery } from "@/redux/features/transactions/transaction.api";
-import { TRANSACTION_STATUS, TRANSACTION_TYPE } from "@/types/transaction.type";
+import { TRANSACTION_TYPE } from "@/types/transaction.type";
 
-import { BanknoteArrowUp, Wallet2 } from "lucide-react";
+import { BanknoteArrowUp } from "lucide-react";
 
 export default function CashIn() {
   const { data: myTransaction } = useGetMyTransactionQuery({});

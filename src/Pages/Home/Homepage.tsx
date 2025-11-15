@@ -1,8 +1,10 @@
+import { Hero } from "@/components/Hero";
+
 
 export default function HomePage() {
  return (
-    <div>
-      <h1>This is HomePage Component</h1>
+    <div className="container mx-auto space-y-6 py-6">
+     <Hero></Hero>
     </div>
  );
 };
