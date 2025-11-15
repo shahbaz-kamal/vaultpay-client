@@ -65,7 +65,7 @@ export default function UserManageMentTable({ role }: IProps) {
 
   const params = {
     searchTerm: searchText,
-    role: Role.USER,
+    role: role,
   };
   const { data: allUsers, isLoading: allLoading } = useGetAllUsersQuery(params, {
     refetchOnMountOrArgChange: true,
@@ -79,7 +79,7 @@ export default function UserManageMentTable({ role }: IProps) {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div>
-          <Label className="px-1 mb-3"> Search Users</Label>
+          <Label className="px-1 mb-3"> {role==="USER" ?"Search Users":"Search Agents"}</Label>
           {/* you can search by   "name","email","type""sources","status","notes","senderEmail","receiverEmail", "source" */}
           <Input placeholder="Name / Email / " value={searchText} onChange={(e) => setSearchText(e.target.value)} />
         </div>

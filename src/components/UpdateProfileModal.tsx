@@ -26,8 +26,7 @@ interface IProps {
 export default function UpdateProfileModal({ userData, currentUserRole, buttonText }: IProps) {
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState<File | null>(null);
-  const [roleValue, setRoleValue] = useState<string | undefined>();
-  const [isActiveValue, setIsActiveValue] = useState<string | undefined>();
+
 
   const [updateUser] = useUpdateUserMutation();
 
@@ -45,7 +44,7 @@ export default function UpdateProfileModal({ userData, currentUserRole, buttonTe
 
   useEffect(() => {
     if (!open || !userData) return;
-    console.log(roleValue, isActiveValue);
+  
 
     if (currentUserRole === Role.ADMIN || currentUserRole === Role.SUPER_ADMIN) {
       form.reset({
