@@ -225,7 +225,7 @@ vaultPay-server/
 1. First clone the project by running
 
 ```bash
-  git clone https://github.com/shahbaz-kamal/vaultPay-server.git
+  git clone https://github.com/shahbaz-kamal/vaultpay-client.git
 ```
 
 2. Change your directory to the cloned folder by
@@ -240,56 +240,11 @@ vaultPay-server/
 npm install
 ```
 
-4. Create a .env file in root directory of the project and add the following variables :
+4. Create a .env file in root directory of the project and add the following variable :
 
 ```bash
-PORT=****
-DB_URL=***************************
-NODE_ENV=development
+VITE_BASE_URL=https://vault-pay-server.vercel.app/api/v1
 
-#jwt
-JWT_ACCESS_TOKEN_SECRET=***************************
-JWT_ACCESS_TOKEN_EXPIRES_IN=**  # 1d/2d
-JWT_REFRESH_TOKEN_SECRET=***************************
-JWT_REFRESH_TOKEN_EXPIRES_IN=**  # 1d,2d
-
-#bcrypt
-BCRYPT_SALT_ROUND=**  # 5/10
-
-#SUPER_ADMIN
-SUPER_ADMIN_EMAIL=*************************** # an email you want to create super admin (super@gmail.com)
-SUPER_ADMIN_PASSWORD=***************************
-
-#Google
-GOOGLE_CLIENT_ID=*************************** # google OAuth Client Id
-GOOGLE_CLIENT_SECRET=*************************** # google OAuth Client secret
-GOOGLE_CALLBACK_URL=*************************** # google OAuth callback Url (ex: http://localhost:5000/api/v1/auth/google/callback)
-
-#express-session
-EXPRESS_SESSION_SECRET=***************************
-
-#FRONTEND_URl
-FRONTEND_URl=***************************   #example:http://localhost:5173
-
-#Backened_URL
-BACKENED_URL=***************************   #example:http://localhost:5000
-
-# #SSLCommerze
-SSL_STORE_ID=*************************** #sslCommerz store Id
-SSL_STORE_PASS=*************************** #sslCommerz store Password
-SSL_ADDMONEY_API=*************************** #sslCommerz Session API to generate transaction
-SSL_VALIDATION_API=*************************** #sslCommerz Validation API
-
-
-#SSL Commerze BAkened URl
-SSL_SUCCESS_BACKEND_URL=*************************** # Backened URL to hit if SSLCommerze is successfull
-SSL_FAIL_BACKEND_URL=*************************** # Backened URL to hit if SSLCommerze is failed
-SSL_CANCEL_BACKEND_URL=*************************** # Backened URL to hit if SSLCommerze is Canceled
-
-#SSL Commerze FRONTENDURL
-SSL_SUCCESS_FRONTEND_URL=*************************** # Frontend URL to hit if SSLCommerze is successfull
-SSL_FAIL_FRONTEND_URL=*************************** # Frontend URL to hit if SSLCommerze is failed
-SSL_CANCEL_FRONTEND_URL=*************************** # Frontend URL to hit if SSLCommerze is failed
 
 ```
 
@@ -299,6 +254,6 @@ SSL_CANCEL_FRONTEND_URL=*************************** # Frontend URL to hit if SSL
 npm run dev
 ```
 
-6. Use Postman to send request as per above instructions
+
 
 ### Thank you:
