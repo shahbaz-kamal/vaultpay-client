@@ -20,10 +20,10 @@ Users can **add balance to their wallets via SSLCommerz**, a reliable online pay
 
 - **Super Admin Email** — super.vaultpay@gmail.com
 - **Super Admin Password** — 123456Aa
-- **User Email** — tamimchowdhury120096@gmail.com
+- **User Email** — tamimchowdhury10@gmail.com
 - **User Password** — 123456Aa
-- **User Email** — shahbazkamal384@gmail.com
-- **User Password** — 123456Aa
+- **Agent Email** — shahbazkamal384@gmail.com
+- **Agent Password** — 123456Aa
 
 
 ## ✨ Features:

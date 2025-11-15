@@ -9,7 +9,7 @@ export function CommonLayout({ children }: IProps) {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar></Navbar>
-      <div className="grow-1"> {children}</div>
+      <div className="grow-1 "> {children}</div>
       <Footer></Footer>
     </div>
   );

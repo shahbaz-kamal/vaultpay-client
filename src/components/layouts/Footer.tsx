@@ -2,7 +2,7 @@ import { Logo } from "@/assets/icons/Logo";
 
 export function Footer() {
   return (
-    <footer className="bg-gray-100">
+    <footer className="bg-gray-100 mt-6  py-6">
       <div className="mx-auto container px-4 ">
         <div className="flex justify-center text-teal-600">
           <Logo></Logo>
