@@ -1,4 +1,3 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -6,9 +5,6 @@ import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { IsActive } from "@/types/user.type";
 import { format } from "date-fns";
 import LoadingPage from "../layouts/LoadingPage";
-import { Input } from "../ui/input";
-
-
 
 export default function ProfileContent() {
   const { data: userData, isLoading } = useGetMeQuery(undefined);
@@ -17,10 +13,6 @@ export default function ProfileContent() {
     return <LoadingPage />;
   }
 
-  const handleSubmit=(e:React.ChangeEvent<HTMLInputElement>)=>{
-  e.preventDefault();
-  console.log(e.target.name.value)
-  }
   return (
     <div>
       <Card>
@@ -76,19 +68,6 @@ export default function ProfileContent() {
         </CardContent>
       </Card>
 
-      <form id="update-user" className="grid grid-cols-1 md:grid-cols-2 gap-6" >
-            {/* NAME */}
-            <div>   
-            <Input name="name" placeholder="Enter your name"  onSubmit={handleSubmit} />
-            </div>
-
-            {/* EMAIL */}
-           
-            {/* <Button className=" w-full col-span-1  md:col-span-3" type="submit">
-                Cash Out
-              </Button> */}
-            <div className="col-span-1 md:col-span-2 flex justify-end gap-3 mt-4"></div>
-          </form>
       {/* <Card>
         <CardHeader>
           <CardTitle>Personal Information</CardTitle>

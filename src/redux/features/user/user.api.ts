@@ -1,5 +1,5 @@
 import { baseApi } from "@/redux/baseApi";
-import type { IResponse, IUpdateUser } from "@/types";
+import type { IResponse, IUpdateUser, IUser } from "@/types";
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,8 +9,16 @@ export const userApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: data,
       }),
+      invalidatesTags:["USER"]
     }),
-
+  getAllUsers: builder.query<IResponse<IUser[]>, { role:string, searchTerm?: string }>({
+      query: (params) => ({
+        url: "/user/users",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["USER"],
+    }),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getMe: builder.query<IResponse<any>, undefined>({
       query: () => ({
@@ -22,4 +30,4 @@ export const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useUpdateUserMutation } = userApi;
+export const { useUpdateUserMutation,useGetAllUsersQuery } = userApi;

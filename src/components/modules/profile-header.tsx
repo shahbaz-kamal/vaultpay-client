@@ -77,7 +77,7 @@ export default function ProfileHeader() {
             </div>
           </div>
           {/* <Button variant="default">Edit Profile</Button> */}
-          <UpdateProfileModal userData={userData.data} currentUserRole={Role.USER}></UpdateProfileModal>
+          <UpdateProfileModal userData={userData.data} currentUserRole={Role.ADMIN} buttonText="Update Profile"></UpdateProfileModal>
         </div>
       </CardContent>
     </Card>

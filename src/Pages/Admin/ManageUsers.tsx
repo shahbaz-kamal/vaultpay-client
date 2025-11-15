@@ -1,11 +1,20 @@
-import SidebarHeader from "@/components/layouts/SidebarHeader"
+
+import SidebarHeader from "@/components/layouts/SidebarHeader";
+import UserManageMentTable from "@/components/modules/Admin/UserManagement/UserManagementTable";
+
+import { Role } from "@/types/user.type";
 
 
 export default function ManageUsers() {
- return (
+
+
+    // if(!allUsers) return <LoadingPage></LoadingPage>
+  return (
     <div>
-        <SidebarHeader heading="User Management" subHeading="Manage Users"></SidebarHeader>
-      <h1>This is ManageUsers Component</h1>
+      <SidebarHeader heading="User Management" subHeading="Manage Users" subSubHeading=""></SidebarHeader>
+      <div className="container mx-auto px-5 py-6">
+        <UserManageMentTable role={Role.USER}></UserManageMentTable>
+      </div>
     </div>
- );
-};
+  );
+}
