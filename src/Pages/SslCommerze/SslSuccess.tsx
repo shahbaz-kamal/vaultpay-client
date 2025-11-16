@@ -38,7 +38,7 @@ export default function SslSuccess() {
   const handleAddMoreMoney = async () => {
     if (userData?.data.role === "USER") {
       navigate("/user/add-money");
-    } else if (userData?.data.role === "AGent") {
+    } else if (userData?.data.role === "AGENT") {
       navigate("/agent/add-money");
     }
   };
