@@ -4,6 +4,8 @@ export type { ISendOtp, ILogin, IRegister, IVerifyOtp } from "./auth.type";
 export type {IAddMoney,ITransaction,ICashOut} from "./transaction.type"
 export type {IUser,IUpdateUser} from "./user.type"
 
+export type {IAdminStats,IUserAndAgentOverview} from "./stats.type.ts"
+
 export interface INavigationLink {
   href: string;
   label: string;

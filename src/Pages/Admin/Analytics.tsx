@@ -7,27 +7,31 @@ import TransactionOverview from "@/components/modules/Admin/Analytics/Transactio
 import UserAndAgentOverview from "@/components/modules/Admin/Analytics/UserAndAgentOverview";
 
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import { useGetStatsForAdminQuery } from "@/redux/features/stats/stats.api";
+import type { IUserAndAgentOverview } from "@/types";
+import type { ISystemBalanceAndRevenue } from "@/types/stats.type";
 import { BadgeDollarSign, Medal, RefreshCcw, Users } from "lucide-react";
 
 export default function Analytics() {
   const { data: userData, isLoading } = useGetMeQuery(undefined);
-
-  if (isLoading) return <LoadingPage></LoadingPage>;
+  const { data: analyticsData, isLoading: analyticsLoading } = useGetStatsForAdminQuery(undefined);
+  if (isLoading || analyticsLoading) return <LoadingPage></LoadingPage>;
   console.log(userData);
+  console.log(analyticsData)
 
   return (
     <div>
       <SidebarHeader heading="Dashboard" subHeading="Analytics" subSubHeading="" />
 
-      <div className="container mx-auto px-5 py-6">
+      <div className=" mx-auto px-8 py-6">
         {/* User & Agent Overview */}
         <DashboardTitle title="User & Agent Overview" icon={<Users size={20} />}></DashboardTitle>
-        <UserAndAgentOverview></UserAndAgentOverview>
+        <UserAndAgentOverview requiredData={analyticsData?.data.userAndAgentOverview as IUserAndAgentOverview}></UserAndAgentOverview>
 
         {/* 💰 System Balance & Revenue */}
         <div className="mt-6"></div>
         <DashboardTitle title="System Balance & Revenue" icon={<BadgeDollarSign size={20} />}></DashboardTitle>
-        <SystemBalanceAndRevenue></SystemBalanceAndRevenue>
+        <SystemBalanceAndRevenue requiredData={analyticsData?.data.systemBalanceAndRevenue as ISystemBalanceAndRevenue}></SystemBalanceAndRevenue>
 
         {/* 🔄 Transaction Overview*/}
         <div className="mt-6"></div>
