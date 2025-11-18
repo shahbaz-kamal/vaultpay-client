@@ -1,54 +1,46 @@
-"use client"
+import { TrendingUp } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts";
 
-import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { CustomTooltip } from "@/hooks/CustomTooltip";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import {
- type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart"
-
-export const description = "A bar chart with a custom label"
+export const description = "A bar chart with a custom label";
 
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-]
+  { source: "SSLCOMMERZE", transactionData: 186 },
+  { source: "AGENT", transactionData: 305 },
+  { source: "USER", transactionData: 237 },
+];
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  transactionData: {
+    label: "transactionData",
     color: "var(--chart-2)",
   },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
-  },
+
   label: {
     color: "var(--background)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
-export function TransactionBySourceChart() {
+interface IPropsSource {
+  chartTitle: string;
+  isShowNumber: boolean;
+
+  footerData: string;
+  chartData: {
+    source: string;
+    transactionData: number;
+  }[];
+}
+
+export function TransactionBySourceChart({ chartTitle, footerData, isShowNumber, chartData }: IPropsSource) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Transaction By Source</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>{chartTitle}</CardTitle>
+        {/* <CardDescription>January - June 2024</CardDescription> */}
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -62,51 +54,27 @@ export function TransactionBySourceChart() {
           >
             <CartesianGrid horizontal={false} />
             <YAxis
-              dataKey="month"
+              dataKey="source"
               type="category"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => value}
               hide
             />
-            <XAxis dataKey="desktop" type="number" hide />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
-            />
-            <Bar
-              dataKey="desktop"
-              layout="vertical"
-              fill="var(--color-desktop)"
-              radius={4}
-            >
-              <LabelList
-                dataKey="month"
-                position="insideLeft"
-                offset={8}
-                className="fill-(--color-label)"
-                fontSize={12}
-              />
-              <LabelList
-                dataKey="desktop"
-                position="right"
-                offset={8}
-                className="fill-foreground"
-                fontSize={12}
-              />
+            <XAxis dataKey="transactionData" type="number" hide />
+            {/* <ChartTooltip cursor={false} content={<ChartTooltipContent />} /> */}
+            <ChartTooltip cursor={false} content={<CustomTooltip isShowNumber={isShowNumber} />} />
+            <Bar dataKey="transactionData" layout="vertical" fill="var(--color-transactionData)" radius={4}>
+              <LabelList dataKey="source" position="insideLeft" offset={8} className="fill-(--color-label)" fontSize={12} />
+              <LabelList dataKey="transactionData" position="right" offset={8} className="fill-foreground" fontSize={12} />
             </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
-        </div>
+      <CardFooter className="flex-col items-start gap-2 text-sm font-bold ">
+        <div className="text-muted-foreground leading-none">{footerData}</div>
       </CardFooter>
     </Card>
-  )
+  );
 }

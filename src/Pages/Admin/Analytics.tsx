@@ -8,8 +8,8 @@ import UserAndAgentOverview from "@/components/modules/Admin/Analytics/UserAndAg
 
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { useGetStatsForAdminQuery } from "@/redux/features/stats/stats.api";
-import type { IUserAndAgentOverview } from "@/types";
-import type { ISystemBalanceAndRevenue } from "@/types/stats.type";
+import type { ISystemBalanceAndRevenue, ITransactionOverview, IUserAndAgentOverview } from "@/types";
+
 import { BadgeDollarSign, Medal, RefreshCcw, Users } from "lucide-react";
 
 export default function Analytics() {
@@ -36,7 +36,7 @@ export default function Analytics() {
         {/* 🔄 Transaction Overview*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Transaction Overview" icon={<RefreshCcw size={20} />}></DashboardTitle>
-        <TransactionOverview></TransactionOverview>
+        <TransactionOverview requiredData={analyticsData?.data.transactionOverview as ITransactionOverview}></TransactionOverview>
 
         {/* 🧮 Top Performers*/}
         <div className="mt-6"></div>
