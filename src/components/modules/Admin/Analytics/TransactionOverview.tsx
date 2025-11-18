@@ -6,6 +6,7 @@ import { TransactionByTypeChart } from "./TransactionByTypeChart";
 import type { ITransactionOverview } from "@/types";
 
 import { convertType } from "@/utils/convertType";
+import { convertSource } from "@/utils/convertSource";
 
 interface ITransactionOverviewProps {
   requiredData: ITransactionOverview;
@@ -52,14 +53,14 @@ export default function TransactionOverview({ requiredData }: ITransactionOvervi
 
   // For NumberofTransactionBySource
 
-  const numberOfTransactionBySourceData = requiredData.transactionByType.map((item) => ({
-    source: convertType(item.type),
+  const numberOfTransactionBySourceData = requiredData.transactionBySource.map((item) => ({
+    source: convertSource(item.source),
     transactionData: item.count,
   }));
   // For NumberofTransactionBySource
 
-  const sourceAmount = requiredData.transactionByType.map((item) => ({
-    source: convertType(item.type),
+  const sourceAmount = requiredData.transactionBySource.map((item) => ({
+    source: convertSource(item.source),
     transactionData: item.amount,
   }));
   return (

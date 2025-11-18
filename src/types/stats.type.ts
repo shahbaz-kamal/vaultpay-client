@@ -26,7 +26,7 @@ export interface ITransactionByType {
   amount: number;
 }
 export interface ITransactionBySource {
-  type: string;
+  source: string;
   count: number;
   amount: number;
 }
@@ -38,8 +38,21 @@ export interface ITransactionOverview {
   transactionBySource:ITransactionBySource[]
 }
 
+export interface ITopUsersAndAgents {
+  _id: string
+  transactionAmount: number
+  name: string
+  profilePicture: string | null
+}
+
+export interface ITopPerformer {
+  topUsers:ITopUsersAndAgents[]
+  topAgents:ITopUsersAndAgents[]
+}
 export interface IAdminStats {
   userAndAgentOverview: IUserAndAgentOverview;
   systemBalanceAndRevenue: ISystemBalanceAndRevenue;
   transactionOverview: ITransactionOverview;
+  topPerformer:ITopPerformer
+
 }

@@ -9,6 +9,7 @@ import UserAndAgentOverview from "@/components/modules/Admin/Analytics/UserAndAg
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { useGetStatsForAdminQuery } from "@/redux/features/stats/stats.api";
 import type { ISystemBalanceAndRevenue, ITransactionOverview, IUserAndAgentOverview } from "@/types";
+import type { ITopPerformer } from "@/types/stats.type";
 
 import { BadgeDollarSign, Medal, RefreshCcw, Users } from "lucide-react";
 
@@ -41,7 +42,7 @@ export default function Analytics() {
         {/* 🧮 Top Performers*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Top Performer" icon={<Medal size={20} />}></DashboardTitle>
-        <TopPerformer></TopPerformer>
+        <TopPerformer requiredData={analyticsData?.data.topPerformer as ITopPerformer}></TopPerformer>
       </div>
     </div>
   );
