@@ -44,7 +44,7 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
       const result = await addMOney(addMOneyInfo).unwrap();
       console.log(result.data);
       if (result.success) {
-        window.open(result.data.payment);
+        window.open(result.data.payment, "_self");
         toast.success("Please Complete the Payment Process", { id: toastId });
       }
 

@@ -1,10 +1,17 @@
 import type { ComponentType, JSX } from "react";
 
 export type { ISendOtp, ILogin, IRegister, IVerifyOtp } from "./auth.type";
-export type {IAddMoney,ITransaction,ICashOut} from "./transaction.type"
-export type {IUser,IUpdateUser} from "./user.type"
+export type { IAddMoney, ITransaction, ICashOut } from "./transaction.type";
+export type { IUser, IUpdateUser } from "./user.type";
 
-export type {IAdminStats,IUserAndAgentOverview} from "./stats.type.ts"
+export type {
+  IAdminStats,
+  IUserAndAgentOverview,
+  ITransactionOverview,
+  ISystemBalanceAndRevenue,
+  ITransactionBySource,
+  ITransactionByType,
+} from "./stats.type.ts";
 
 export interface INavigationLink {
   href: string;
@@ -24,7 +31,7 @@ export interface IResponse<T> {
   success: boolean;
   message: string;
   data: T;
-  meta?: TMeta
+  meta?: TMeta;
 }
 
 export interface ISidebarItems {
@@ -36,7 +43,7 @@ export interface ISidebarItems {
   }[];
 }
 
-export type Trole ="SUPER-ADMIN" |"ADMIN" | "USER" | "AGENT"
+export type Trole = "SUPER-ADMIN" | "ADMIN" | "USER" | "AGENT";
 
 export interface DashboardCard {
   title: string;
@@ -45,10 +52,9 @@ export interface DashboardCard {
   description: string;
 }
 
-
 export enum TCardDisplayDataType {
   peopleCount = "peopleCount",
-  moneyCount = "moneyCount"
+  moneyCount = "moneyCount",
 }
 
 export interface ITransactionHistoryTableData {
@@ -60,4 +66,3 @@ export interface ITransactionHistoryTableData {
   type: string;
   transactionDate: string;
 }
-

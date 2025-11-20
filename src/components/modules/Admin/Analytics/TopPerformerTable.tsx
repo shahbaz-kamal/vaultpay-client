@@ -22,41 +22,42 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import AnalyticsConstants from "@/constants/AnalyticsConstants";
+import type { ITableData } from "./TopPerformer";
 
 
-const data: TUser[] = [
-  {
-    id: "u1",
-    profilePhoto: "https://randomuser.me/api/portraits/men/32.jpg",
+// const data: TUser[] = [
+//   {
+//     id: "u1",
+//     profilePhoto: "https://randomuser.me/api/portraits/men/32.jpg",
 
-    name: "Ayaan Rahman",
-    transactionAmount: 15420,
-  },
-  {
-    id: "u2",
-    profilePhoto: "https://randomuser.me/api/portraits/women/45.jpg",
-    name: "Nadia Hasan",
-    transactionAmount: 9820,
-  },
-  {
-    id: "u3",
-    profilePhoto: "https://randomuser.me/api/portraits/men/18.jpg",
-    name: "Rafiul Islam",
-    transactionAmount: 21450,
-  },
-  {
-    id: "u4",
-    profilePhoto: "https://randomuser.me/api/portraits/women/66.jpg",
-    name: "Sadia Chowdhury",
-    transactionAmount: 12760,
-  },
-  {
-    id: "u5",
-    profilePhoto: "https://randomuser.me/api/portraits/men/75.jpg",
-    name: "Tanvir Ahmed",
-    transactionAmount: 18690,
-  },
-];
+//     name: "Ayaan Rahman",
+//     transactionAmount: 15420,
+//   },
+//   {
+//     id: "u2",
+//     profilePhoto: "https://randomuser.me/api/portraits/women/45.jpg",
+//     name: "Nadia Hasan",
+//     transactionAmount: 9820,
+//   },
+//   {
+//     id: "u3",
+//     profilePhoto: "https://randomuser.me/api/portraits/men/18.jpg",
+//     name: "Rafiul Islam",
+//     transactionAmount: 21450,
+//   },
+//   {
+//     id: "u4",
+//     profilePhoto: "https://randomuser.me/api/portraits/women/66.jpg",
+//     name: "Sadia Chowdhury",
+//     transactionAmount: 12760,
+//   },
+//   {
+//     id: "u5",
+//     profilePhoto: "https://randomuser.me/api/portraits/men/75.jpg",
+//     name: "Tanvir Ahmed",
+//     transactionAmount: 18690,
+//   },
+// ];
 
 // const data: Payment[] = [
 //   {
@@ -98,22 +99,23 @@ export type Payment = {
   email: string;
 };
 export type TUser = {
-  id: string;
-  profilePhoto: string;
+  id: number;
+  profilePicture: string;
   name: string;
   transactionAmount: number;
 };
 
 interface IProps {
   title: string;
+  tableData:ITableData[]
 }
 
-export function TopPerformerTable({ title }: IProps) {
+export function TopPerformerTable({ title,tableData:data }: IProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
-
+// console.log("From Table Data",tableData)
   const columns = AnalyticsConstants({ title });
   const table = useReactTable({
     data,

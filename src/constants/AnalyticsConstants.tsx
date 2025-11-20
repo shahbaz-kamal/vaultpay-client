@@ -21,9 +21,9 @@ export default function AnalyticsConstants({title}:{title:string}) {
       cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
     },
     {
-      accessorKey: "profilePhoto",
+      accessorKey: "profilePicture",
       header: "",
-      cell: ({ row }) => <div className="capitalize"><img className="w-5 h-5 md:w-10 md:h-10 rounded-full" src={row.getValue("profilePhoto")} alt="" /></div>,
+      cell: ({ row }) => <div className="capitalize"><img className="w-5 h-5 md:w-10 md:h-10 rounded-full" src={row.getValue("profilePicture")} alt="" /></div>,
     },
     {
       accessorKey: "name",
