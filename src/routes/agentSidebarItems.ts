@@ -2,7 +2,7 @@ import { lazy } from "react";
 
 const AddMoney = lazy(() => import("@/Pages/AddMoney"));
 const Profile = lazy(() => import("@/Pages/Profile"));
-const WalletSummary = lazy(() => import("@/Pages/User/WalletInsights"));
+const WalletSummary = lazy(() => import("@/Pages/Agent/WalletSummary"));
 const CashIn = lazy(() => import("@/Pages/Agent/CashIn"));
 
 import type { ISidebarItems } from "@/types";

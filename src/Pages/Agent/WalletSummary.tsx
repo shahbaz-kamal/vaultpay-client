@@ -12,7 +12,7 @@ import { useGetStatsForUserQuery } from "@/redux/features/stats/stats.api";
 import { TCardDisplayDataType } from "@/types";
 import { ArrowDownCircle, ArrowUpCircle, CalendarDays, RefreshCcw, Wallet } from "lucide-react";
 
-export default function WalletInsights() {
+export default function WalletSummary() {
   const { data: userData, isLoading:userLoading } = useGetMeQuery(undefined);
   const {data:statsData,isLoading:statsLoading}=useGetStatsForUserQuery(undefined)
 
@@ -23,25 +23,25 @@ export default function WalletInsights() {
     {
       title: "Current Balance",
       icon: <Wallet className="text-blue-500 w-5 h-5" />,
-      data: statsData?.data.walletOverview.currentBalance as number,
+      data: statsData?.data.walletOverview.currentBalance,
       description: "Available for use",
     },
     {
       title: userData?.data?.role === role.user ? "Total Cash In From Agent" : "Total Cash In To User",
       icon: <ArrowDownCircle className="text-green-500 w-5 h-5" />,
-      data: statsData?.data.walletOverview.totalCashInFromAgent as number,
+      data: 26800,
       description: "All Time",
     },
     {
       title: "Total Cash Out",
       icon: <ArrowUpCircle className="text-red-500 w-5 h-5" />,
-      data: statsData?.data.walletOverview.totalCashOut as number,
+      data: 25000,
       description: "All Time",
     },
     {
       title: "Total Add Money",
       icon: <ArrowDownCircle className="w-5 h-5 text-green-600" />,
-      data: statsData?.data.walletOverview.totalAddMOney as number,
+      data: 200,
       description: "All TIme",
     },
   ];

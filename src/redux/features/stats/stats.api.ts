@@ -1,5 +1,5 @@
 import { baseApi } from "@/redux/baseApi";
-import type {  IAdminStats, IResponse } from "@/types";
+import type {  IAdminStats, IResponse, IUserStats } from "@/types";
 export const statsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
   
@@ -11,8 +11,16 @@ export const statsApi = baseApi.injectEndpoints({
       }),
       providesTags:["TRANSACTION"]
     }),
+    getStatsForUser: builder.query<IResponse<IUserStats>, undefined>({
+      query: () => ({
+        url: "/stats/user",
+        method: "GET",
+        
+      }),
+      providesTags:["TRANSACTION"]
+    }),
    
   }),
 });
 
-export const {useGetStatsForAdminQuery } = statsApi;
+export const {useGetStatsForAdminQuery,useGetStatsForUserQuery } = statsApi;

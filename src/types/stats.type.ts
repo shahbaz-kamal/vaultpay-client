@@ -56,3 +56,15 @@ export interface IAdminStats {
   topPerformer:ITopPerformer
 
 }
+
+
+// 
+export interface IWalletOverview {
+  currentBalance: number
+  totalCashInFromAgent: number
+  totalCashOut: number
+  totalAddMOney: number
+}
+export interface IUserStats {
+  walletOverview: IWalletOverview
+}
