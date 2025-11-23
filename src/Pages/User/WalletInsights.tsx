@@ -9,7 +9,7 @@ import TransactionOverViewUser from "@/components/modules/User/WalletInsights/Tr
 import { role } from "@/constants/role";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { useGetStatsForUserQuery } from "@/redux/features/stats/stats.api";
-import { TCardDisplayDataType, type IMonthlyActivity, type IMonthlyTransactionAmount, type ITransactionOverviewUser } from "@/types";
+import { TCardDisplayDataType, type IMonthlyActivity, type IMonthlyTransactionAmount, type ITransaction, type ITransactionOverviewUser } from "@/types";
 import { ArrowDownCircle, ArrowUpCircle, CalendarDays, RefreshCcw, Wallet } from "lucide-react";
 
 
@@ -69,7 +69,7 @@ export default function WalletInsights() {
         {/* Recent Transactions*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Recent 5 Transactions" icon={<CalendarDays size={20} />}></DashboardTitle>
-        <TransactionHistory></TransactionHistory>
+        <TransactionHistory requiredData={statsData?.data.recentFiveTRansactions as Partial<ITransaction>[]}></TransactionHistory>
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ export default function TransactionHistoryConstants() {
           </div>
         );
       },
-      cell: ({ row }) => <div className="lowercase text-center">{row.getValue("senderEmail")}</div>,
+      cell: ({ row }) => <div className="lowercase text-center">{row.getValue("senderEmail")?row.getValue("senderEmail"):"N/A"}</div>,
     },
     {
       accessorKey: "receiverEmail",

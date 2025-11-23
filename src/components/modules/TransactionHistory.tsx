@@ -1,5 +1,3 @@
-"use client";
-
 import {
   type ColumnFiltersState,
   flexRender,
@@ -9,35 +7,34 @@ import {
   getSortedRowModel,
   type SortingState,
   useReactTable,
-  type VisibilityState
+  type VisibilityState,
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import TransactionHistoryConstants from "@/constants/TransactionHistoryConstants";
+import type { ITransaction } from "@/types";
+import { useNavigate } from "react-router";
+import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import LoadingPage from "../layouts/LoadingPage";
+import { Role } from "@/types/user.type";
 
-const data = [
-  {
-    id: "1",
-    senderEmail: "a@b.com",
-    receiverEmail: "b@c.com",
-    amount: 316,
-    status: "success",
-    type: "Add Money",
-    // email: "ken99@example.com",
-    transactionDate: "2025-11-04T17:02:21.080+00:00",
-  },
-];
+// const data = [
+//   {
+//     id: "1",
+//     senderEmail: "a@b.com",
+//     receiverEmail: "b@c.com",
+//     amount: 316,
+//     status: "success",
+//     type: "Add Money",
+//     // email: "ken99@example.com",
+//     transactionDate: "2025-11-04T17:02:21.080+00:00",
+//   },
+// ];
 // const data: Payment[] = [
 //   {
 //     id: "m5gr84i9",
@@ -71,17 +68,23 @@ const data = [
 //   },
 // ];
 
+interface IProps {
+  requiredData: Partial<ITransaction>[];
+}
 
-
-
-
-export function TransactionHistory() {
+export function TransactionHistory({ requiredData }: IProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const columns=TransactionHistoryConstants()
+  const columns = TransactionHistoryConstants();
+
+  const data = requiredData.map((item, index) => ({
+    id: index + 1,
+    transactionDate: item.createdAt,
+    ...item,
+  }));
 
   const table = useReactTable({
     data,
@@ -101,7 +104,16 @@ export function TransactionHistory() {
       rowSelection,
     },
   });
+  const navigate = useNavigate();
 
+  const { data: userData } = useGetMeQuery(undefined);
+
+  let navigateToTransactionHistory = "";
+
+  if (userData?.data?.role === Role.USER) navigateToTransactionHistory = "/user/transaction-history";
+  if (userData?.data?.role === Role.AGENT) navigateToTransactionHistory = "/agent/transaction-history";
+
+  if (!userData) return <LoadingPage></LoadingPage>;
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
@@ -175,11 +187,8 @@ export function TransactionHistory() {
           {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
-          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-            Previous
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-            Next
+          <Button variant="outline" size="sm" onClick={() => navigate(navigateToTransactionHistory)}>
+            View All Transaction
           </Button>
         </div>
       </div>

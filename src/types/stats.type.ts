@@ -1,3 +1,5 @@
+import type { ITransaction } from "./transaction.type";
+
 export interface IUserAndAgentOverview {
   totalUsers: number;
   totalAgents: number;
@@ -89,10 +91,13 @@ export interface IMonthlyActivity {
   monthlyTransactionAmount:IMonthlyTransactionAmount[]
   monthlyTransactionAmountByType:IMonthlyTransactionAmountByType[]
 }
+
+
 export interface IUserStats {
   walletOverview: IWalletOverview
   transactionOverview:ITransactionOverviewUser
   monthlyActivity:IMonthlyActivity
+  recentFiveTRansactions:Partial<ITransaction>[]
 }
 
 
