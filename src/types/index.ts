@@ -14,6 +14,9 @@ export type {
   IWalletOverview,
   IUserStats,
   ITransactionOverviewUser,
+  IMonthlyTransactionAmount,
+  IMonthlyActivity,
+  IMonthlyTransactionAmountByType,
 } from "./stats.type.ts";
 
 export interface INavigationLink {

@@ -70,9 +70,29 @@ export interface ITransactionOverviewUser {
   transactionsAmount: number
   transactionByType: ITransactionByType[]
 }
+
+export interface IMonthlyTransactionAmount {
+  amount: number
+  month: string
+  year: number
+}
+
+export interface IMonthlyTransactionAmountByType {
+  month: string
+  ADD_MONEY: number
+  CASH_OUT: number
+  CASH_IN: number
+  SEND_MONEY?: number
+  year:number
+}
+export interface IMonthlyActivity {
+  monthlyTransactionAmount:IMonthlyTransactionAmount[]
+  monthlyTransactionAmountByType:IMonthlyTransactionAmountByType[]
+}
 export interface IUserStats {
   walletOverview: IWalletOverview
   transactionOverview:ITransactionOverviewUser
+  monthlyActivity:IMonthlyActivity
 }
 
 

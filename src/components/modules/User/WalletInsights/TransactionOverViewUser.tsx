@@ -8,7 +8,7 @@ interface IProps {
   requiredData: ITransactionOverviewUser;
 }
 export default function TransactionOverViewUser({ requiredData }: IProps) {
-  console.log("From TransactionOverview", requiredData);
+  // console.log("From TransactionOverview", requiredData);
   const cardObject = [
     {
       title: "Total Transactions",

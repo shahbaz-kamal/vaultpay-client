@@ -9,12 +9,14 @@ import TransactionOverViewUser from "@/components/modules/User/WalletInsights/Tr
 import { role } from "@/constants/role";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { useGetStatsForUserQuery } from "@/redux/features/stats/stats.api";
-import { TCardDisplayDataType } from "@/types";
+import { TCardDisplayDataType, type IMonthlyActivity, type IMonthlyTransactionAmount, type ITransactionOverviewUser } from "@/types";
 import { ArrowDownCircle, ArrowUpCircle, CalendarDays, RefreshCcw, Wallet } from "lucide-react";
 
+
+
 export default function WalletInsights() {
-  const { data: userData, isLoading:userLoading } = useGetMeQuery(undefined);
-  const {data:statsData,isLoading:statsLoading}=useGetStatsForUserQuery(undefined)
+  const { data: userData, isLoading: userLoading } = useGetMeQuery(undefined);
+  const { data: statsData, isLoading: statsLoading } = useGetStatsForUserQuery(undefined);
 
   if (userLoading || statsLoading) return <LoadingPage></LoadingPage>;
   console.log(statsData);
@@ -57,15 +59,17 @@ export default function WalletInsights() {
         {/* 🔄 Transaction Overview*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Transaction Overview" icon={<RefreshCcw size={20} />}></DashboardTitle>
-        <TransactionOverViewUser requiredData={statsData?.data.transactionOverview}></TransactionOverViewUser>
+        <TransactionOverViewUser requiredData={statsData?.data.transactionOverview as ITransactionOverviewUser}></TransactionOverViewUser>
         {/* 📅 Monthly Activity*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Monthly Activity" icon={<CalendarDays size={20} />}></DashboardTitle>
-        <MonthlyActivityUser></MonthlyActivityUser>
+        <MonthlyActivityUser
+          requiredData={statsData?.data.monthlyActivity as IMonthlyActivity}
+        ></MonthlyActivityUser>
         {/* Recent Transactions*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Recent 5 Transactions" icon={<CalendarDays size={20} />}></DashboardTitle>
-        <TransactionHistory ></TransactionHistory>
+        <TransactionHistory></TransactionHistory>
       </div>
     </div>
   );

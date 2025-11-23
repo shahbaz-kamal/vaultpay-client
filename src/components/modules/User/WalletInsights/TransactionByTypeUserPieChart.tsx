@@ -58,7 +58,7 @@ interface IProps {
 }
 
 export function TransactionByTypeUserPieChart({ title, payload, isMoneyCount }: IProps) {
-  console.log("Payload", payload);
+  // console.log("Payload", payload);
   const id = "pie-interactive";
   // const [activeType, setActiveType] = React.useState(payload[0].type);
   const [activeType, setActiveType] = React.useState(payload[0].rawType);
