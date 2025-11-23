@@ -19,8 +19,16 @@ export const statsApi = baseApi.injectEndpoints({
       }),
       providesTags:["TRANSACTION"]
     }),
+    getStatsForAgent: builder.query<IResponse<IUserStats>, undefined>({
+      query: () => ({
+        url: "/stats/user",
+        method: "GET",
+        
+      }),
+      providesTags:["TRANSACTION"]
+    }),
    
   }),
 });
 
-export const {useGetStatsForAdminQuery,useGetStatsForUserQuery } = statsApi;
+export const {useGetStatsForAdminQuery,useGetStatsForUserQuery,useGetStatsForAgentQuery } = statsApi;
