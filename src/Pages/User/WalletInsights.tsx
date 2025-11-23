@@ -57,7 +57,7 @@ export default function WalletInsights() {
         {/* 🔄 Transaction Overview*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Transaction Overview" icon={<RefreshCcw size={20} />}></DashboardTitle>
-        <TransactionOverViewUser></TransactionOverViewUser>
+        <TransactionOverViewUser requiredData={statsData?.data.transactionOverview}></TransactionOverViewUser>
         {/* 📅 Monthly Activity*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Monthly Activity" icon={<CalendarDays size={20} />}></DashboardTitle>

@@ -65,6 +65,14 @@ export interface IWalletOverview {
   totalCashOut: number
   totalAddMOney: number
 }
+export interface ITransactionOverviewUser {
+  totalTransaction: number
+  transactionsAmount: number
+  transactionByType: ITransactionByType[]
+}
 export interface IUserStats {
   walletOverview: IWalletOverview
+  transactionOverview:ITransactionOverviewUser
 }
+
+

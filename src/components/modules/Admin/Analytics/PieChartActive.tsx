@@ -72,7 +72,7 @@ export function PieChartActive({ role, chartData }: IProps) {
       <ChartStyle id={id} config={chartConfig} />
       <CardHeader className="flex-row items-start space-y-0 pb-0">
         <div className="grid gap-1">
-          <CardTitle>Active vs Inactive {title}</CardTitle>
+          <CardTitle>Active vs Inactive {title}s</CardTitle>
           {/* <CardDescription>January - June 2024</CardDescription> */}
         </div>
         <Select value={activeStatus} onValueChange={setActiveStatus}>
@@ -132,7 +132,7 @@ export function PieChartActive({ role, chartData }: IProps) {
                         </tspan>
                         <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 24} className="fill-muted-foreground text-red-500">
                           {title}
-                          {userData[activeIndex].user.toLocaleString().length > 1 ? "s" : ""}
+                          {Number(userData[activeIndex].user.toLocaleString()) > 1 ? "s" : ""}
                         </tspan>
                       </text>
                     );

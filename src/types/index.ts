@@ -13,6 +13,7 @@ export type {
   ITransactionByType,
   IWalletOverview,
   IUserStats,
+  ITransactionOverviewUser,
 } from "./stats.type.ts";
 
 export interface INavigationLink {
