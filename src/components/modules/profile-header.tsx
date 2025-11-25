@@ -18,7 +18,7 @@ export default function ProfileHeader() {
   const { data: userData } = useGetMeQuery(undefined);
   if (!userData) return <LoadingPage></LoadingPage>;
 
-  const { name, email, role, profilePicture, address, createdAt } = userData?.data as IUser;
+  const { name, email, role, profilePicture, address, createdAt, auths } = userData?.data as IUser;
 
   return (
     <Card>
@@ -57,7 +57,10 @@ export default function ProfileHeader() {
             </div>
           </div>
           {/* <Button variant="default">Edit Profile</Button> */}
-          <UpdateProfileModal userData={userData.data} currentUserRole={Role.ADMIN} buttonText="Update Profile"></UpdateProfileModal>
+          <div className="flex flex-col gap-2">
+            <UpdateProfileModal userData={userData.data} currentUserRole={Role.ADMIN} buttonText="Update Profile"></UpdateProfileModal>
+            {auths.length > 1 && <Button>Change Password</Button>}
+          </div>
         </div>
       </CardContent>
     </Card>
