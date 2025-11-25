@@ -1,4 +1,3 @@
-
 export interface ISendOtp {
   email: string;
 }
@@ -8,7 +7,11 @@ export interface IVerifyOtp {
 }
 export interface IForgetPassword {
   email: string;
-
+}
+export interface IResetPassword {
+  id: string;
+  newPassword: string;
+  token:string
 }
 
 export interface ILogin {
@@ -17,7 +20,7 @@ export interface ILogin {
 }
 
 export interface IRegister {
-    name:string;
-    email: string;
-    password: string;
+  name: string;
+  email: string;
+  password: string;
 }

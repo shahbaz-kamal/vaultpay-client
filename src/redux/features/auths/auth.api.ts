@@ -1,5 +1,6 @@
 import { baseApi } from "@/redux/baseApi";
-import type { IForgetPassword, ILogin, IRegister, IResponse, ISendOtp, IVerifyOtp } from "@/types";
+import type { IForgetPassword, ILogin, IRegister, IResetPassword, IResponse, ISendOtp, IVerifyOtp } from "@/types";
+
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -39,23 +40,41 @@ export const authApi = baseApi.injectEndpoints({
         data: userInfo,
       }),
     }),
+    resetPassword: builder.mutation<IResponse<null>, IResetPassword>({
+      query: ({ id, newPassword, token }) => ({
+        url: "/auth/reset-password",
+        method: "POST",
+        data: { id, newPassword },
+        headers: {
+          Authorization: token,
+        },
+      }),
+    }),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getMe: builder.query<IResponse<any>, undefined>({
       query: () => ({
         url: "/user/me",
         method: "GET",
-        
       }),
-      providesTags:["USER"]
+      providesTags: ["USER"],
     }),
     logout: builder.mutation({
       query: () => ({
         url: "/auth/logout",
         method: "POST",
       }),
-      invalidatesTags:["USER"]
+      invalidatesTags: ["USER"],
     }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useSendOtpMutation, useVerifyOtpMutation, useGetMeQuery,useLogoutMutation,useForgetPasswordMutation } = authApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useSendOtpMutation,
+  useVerifyOtpMutation,
+  useGetMeQuery,
+  useLogoutMutation,
+  useForgetPasswordMutation,
+  useResetPasswordMutation,
+} = authApi;

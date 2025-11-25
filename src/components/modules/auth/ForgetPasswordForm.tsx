@@ -13,7 +13,7 @@ import type z from "zod";
 
 export function ForgetPasswordForm({ className, ...props }: React.ComponentProps<"div">) {
   const [sendEmail, setSendEmail] = useState(false);
-  const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(300);
   const [email, setEmail] = useState("");
 
 
@@ -57,7 +57,7 @@ export function ForgetPasswordForm({ className, ...props }: React.ComponentProps
       if (res.success) {
         toast.success("Email Send Successfully", { id: toastId });
         setSendEmail(true);
-        setTimer(5);
+        setTimer(300);
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

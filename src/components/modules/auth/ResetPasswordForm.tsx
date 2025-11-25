@@ -1,47 +1,49 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import Password from "@/components/ui/Password";
 import { cn } from "@/lib/utils";
-import { useSendOtpMutation, useVerifyOtpMutation } from "@/redux/features/auths/auth.api";
-import { otpSchema } from "@/schemas/otpSchema";
+import { useResetPasswordMutation } from "@/redux/features/auths/auth.api";
 import { resetPasswordSchema } from "@/schemas/resetPasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
 import type z from "zod";
 
 export function VerifyResetPasswordForm({ className, ...props }: React.ComponentProps<"div">) {
-  const [sentOtp, setSentOtp] = useState(false);
-  const [timer, setTimer] = useState(120);
-
-  const location = useLocation();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [sendOtp] = useSendOtpMutation();
-  const [verifyOtp] = useVerifyOtpMutation();
+  const id = searchParams.get("id") || "";
+  const token = searchParams.get("token") || "";
 
-  const [email] = useState(location.state || "");
+  
+  console.log(id, token);
+
+
+  const [resetPassword] = useResetPasswordMutation();
+
+
 
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
-    defaultValues: { id: "", newPassword: "" },
+    defaultValues: { newPassword: "" },
   });
 
   const onSubmit = async (data: z.infer<typeof resetPasswordSchema>) => {
-    const toastId = toast.loading("Verifying OTP");
+    const toastId = toast.loading("Resetting Password");
     try {
       console.log(data);
       const userInfo = {
-        email,
-        otp: data.otp,
+        newPassword: data.newPassword,
+        id,
+        token
       };
-      const result = await verifyOtp(userInfo).unwrap();
+      const result = await resetPassword(userInfo).unwrap();
       if (result.success) {
-        toast.success("OTP verified successfully.", { id: toastId });
+        toast.success("Password reset successfull", { id: toastId });
         navigate("/login");
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,48 +53,27 @@ export function VerifyResetPasswordForm({ className, ...props }: React.Component
     }
   };
 
-  const handleSendOtp = async () => {
-    const toastId = toast.loading("Sending OTP");
-    try {
-      const res = await sendOtp({ email }).unwrap();
-      if (res.success) {
-        toast.success("OTP sent successfully to your email.", { id: toastId });
-        setSentOtp(true);
-        setTimer(120);
-      }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
-
-  //   useEffect(() => {
-  //     if (!email) {
-  //       toast.error("No email provided for verification.");
-  //       navigate("/");
-  //     }
-  //   }, [email]);
 
   useEffect(() => {
-    const timerId = setInterval(() => {
-      if (email && sentOtp) {
-        setTimer((prev) => (prev > 0 ? prev - 1 : 0));
-      }
-    }, 1000);
-    return () => clearInterval(timerId);
-  }, [timer, email, sentOtp]);
+    if (!id || !token) {
+      toast.error("Please provide your email first...");
+      setTimeout(() => navigate("/forget-password"), 0);
+    }
+  }, [navigate,id,token]);
+
+ 
 
   return (
     <div className={cn("flex flex-col gap-6 items-center", className)} {...props}>
       <Card className=" w-full">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl font-semibold">Verify It's You</CardTitle>
-          <CardDescription>Please verify your identity by entering the one-time password sent to your email </CardDescription>
+          <CardTitle className="text-xl font-semibold">Enter your new password</CardTitle>
+          <CardDescription> </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full flex flex-col items-center space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full  space-y-6">
               <FormField
                 control={form.control}
                 name="newPassword"
@@ -107,7 +88,7 @@ export function VerifyResetPasswordForm({ className, ...props }: React.Component
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-1/2 mx-auto">
+              <Button type="submit" className="w-full mx-auto">
                 Reset Password
               </Button>
             </form>
