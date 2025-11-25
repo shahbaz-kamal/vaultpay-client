@@ -8,15 +8,15 @@ import MonthlyActivityUser from "@/components/modules/User/WalletInsights/Monthl
 import TransactionOverViewUser from "@/components/modules/User/WalletInsights/TransactionOverViewUser";
 import { role } from "@/constants/role";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import { useGetStatsForUserQuery } from "@/redux/features/stats/stats.api";
+import { useGetStatsForAgentQuery, useGetStatsForUserQuery } from "@/redux/features/stats/stats.api";
 import { TCardDisplayDataType, type IMonthlyActivity, type IMonthlyTransactionAmount, type ITransaction, type ITransactionOverviewUser } from "@/types";
 import { ArrowDownCircle, ArrowUpCircle, CalendarDays, RefreshCcw, Wallet } from "lucide-react";
 
 
 
-export default function WalletInsights() {
+export default function WalletSummary() {
   const { data: userData, isLoading: userLoading } = useGetMeQuery(undefined);
-  const { data: statsData, isLoading: statsLoading } = useGetStatsForUserQuery(undefined);
+  const { data: statsData, isLoading: statsLoading } = useGetStatsForAgentQuery(undefined);
 
   if (userLoading || statsLoading) return <LoadingPage></LoadingPage>;
   console.log(statsData);
@@ -31,7 +31,7 @@ export default function WalletInsights() {
     {
       title: userData?.data?.role === role.user ? "Total Cash In From Agent" : "Total Cash In To User",
       icon: <ArrowDownCircle className="text-green-500 w-5 h-5" />,
-      data: statsData?.data.walletOverview.totalCashInFromAgent as number,
+      data: statsData?.data.walletOverview.totalCashInToUser as number,
       description: "All Time",
     },
     {

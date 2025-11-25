@@ -11,6 +11,14 @@ export type {
   ISystemBalanceAndRevenue,
   ITransactionBySource,
   ITransactionByType,
+  IWalletOverview,
+  IUserStats,
+  ITransactionOverviewUser,
+  IMonthlyTransactionAmount,
+  IMonthlyActivity,
+  IMonthlyTransactionAmountByType,
+  IWalletOverviewAgent,
+  IAgentStats
 } from "./stats.type.ts";
 
 export interface INavigationLink {

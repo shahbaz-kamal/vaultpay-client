@@ -1,3 +1,5 @@
+import type { ITransaction } from "./transaction.type";
+
 export interface IUserAndAgentOverview {
   totalUsers: number;
   totalAgents: number;
@@ -55,4 +57,58 @@ export interface IAdminStats {
   transactionOverview: ITransactionOverview;
   topPerformer:ITopPerformer
 
+}
+
+
+// 
+export interface IWalletOverview {
+  currentBalance: number
+  totalCashInFromAgent: number
+  totalCashOut: number
+  totalAddMOney: number
+}
+export interface ITransactionOverviewUser {
+  totalTransaction: number
+  transactionsAmount: number
+  transactionByType: ITransactionByType[]
+}
+
+export interface IMonthlyTransactionAmount {
+  amount: number
+  month: string
+  year: number
+}
+
+export interface IMonthlyTransactionAmountByType {
+  month: string
+  ADD_MONEY: number
+  CASH_OUT: number
+  CASH_IN: number
+  SEND_MONEY?: number
+  year:number
+}
+export interface IMonthlyActivity {
+  monthlyTransactionAmount:IMonthlyTransactionAmount[]
+  monthlyTransactionAmountByType:IMonthlyTransactionAmountByType[]
+}
+
+
+export interface IUserStats {
+  walletOverview: IWalletOverview
+  transactionOverview:ITransactionOverviewUser
+  monthlyActivity:IMonthlyActivity
+  recentFiveTRansactions:Partial<ITransaction>[]
+}
+
+export interface IWalletOverviewAgent {
+  currentBalance: number
+  totalCashInToUser: number
+  totalCashOut: number
+  totalAddMOney: number
+}
+export interface IAgentStats {
+  walletOverview: IWalletOverviewAgent
+  transactionOverview:ITransactionOverviewUser
+  monthlyActivity:IMonthlyActivity
+  recentFiveTRansactions:Partial<ITransaction>[]
 }
