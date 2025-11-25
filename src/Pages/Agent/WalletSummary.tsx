@@ -50,7 +50,7 @@ export default function WalletSummary() {
 
   return (
     <div>
-      <SidebarHeader heading="Dashboard" subHeading="Overview" subSubHeading="Wallet Insights" />
+      <SidebarHeader heading="Dashboard" subHeading="Overview" subSubHeading="Wallet Summary" />
       <div className="container mx-auto px-5 py-6">
         {/* 💰 Wallet Overview */}
         <DashboardTitle title="Wallet Overview" icon={<Wallet size={20} />}></DashboardTitle>

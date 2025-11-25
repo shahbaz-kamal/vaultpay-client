@@ -37,7 +37,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       const result = await login(userInfo).unwrap();
       console.log(result);
       toast.success("Login successful!");
-      navigate("/")
+      navigate("/");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -60,7 +60,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
           <CardDescription>Login with your Google account</CardDescription>
         </CardHeader>
         <CardContent>
-          <GoogleLogin  operation="Login"></GoogleLogin>
+          <GoogleLogin operation="Login"></GoogleLogin>
           <Form {...form}>
             <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
@@ -91,13 +91,18 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                   </FormItem>
                 )}
               />
+              <div className="text-right">
+                <Link to="/forget-password" className="text-sm text-red-500 hover:underline">
+                  Forgot Password?
+                </Link>
+              </div>
               <FieldDescription className="text-center">
                 Don't Have an account?{" "}
                 <span className="underline-offset-4 hover:underline dark:text-primary-foreground font-semibold">
                   <Link to="/register">Register now</Link>
                 </span>
               </FieldDescription>
-
+              
               <Button className=" w-full" type="submit">
                 Login
               </Button>

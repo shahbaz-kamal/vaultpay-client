@@ -6,6 +6,10 @@ export interface IVerifyOtp {
   email: string;
   otp: string;
 }
+export interface IForgetPassword {
+  email: string;
+
+}
 
 export interface ILogin {
   email: string;
