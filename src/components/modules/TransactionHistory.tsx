@@ -118,7 +118,7 @@ export function TransactionHistory({ requiredData }: IProps) {
   if (!userData) return <LoadingPage></LoadingPage>;
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      {/* <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("senderEmail")?.getFilterValue() as string) ?? ""}
@@ -149,7 +149,7 @@ export function TransactionHistory({ requiredData }: IProps) {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
+      </div> */}
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
