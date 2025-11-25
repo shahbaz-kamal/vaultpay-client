@@ -1,5 +1,5 @@
 import { baseApi } from "@/redux/baseApi";
-import type {  IAdminStats, IResponse, IUserStats } from "@/types";
+import type {  IAdminStats, IAgentStats, IResponse, IUserStats } from "@/types";
 export const statsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
   
@@ -19,9 +19,9 @@ export const statsApi = baseApi.injectEndpoints({
       }),
       providesTags:["TRANSACTION"]
     }),
-    getStatsForAgent: builder.query<IResponse<IUserStats>, undefined>({
+    getStatsForAgent: builder.query<IResponse<IAgentStats>, undefined>({
       query: () => ({
-        url: "/stats/user",
+        url: "/stats/agent",
         method: "GET",
         
       }),

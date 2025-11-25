@@ -31,7 +31,7 @@ export default function WalletSummary() {
     {
       title: userData?.data?.role === role.user ? "Total Cash In From Agent" : "Total Cash In To User",
       icon: <ArrowDownCircle className="text-green-500 w-5 h-5" />,
-      data: statsData?.data.walletOverview.totalCashInFromAgent as number,
+      data: statsData?.data.walletOverview.totalCashInToUser as number,
       description: "All Time",
     },
     {

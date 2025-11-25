@@ -73,6 +73,8 @@ interface IProps {
 }
 
 export function TransactionHistory({ requiredData }: IProps) {
+
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -85,7 +87,7 @@ export function TransactionHistory({ requiredData }: IProps) {
     transactionDate: item.createdAt,
     ...item,
   }));
-
+ 
   const table = useReactTable({
     data,
     columns,

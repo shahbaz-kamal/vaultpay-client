@@ -3,17 +3,19 @@ import { Banknote, ReceiptText } from "lucide-react";
 import { TransactionByTypeUserPieChart } from "./TransactionByTypeUserPieChart";
 import type { ITransactionOverviewUser } from "@/types";
 import { convertType } from "@/utils/convertType";
+import LoadingPage from "@/components/layouts/LoadingPage";
 
 interface IProps {
   requiredData: ITransactionOverviewUser;
 }
 export default function TransactionOverViewUser({ requiredData }: IProps) {
   // console.log("From TransactionOverview", requiredData);
+  if(!requiredData) return <LoadingPage></LoadingPage>
   const cardObject = [
     {
       title: "Total Transactions",
       icon: <ReceiptText className="w-8 h-8" style={{ color: "var(--chart-1)" }} />,
-      data: requiredData.totalTransaction,
+      data: requiredData?.totalTransaction,
       description: "Total number of transactions processed so far",
       type: "count",
     },

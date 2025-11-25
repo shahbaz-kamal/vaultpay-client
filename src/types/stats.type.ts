@@ -100,4 +100,15 @@ export interface IUserStats {
   recentFiveTRansactions:Partial<ITransaction>[]
 }
 
-
+export interface IWalletOverviewAgent {
+  currentBalance: number
+  totalCashInToUser: number
+  totalCashOut: number
+  totalAddMOney: number
+}
+export interface IAgentStats {
+  walletOverview: IWalletOverviewAgent
+  transactionOverview:ITransactionOverviewUser
+  monthlyActivity:IMonthlyActivity
+  recentFiveTRansactions:Partial<ITransaction>[]
+}
