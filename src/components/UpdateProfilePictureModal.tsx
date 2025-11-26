@@ -1,22 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
 import { useUpdateUserMutation } from "@/redux/features/user/user.api";
-import { updateUserSchema } from "@/schemas/userSchema";
 import type { IUser } from "@/types";
-import { IsActive, Role } from "@/types/user.type";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Camera } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
-import type z from "zod";
 import CustomModal from "./CustomModal";
-import { Camera, HandPlatterIcon } from "lucide-react";
 import ProfilePictureUploader from "./ProfilePictureUploader";
 
-type UpdateUserFormValues = z.infer<typeof updateUserSchema>;
+
 
 interface IProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

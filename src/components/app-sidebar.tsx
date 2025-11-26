@@ -13,22 +13,22 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import { Logo } from "@/assets/icons/Logo";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import { cn } from "@/lib/utils";
 
 // This is sample data.
 
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-
-const {data:userData}=useGetMeQuery(undefined)
-
-const role=userData?.data.role
+  const { data: userData } = useGetMeQuery(undefined);
+  const location = useLocation();
+  const role = userData?.data.role;
   const data = {
     navMain: getSidebarItems(role),
   };
+  console.log("navMain", data);
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -57,13 +57,19 @@ const role=userData?.data.role
                 </SidebarMenuButton>
                 {item.items?.length ? (
                   <SidebarMenuSub>
-                    {item.items.map((item) => (
-                      <SidebarMenuSubItem key={item.title}>
-                        <SidebarMenuSubButton asChild>
-                          <NavLink to={item.url}>{item.title}</NavLink>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
+                    {item.items.map((item) => {
+                      const isActive = location.pathname === item.url;
+
+                      return (
+                        <SidebarMenuSubItem key={item.title}>
+                          <SidebarMenuSubButton asChild>
+                            <Link to={item.url}>
+                              <span className={cn(isActive ? "text-primary" : "")}> {item.title}</span>
+                            </Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      );
+                    })}
                   </SidebarMenuSub>
                 ) : null}
               </SidebarMenuItem>
