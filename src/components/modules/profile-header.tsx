@@ -14,6 +14,7 @@ import { format } from "date-fns";
 import { Role } from "@/types/user.type";
 import UpdateProfileModal from "../UpdateProfileModal";
 import SetPasswordModal from "../setPasswordModal";
+import ChangePasswordModal from "../ChangePasswordModal";
 
 export default function ProfileHeader() {
   const { data: userData } = useGetMeQuery(undefined);
@@ -62,7 +63,7 @@ export default function ProfileHeader() {
           <div className="flex flex-col gap-2">
             <UpdateProfileModal userData={userData.data} currentUserRole={Role.ADMIN} buttonText="Update Profile"></UpdateProfileModal>
             {onlyGoogleAuthenticated && <SetPasswordModal></SetPasswordModal>}
-            {!onlyGoogleAuthenticated && <Button>Change Password</Button>}
+            {!onlyGoogleAuthenticated && <ChangePasswordModal></ChangePasswordModal>}
           </div>
         </div>
       </CardContent>

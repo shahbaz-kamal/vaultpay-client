@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useSetPasswordMutation } from "@/redux/features/auths/auth.api";
+import { useChangePasswordMutation, useSetPasswordMutation } from "@/redux/features/auths/auth.api";
 import { setPasswordSchema } from "@/schemas/setPasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -9,36 +9,39 @@ import { toast } from "sonner";
 import type z from "zod";
 import CustomModal from "./CustomModal";
 import Password from "./ui/Password";
+import  { changePasswordSchema } from "@/schemas/changePasswordSchema";
 
-type SetPasswordFormValue = z.infer<typeof setPasswordSchema>;
+type ChangePasswordFormValue = z.infer<typeof changePasswordSchema>;
 
-export default function SetPasswordModal() {
+export default function ChangePasswordModal() {
   const [open, setOpen] = useState(false);
 
-  const [setPassword] = useSetPasswordMutation();
+  const [changePassword] = useChangePasswordMutation();
 
-  const form = useForm<SetPasswordFormValue>({
-    resolver: zodResolver(setPasswordSchema),
+  const form = useForm<ChangePasswordFormValue>({
+    resolver: zodResolver(changePasswordSchema),
     defaultValues: {
-      password: "",
+      oldPassword: "",
+      newPassword: "",
     },
   });
 
-  const onSubmit = async (data: SetPasswordFormValue) => {
-    const toastId = toast.loading("Setting Password");
+  const onSubmit = async (data: ChangePasswordFormValue) => {
+    const toastId = toast.loading("Changing Password");
 
     console.log("FORM SUBMITTED:", data);
 
     try {
-      const res = await setPassword({
-        password: data.password,
+      const res = await changePassword({
+        oldPassword: data.oldPassword,
+        newPassword: data.newPassword,
       }).unwrap();
 
       if (res.success) {
-        toast.success("Password has been set successfully", { id: toastId });
+        toast.success("Password changed successfully", { id: toastId });
       }
 
-      //   console.log("responseee", res);
+        console.log("responseee", res);
       setOpen(false);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -49,18 +52,32 @@ export default function SetPasswordModal() {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Set Password</Button>
+      <Button onClick={() => setOpen(true)}>Change Password</Button>
 
-      <CustomModal open={open} onClose={() => setOpen(false)} title="Set Password">
+      <CustomModal open={open} onClose={() => setOpen(false)} title="Change Password">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-6">
             {/* NAME */}
             <FormField
               control={form.control}
-              name="password"
+              name="oldPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password *</FormLabel>
+                  <FormLabel>Old Password *</FormLabel>
+                  <FormControl>
+                    <Password {...field}></Password>
+                  </FormControl>
+                  <FormDescription className="sr-only">This is your Password</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="newPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>New Password *</FormLabel>
                   <FormControl>
                     <Password {...field}></Password>
                   </FormControl>
