@@ -13,6 +13,10 @@ export interface IResetPassword {
   newPassword: string;
   token:string
 }
+export interface ISetPassword {
+  password: string;
+
+}
 
 export interface ILogin {
   email: string;

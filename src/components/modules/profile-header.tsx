@@ -13,13 +13,15 @@ import { format } from "date-fns";
 
 import { Role } from "@/types/user.type";
 import UpdateProfileModal from "../UpdateProfileModal";
+import SetPasswordModal from "../setPasswordModal";
 
 export default function ProfileHeader() {
   const { data: userData } = useGetMeQuery(undefined);
   if (!userData) return <LoadingPage></LoadingPage>;
 
   const { name, email, role, profilePicture, address, createdAt, auths } = userData?.data as IUser;
-
+  const onlyGoogleAuthenticated = auths.length === 1 && auths.map((auth) => auth.provider.includes("google"));
+  console.log(onlyGoogleAuthenticated);
   return (
     <Card>
       <CardContent className="p-6">
@@ -59,7 +61,8 @@ export default function ProfileHeader() {
           {/* <Button variant="default">Edit Profile</Button> */}
           <div className="flex flex-col gap-2">
             <UpdateProfileModal userData={userData.data} currentUserRole={Role.ADMIN} buttonText="Update Profile"></UpdateProfileModal>
-            {auths.length > 1 && <Button>Change Password</Button>}
+            {onlyGoogleAuthenticated && <SetPasswordModal></SetPasswordModal>}
+            {!onlyGoogleAuthenticated && <Button>Change Password</Button>}
           </div>
         </div>
       </CardContent>

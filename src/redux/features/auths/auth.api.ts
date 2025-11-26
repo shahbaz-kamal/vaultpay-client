@@ -1,5 +1,5 @@
 import { baseApi } from "@/redux/baseApi";
-import type { IForgetPassword, ILogin, IRegister, IResetPassword, IResponse, ISendOtp, IVerifyOtp } from "@/types";
+import type { IForgetPassword, ILogin, IRegister, IResetPassword, IResponse, ISendOtp, ISetPassword, IVerifyOtp } from "@/types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -49,6 +49,15 @@ export const authApi = baseApi.injectEndpoints({
           Authorization: token,
         },
       }),
+      invalidatesTags: ["USER"],
+    }),
+    setPassword: builder.mutation<IResponse<null>, ISetPassword>({
+      query: ({ password }) => ({
+        url: "/auth/set-password",
+        method: "POST",
+        data: { password },
+      }),
+      invalidatesTags: ["USER"],
     }),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getMe: builder.query<IResponse<any>, undefined>({
@@ -77,4 +86,5 @@ export const {
   useLogoutMutation,
   useForgetPasswordMutation,
   useResetPasswordMutation,
+  useSetPasswordMutation,
 } = authApi;
