@@ -15,6 +15,7 @@ import { Role } from "@/types/user.type";
 import UpdateProfileModal from "../UpdateProfileModal";
 import SetPasswordModal from "../setPasswordModal";
 import ChangePasswordModal from "../ChangePasswordModal";
+import UpdateProfilePictureModal from "../UpdateProfilePictureModal";
 
 export default function ProfileHeader() {
   const { data: userData } = useGetMeQuery(undefined);
@@ -32,9 +33,7 @@ export default function ProfileHeader() {
               {profilePicture && <AvatarImage src={profilePicture as string} alt="Profile" />}
               {!profilePicture && <AvatarImage src={mockProfilePicture} alt="Profile" />}
             </Avatar>
-            <Button size="icon" variant="outline" className="absolute -right-2 -bottom-2 h-8 w-8 rounded-full">
-              <Camera />
-            </Button>
+          <UpdateProfilePictureModal userData={userData.data}></UpdateProfilePictureModal>
           </div>
           <div className="flex-1 space-y-2 flex flex-col lg:flex-row items-center lg:block">
             <div className="flex flex-col gap-2 lg:flex-row items-center ">
