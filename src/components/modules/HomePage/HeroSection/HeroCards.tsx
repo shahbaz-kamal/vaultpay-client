@@ -37,7 +37,28 @@ export const HeroCards = () => {
       ease: "expo.out",
       stagger: 0.06,
     });
-  },[])
+
+    const vibrateConfigs = [
+      { selector: ".vibrate-left-top", x: -6, y: -2, delay: 1.8 },
+      { selector: ".vibrate-right-top", x: 6, y: -1, delay: 2.0 },
+      { selector: ".vibrate-left-bottom", x: 6, y: 1, delay: 2.2 },
+      { selector: ".vibrate-right-bottom", x: -6, y: 2, delay: 2.4 },
+    ];
+  
+    vibrateConfigs.forEach(({ selector, x, y, delay }) => {
+      gsap.to(selector, {
+        x,
+        y,
+        yoyo: true,
+        repeat: -1,
+        duration: 1, // slower duration for smoother movement
+        ease: "sine.inOut", // smooth easing
+        delay,
+      });
+    });
+
+
+},[])
   console.log(testimonialData);
   if (!testimonialData) return <LoadingPage></LoadingPage>;
   const firstReview = testimonialData[0];
@@ -49,7 +70,7 @@ export const HeroCards = () => {
   return (
     <div className="hidden lg:flex flex-row flex-wrap gap-8 relative w-[700px] h-[500px]">
       {/* Testimonial */}
-      <Card className="sandwitch-top-card absolute w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="sandwitch-top-card vibrate-left-top absolute w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
           <Avatar>
             <AvatarImage alt="" src={firstReview?.photoUrl || "https://i.pravatar.cc/150?img=32"} />
@@ -66,7 +87,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Team */}
-      <Card className="sandwitch-top-card absolute right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="sandwitch-top-card vibrate-right-top absolute right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="mt-8 flex justify-center items-center pb-2">
           <img
             src={secondReview?.photoUrl || "https://i.pravatar.cc/150?img=58"}
@@ -136,7 +157,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Pricing */}
-      <Card className="sandwitch-bottom-card absolute top-[150px] left-[50px] w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="sandwitch-bottom-card vibrate-left-bottom absolute top-[150px] left-[50px] w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader>
           <CardTitle className="flex item-center justify-between">
             Free Add Money
@@ -184,7 +205,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Service */}
-      <Card className="sandwitch-bottom-card absolute w-[350px] -right-[10px] bottom-[35px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="sandwitch-bottom-card vibrate-right-bottom absolute w-[350px] -right-[10px] bottom-[35px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
           <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
             <LightbulbIcon />
