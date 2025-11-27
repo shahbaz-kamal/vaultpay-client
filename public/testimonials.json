@@ -1,0 +1,45 @@
+[
+    {
+      "name": "Arif Hossain",
+      "email": "arif.hossain@example.com",
+      "photoUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+      "title": "Small Business Owner",
+      "description": "VP provides smooth daily transactions."
+    },
+    {
+      "name": "Nusrat Jahan",
+      "email": "nusrat.jahan@example.com",
+      "photoUrl": "https://randomuser.me/api/portraits/women/45.jpg",
+      "title": "Graphic Designer",
+      "description": "I love how fast and secure VaultPay transfers are. Sending and receiving  payments became super easy."
+    },
+    {
+      "name": "Tanvir Ahmed",
+      "email": "tanvir.ahmed@example.com",
+      "photoUrl": "https://randomuser.me/api/portraits/men/28.jpg",
+      "title": "E-commerce Seller",
+      "description": "VaultPay helped automate my store’s payouts. I no longer worry about manual transfers—everything just works!"
+    },
+    {
+      "name": "Mehnaz Rahman",
+      "email": "mehnaz.rahman@example.com",
+      "photoUrl": "https://randomuser.me/api/portraits/women/62.jpg",
+      "title": "Digital Marketer",
+      "description": "The user-friendly interface and quick payment processing makes VaultPay my favorite wallet. Highly recommended!"
+    },
+    {
+      "name": "Fahim Chowdhury",
+      "email": "fahim.chowdhury@example.com",
+      "photoUrl": "https://randomuser.me/api/portraits/men/14.jpg",
+      "title": "Software Engineer",
+      "description": "VaultPay combines great UI with powerful features. As a tech person, I appreciate the security and transaction speed."
+    },
+    {
+      "name": "Shaila Karim",
+      "email": "shaila.karim@example.com",
+      "photoUrl": "https://randomuser.me/api/portraits/women/50.jpg",
+      "title": "Online Tutor",
+      "description": "My students pay me through VaultPay every month. Transactions are clear, traceable, and super fast!"
+    }
+  ]
+  
