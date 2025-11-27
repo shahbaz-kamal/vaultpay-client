@@ -1,10 +1,7 @@
-// import { Button } from "./ui/button";
-// import { buttonVariants } from "./ui/button";
-// import { HeroCards } from "./HeroCards";
-// import { GitHubLogoIcon } from "@radix-ui/react-icons";
+
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { HeroCards } from "./HeroCards";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
@@ -18,7 +15,7 @@ export const Hero = () => {
     gsap.from(sandwitchTopSplit.lines, {
       opacity: 0,
       yPercent: -100,
-      duration: 1.8,
+      duration: 1.2,
       ease: "expo.out",
       stagger: 0.06,
     });
@@ -32,9 +29,9 @@ export const Hero = () => {
     gsap.from(".sandwitch-bottom", {
       opacity: 0,
       yPercent: 100,
-      duration: 1.8,
+      duration: 1.2,
       ease: "expo.out",
-      stagger: 0.06,
+      // stagger: 0.06,
     });
   }, []);
 
@@ -66,14 +63,14 @@ export const Hero = () => {
 
           <a
             rel="noreferrer noopener"
-            href="https://github.com/leoMirandaa/shadcn-landing-page.git"
+            href="https://github.com/shahbaz-kamal/vaultpay-client"
             target="_blank"
             className={`w-full md:w-1/3 ${buttonVariants({
               variant: "outline",
             })}`}
           >
             Github Repository
-            <Github className="ml-2 w-5 h-5" />
+            <FaGithub className="ml-2 w-5 h-5" />
           </a>
         </div>
       </div>

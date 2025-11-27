@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Check, Github, LightbulbIcon, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 // import { LightBulbIcon } from "./Icons";
 // import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
@@ -29,6 +30,7 @@ export const HeroCards = () => {
       duration: 1.8,
       ease: "expo.out",
       stagger: 0.06,
+      delay:0.5,
     });
     gsap.from('.sandwitch-bottom-card', {
       opacity: 0,
@@ -36,6 +38,7 @@ export const HeroCards = () => {
       duration: 1.8,
       ease: "expo.out",
       stagger: 0.06,
+      delay:0.5
     });
 
     const vibrateConfigs = [
@@ -182,13 +185,11 @@ export const HeroCards = () => {
             <span className="text-muted-foreground"> /send Money</span>
           </div>
 
-          {/* <CardDescription>
-            Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.
-          </CardDescription> */}
+          
         </CardHeader>
 
         <CardContent>
-          <Button className="w-full">Start Free Trial</Button>
+         <Link to="/register"> <Button className="w-full">Start For Free</Button></Link>
         </CardContent>
 
         <hr className="w-4/5 m-auto mb-4" />
