@@ -9,6 +9,9 @@ import { toast } from "sonner";
 import { useAppDispatch } from "@/redux/hooks";
 import { role } from "@/constants/role";
 import { User } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap/all";
+import { useTheme } from "@/hooks/useTheme";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -25,7 +28,7 @@ export default function Navbar() {
   const { data: userData } = useGetMeQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
-  console.log(userData);
+  const { theme } = useTheme();
 
   const handleLogout = async () => {
     const toastId = toast.loading("Logging Out...");
@@ -40,8 +43,47 @@ export default function Navbar() {
       toast.error(error.data.message);
     }
   };
+
+  useGSAP(() => {
+    gsap.set("header", {
+    
+      backdropFilter: "blur(0px)",
+      y: -100, // Set the starting position instantly
+    });
+    gsap.to("header", {
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  }, []);
+
+  useGSAP(() => {
+    const navTween = gsap.timeline({
+      scrollTrigger: {
+        trigger: "header",
+        start: "bottom top",
+        // end: "top top-=-1",
+        toggleActions: "play none none reverse",
+   
+      },
+    });
+
+    navTween.fromTo(
+      "header",
+      {
+        backdropFilter: "blur(0px)",
+      },
+      {
+        backdropFilter: "blur(10px)",
+        duration: 0.5,
+        ease: "power1.inOut",
+     
+      }
+    );
+}, []);
+
   return (
-    <header className="border-b px-4 ">
+    <header className="border-b px-4 fixed w-full top-0 left-0 right-0 z-50 bg-background/50">
       <div className="container mx-auto flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
