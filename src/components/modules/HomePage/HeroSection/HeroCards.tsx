@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import type { ITestimonial } from "@/types";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { Check, Github, LightbulbIcon, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
 // import { LightBulbIcon } from "./Icons";
@@ -20,14 +22,34 @@ export const HeroCards = () => {
       .then((data) => setTestimonialData(data))
       .catch((error) => console.log(error));
   }, []);
+  useGSAP(()=>{
+    gsap.from('.sandwitch-top-card', {
+      opacity: 0,
+      yPercent: -100,
+      duration: 1.8,
+      ease: "expo.out",
+      stagger: 0.06,
+    });
+    gsap.from('.sandwitch-bottom-card', {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1.8,
+      ease: "expo.out",
+      stagger: 0.06,
+    });
+  },[])
   console.log(testimonialData);
   if (!testimonialData) return <LoadingPage></LoadingPage>;
   const firstReview = testimonialData[0];
   const secondReview = testimonialData[1];
+
+
+
+
   return (
     <div className="hidden lg:flex flex-row flex-wrap gap-8 relative w-[700px] h-[500px]">
       {/* Testimonial */}
-      <Card className="absolute w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="sandwitch-top-card absolute w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
           <Avatar>
             <AvatarImage alt="" src={firstReview?.photoUrl || "https://i.pravatar.cc/150?img=32"} />
@@ -44,7 +66,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Team */}
-      <Card className="absolute right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="sandwitch-top-card absolute right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="mt-8 flex justify-center items-center pb-2">
           <img
             src={secondReview?.photoUrl || "https://i.pravatar.cc/150?img=58"}
@@ -114,7 +136,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Pricing */}
-      <Card className="absolute top-[150px] left-[50px] w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="sandwitch-bottom-card absolute top-[150px] left-[50px] w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader>
           <CardTitle className="flex item-center justify-between">
             Free Add Money
@@ -162,7 +184,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Service */}
-      <Card className="absolute w-[350px] -right-[10px] bottom-[35px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="sandwitch-bottom-card absolute w-[350px] -right-[10px] bottom-[35px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
           <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
             <LightbulbIcon />

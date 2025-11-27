@@ -6,33 +6,62 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Github } from "lucide-react";
 import { HeroCards } from "./HeroCards";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/all";
+import gsap from "gsap";
 
 export const Hero = () => {
+  useGSAP(() => {
+    const sandwitchTopSplit = new SplitText(".sandwitch-top", { type: "lines" });
+    const sandwitchMiddleSplit = new SplitText(".sandwitch-middle", { type: "lines" });
+
+    gsap.from(sandwitchTopSplit.lines, {
+      opacity: 0,
+      yPercent: -100,
+      duration: 1.8,
+      ease: "expo.out",
+      stagger: 0.06,
+    });
+    gsap.from(sandwitchMiddleSplit.lines, {
+      opacity: 0,
+      yPercent: 0,
+      duration: 1.8,
+      ease: "expo.out",
+      stagger: 0.06,
+    });
+    gsap.from(".sandwitch-bottom", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1.8,
+      ease: "expo.out",
+      stagger: 0.06,
+    });
+  }, []);
+
   return (
     <section className="container grid lg:grid-cols-2 place-items-center py-6 gap-10 ">
       <div className="text-center lg:text-start space-y-6">
-        <main className="text-5xl md:text-6xl font-bold">
+        <main className="text-5xl md:text-6xl font-bold sandwitch-top">
           <h1 className="inline">
-            <span className="inline bg-gradient-to-r from-[#ff6900]  to-[oklch(0.47_0.157_37.304)] text-transparent bg-clip-text">
-            VaultPay
+            <span className="  inline bg-gradient-to-r from-[#ff6900]  to-[oklch(0.47_0.157_37.304)] text-transparent bg-clip-text">
+              VaultPay
             </span>{" "}
             digital wallet
           </h1>{" "}
           for{" "}
           <h2 className="inline">
             <span className="inline bg-gradient-to-r to-[oklch(0.47_0.157_37.304)]  via-[oklch(0.553_0.195_38.402)] from-[oklch(0.646_0.222_41.116)] text-transparent bg-clip-text">
-            secure 
+              secure
             </span>{" "}
             transactions
           </h2>
         </main>
 
-        <p className="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
-          Build your React landing page effortlessly with the required sections
-          to your project.
+        <p className="sandwitch-middle text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
+          Build your React landing page effortlessly with the required sections to your project.
         </p>
 
-        <div className="space-y-4 md:space-y-0 md:space-x-4">
+        <div className="sandwitch-bottom space-y-4 md:space-y-0 md:space-x-4">
           <Button className="w-full md:w-1/3">Get Started</Button>
 
           <a
