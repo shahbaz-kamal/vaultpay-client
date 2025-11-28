@@ -1,5 +1,6 @@
 import { Features } from "@/components/modules/HomePage/Features/Features";
 import { Hero } from "@/components/modules/HomePage/HeroSection/Hero";
+import { HowItWorks } from "@/components/modules/HomePage/HowItWorks/HowItWorks";
 import { Investors } from "@/components/modules/HomePage/Investor/Investor";
 
 
@@ -10,6 +11,7 @@ export default function HomePage() {
      <Hero></Hero>
      <Investors></Investors>
      <Features></Features>
+     <HowItWorks></HowItWorks>
     </div>
  );
 };

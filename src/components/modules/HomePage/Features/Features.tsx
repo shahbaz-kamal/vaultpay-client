@@ -76,7 +76,7 @@ export const Features = () => {
           ease: "power2.out",
           stagger: 0.05,
         },
-        "-=0.3"
+        "-=0.2"
       )
       .from(
         ".feature-card",
@@ -88,7 +88,7 @@ export const Features = () => {
           ease: "expo.out",
           stagger: 0.1,
         },
-        "-=0.2"
+        "-=0.1"
       );
 
     // Floating animation (runs continuously)
@@ -99,20 +99,7 @@ export const Features = () => {
       yoyo: true,
       ease: "sine.inOut",
     });
-    // const titleSplit = new SplitText(".title", {
-    //   type: "chars, words",
-    // });
-    // gsap.from(titleSplit.chars, {
-    //   yPercent: 75,
-    //   duration: 0.5,
-    //   ease: "expo.out",
-    //   stagger: 0.02,
-    //   scrollTrigger: {
-    //     trigger: "#sponsors",
-    //     start: "top 90%",
-    //     toggleActions: "play none none none",
-    //   },
-    // });
+    
   }, []);
   return (
     <section id="features" className="container  space-y-8 px-4 md:px-0">
