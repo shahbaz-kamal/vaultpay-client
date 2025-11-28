@@ -15,28 +15,28 @@ export default function ProfileContent() {
 
   return (
     <div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Personal Information</CardTitle>
+      <Card className="">
+        <CardHeader className="flex flex-col justify-center items-center lg:block">
+          <CardTitle >Personal Information</CardTitle>
           <CardDescription>Additional profile details.</CardDescription>
         </CardHeader>
 
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <CardContent className="space-y-6  ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* PHONE */}
-            <div className="space-y-1">
+            <div className="space-y-1 flex flex-col items-center lg:block">
               <Label className="text-sm text-muted-foreground">Phone</Label>
               <p className="font-medium">{userData?.data.phone || "N/A"}</p>
             </div>
 
             {/* STATUS */}
-            <div className="space-y-1">
+            <div className="space-y-1 flex flex-col items-center lg:block">
               <Label className="text-sm text-muted-foreground">Account Status</Label>
               <Badge className={`font-medium ${IsActive.ACTIVE ? "bg-green-800" : "bg-red-400"}`}>{userData?.data.isActive}</Badge>
             </div>
 
             {/* VERIFIED */}
-            <div className="space-y-1">
+            <div className="space-y-1 flex flex-col items-center lg:block">
               <Label className="text-sm text-muted-foreground">Verification</Label>
               <Badge className={`font-medium ${userData?.data.isVerified ? "bg-green-800" : "bg-red-400"}`}>
                 {userData?.data.isVerified ? "Verified" : "Not Verified"}
@@ -44,13 +44,13 @@ export default function ProfileContent() {
             </div>
 
             {/* AGENT REQUEST STATUS */}
-            <div className="space-y-1">
+            <div className="space-y-1 flex flex-col items-center lg:block">
               <Label className="text-sm text-muted-foreground">Agent Request Status</Label>
               <p className="font-medium">{userData?.data.agentRequestStatus || "N/A"}</p>
             </div>
 
             {/* AGENT REQUESTED AT */}
-            <div className="space-y-1">
+            <div className="space-y-1 flex flex-col items-center lg:block">
               <Label className="text-sm text-muted-foreground">Agent Requested At</Label>
               <p className="font-medium">
                 {userData?.data.agentRequestedAt ? format(new Date(userData.data.agentRequestedAt), "PPPp") : "N/A"}
@@ -58,7 +58,7 @@ export default function ProfileContent() {
             </div>
 
             {/* AGENT APPROVED AT */}
-            <div className="space-y-1">
+            <div className="space-y-1 flex flex-col items-center lg:block">
               <Label className="text-sm text-muted-foreground">Agent Approved At</Label>
               <p className="font-medium">
                 {userData?.data.agentApprovedAt ? format(new Date(userData.data.agentApprovedAt), "PPPp") : "N/A"}

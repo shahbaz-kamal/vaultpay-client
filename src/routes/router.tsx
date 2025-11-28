@@ -22,6 +22,8 @@ import type { Trole } from "@/types";
 import LoadingPage from "@/components/layouts/LoadingPage";
 import SslSuccess from "@/Pages/SslCommerze/SslSuccess";
 import SslFailed from "@/Pages/SslCommerze/sslFailed";
+import ResetPassword from "@/Pages/ResetPassword";
+import ForgetPassword from "@/Pages/ForgetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +65,14 @@ export const router = createBrowserRouter([
   {
     path: "/verify",
     Component: Verify,
+  },
+  {
+    path: "/forget-password",
+    Component: ForgetPassword,
+  },
+  {
+    path: "/reset-password",
+    Component: ResetPassword,
   },
   {
     path: "/unauthorized",

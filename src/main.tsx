@@ -9,6 +9,9 @@ import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./redux/store";
 import { Toaster } from "./components/ui/sonner";
 
+import gsap, {ScrollTrigger, SplitText} from "gsap/all"
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ReduxProvider store={store}>
