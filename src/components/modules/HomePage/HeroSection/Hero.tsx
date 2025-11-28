@@ -36,8 +36,8 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="container grid lg:grid-cols-2 place-items-center py-6 gap-10 ">
-      <div className="text-center lg:text-start space-y-6">
+    <section className="container grid xl:grid-cols-2 place-items-center py-0 xl:py-10 gap-10 px-4 md:px-0 ">
+      <div className="text-center xl:text-start space-y-6 ">
         <main className="text-5xl md:text-6xl font-bold sandwitch-top">
           <h1 className="inline">
             <span className="  inline bg-gradient-to-r from-[#ff6900]  to-[oklch(0.47_0.157_37.304)] text-transparent bg-clip-text">
@@ -54,11 +54,11 @@ export const Hero = () => {
           </h2>
         </main>
 
-        <p className="sandwitch-middle text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
+        <p className="sandwitch-middle text-xl text-muted-foreground md:w-10/12 mx-auto xl:mx-0">
           Build your React landing page effortlessly with the required sections to your project.
         </p>
 
-        <div className="sandwitch-bottom space-y-4 md:space-y-0 md:space-x-4">
+        <div className="sandwitch-bottom space-y-4 md:space-y-0 md:space-x-4 ">
           <Button className="w-full md:w-1/3">Get Started</Button>
 
           <a
@@ -76,12 +76,12 @@ export const Hero = () => {
       </div>
 
       {/* Hero cards sections */}
-      <div className="z-10">
+      <div className="z-10 hidden xl:block">
         <HeroCards />
       </div>
 
       {/* Shadow effect */}
-      <div className="shadow"></div>
+      {/* <div className="shadow"></div> */}
     </section>
   );
 };
