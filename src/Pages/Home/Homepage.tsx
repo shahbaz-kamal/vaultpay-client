@@ -2,6 +2,7 @@ import { Features } from "@/components/modules/HomePage/Features/Features";
 import { Hero } from "@/components/modules/HomePage/HeroSection/Hero";
 import { HowItWorks } from "@/components/modules/HomePage/HowItWorks/HowItWorks";
 import { Investors } from "@/components/modules/HomePage/Investor/Investor";
+import { Testimonials } from "@/components/modules/HomePage/Testimonial/Testimonial";
 
 
 
@@ -12,6 +13,7 @@ export default function HomePage() {
      <Investors></Investors>
      <Features></Features>
      <HowItWorks></HowItWorks>
+     <Testimonials></Testimonials>
     </div>
  );
 };
