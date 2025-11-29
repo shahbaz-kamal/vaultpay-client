@@ -102,7 +102,7 @@ export const Features = () => {
     
   }, []);
   return (
-    <section id="features" className="container  space-y-8 px-4 md:px-0">
+    <section id="features" className="container mx-auto  space-y-8 px-4 md:px-0">
       <h2 id="features-title" className="title text-3xl lg:text-4xl font-bold text-center">
         Many <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">Great Features</span>
       </h2>

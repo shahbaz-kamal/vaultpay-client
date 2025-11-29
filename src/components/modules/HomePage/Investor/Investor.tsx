@@ -70,7 +70,7 @@ export const Investors = () => {
     });
   }, []);
   return (
-    <section id="sponsors" className="container mt-0 xl:mt-28  px-4 md:px-0 ">
+    <section id="sponsors" className="container mx-auto mt-0 xl:mt-28  px-4 md:px-0 ">
       <h2 className="title-header text-center text-3xl lg:text-4xl font-bold mb-8 text-primary ">Investors and founders</h2>
 
       <div className="flex flex-wrap justify-center xl:justify-between items-center gap-4 md:gap-8">

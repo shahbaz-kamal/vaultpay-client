@@ -146,7 +146,7 @@ export const Crew = () => {
       });
   }, [teamList]);
   return (
-    <section id="team" className="container px-4 md:px-0">
+    <section id="team" className="container mx-auto px-4 md:px-0">
       <h2 className="team-title text-3xl md:text-4xl font-bold text-center">
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">Our Dedicated </span>
         Crew

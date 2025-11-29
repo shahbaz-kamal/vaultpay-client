@@ -1,0 +1,6 @@
+#news-letter {
+    background-image: url("@/assets/images/newsLetterBg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+  }
