@@ -1,3 +1,4 @@
+import { Crew } from "@/components/modules/HomePage/Crew/Crew";
 import { Features } from "@/components/modules/HomePage/Features/Features";
 import { Hero } from "@/components/modules/HomePage/HeroSection/Hero";
 import { HowItWorks } from "@/components/modules/HomePage/HowItWorks/HowItWorks";
@@ -14,6 +15,7 @@ export default function HomePage() {
      <Features></Features>
      <HowItWorks></HowItWorks>
      <Testimonials></Testimonials>
+     <Crew></Crew>
     </div>
  );
 };

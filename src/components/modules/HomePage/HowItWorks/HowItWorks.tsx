@@ -254,10 +254,10 @@ export const HowItWorks = () => {
   // );
   
   useEffect(() => {
-    if (!initialAnimatedRef.current) return; // wait for initial entrance
+    if (!initialAnimatedRef.current) return; 
     const cards = gsap.utils.toArray<HTMLDivElement>(".howItWorks-card");
   
-    // animate only Y (no opacity/scale changes) to avoid flicker
+
     gsap.fromTo(
       cards,
       { y: 40 }, // do not touch opacity or scale
@@ -272,7 +272,7 @@ export const HowItWorks = () => {
   }, [currentIndex]);
 
   return (
-    <section id="howItWorks" className="container  mx-auto">
+    <section id="howItWorks" className="container  mx-auto px-4 md:px-0">
       <h2 id="howItWorks-title" className="text-3xl md:text-4xl font-bold text-center">
         How It <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">Works </span>
         Step-by-Step Guide
