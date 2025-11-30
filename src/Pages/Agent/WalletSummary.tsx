@@ -8,11 +8,9 @@ import MonthlyActivityUser from "@/components/modules/User/WalletInsights/Monthl
 import TransactionOverViewUser from "@/components/modules/User/WalletInsights/TransactionOverViewUser";
 import { role } from "@/constants/role";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import { useGetStatsForAgentQuery, useGetStatsForUserQuery } from "@/redux/features/stats/stats.api";
-import { TCardDisplayDataType, type IMonthlyActivity, type IMonthlyTransactionAmount, type ITransaction, type ITransactionOverviewUser } from "@/types";
+import { useGetStatsForAgentQuery } from "@/redux/features/stats/stats.api";
+import { TCardDisplayDataType, type IMonthlyActivity, type ITransaction, type ITransactionOverviewUser } from "@/types";
 import { ArrowDownCircle, ArrowUpCircle, CalendarDays, RefreshCcw, Wallet } from "lucide-react";
-
-
 
 export default function WalletSummary() {
   const { data: userData, isLoading: userLoading } = useGetMeQuery(undefined);
@@ -50,9 +48,11 @@ export default function WalletSummary() {
 
   return (
     <div>
+     
       <SidebarHeader heading="Dashboard" subHeading="Overview" subSubHeading="Wallet Summary" />
       <div className="container mx-auto px-5 py-6">
         {/* 💰 Wallet Overview */}
+        <title> Wallet Summary || Vaultpay</title>
         <DashboardTitle title="Wallet Overview" icon={<Wallet size={20} />}></DashboardTitle>
         <CardGrid cardObject={cardObject} cardDisplayDataType={TCardDisplayDataType.moneyCount}></CardGrid>
 
@@ -63,9 +63,7 @@ export default function WalletSummary() {
         {/* 📅 Monthly Activity*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Monthly Activity" icon={<CalendarDays size={20} />}></DashboardTitle>
-        <MonthlyActivityUser
-          requiredData={statsData?.data.monthlyActivity as IMonthlyActivity}
-        ></MonthlyActivityUser>
+        <MonthlyActivityUser requiredData={statsData?.data.monthlyActivity as IMonthlyActivity}></MonthlyActivityUser>
         {/* Recent Transactions*/}
         <div className="mt-6"></div>
         <DashboardTitle title="Recent 5 Transactions" icon={<CalendarDays size={20} />}></DashboardTitle>

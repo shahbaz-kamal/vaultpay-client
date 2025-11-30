@@ -12,6 +12,7 @@ import "./Homepage.css";
 export default function HomePage() {
   return (
     <div className="w-full space-y-20   py-6">
+      <title className="font-bold text-primary"> Home || Vaultpay</title>
       <Hero></Hero>
       <Investors></Investors>
       <Features></Features>

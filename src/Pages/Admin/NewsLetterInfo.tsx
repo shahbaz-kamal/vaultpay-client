@@ -9,6 +9,7 @@ const NewsLetterInfo = () => {
 
   return (
     <div>
+              <title > Newsletter Info || Vaultpay</title>
       <SidebarHeader heading="Dashboard" subHeading="User Management" subSubHeading="Newsletter Information" />
 
       <div className="px-8 py-6">

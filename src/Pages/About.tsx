@@ -67,7 +67,7 @@ export default function About() {
 
   return (
     <div className="w-full overflow-hidden">
-  
+      <title className="font-bold text-primary"> About || Vaultpay</title>
       {/*         ABOUT SECTION          */}
 
       <section ref={aboutRef} className="bg-background sm:grid sm:grid-cols-2 sm:items-center">

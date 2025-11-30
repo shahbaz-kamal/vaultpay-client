@@ -32,6 +32,7 @@ export default function SendMoney() {
   if (!myTransaction) return <LoadingPage></LoadingPage>;
   return (
     <div>
+       <title> Send Money || Vaultpay</title>
       <SidebarHeader heading="Transaction" subHeading="Send Money" subSubHeading=""></SidebarHeader>
       <div className="container mx-auto px-5 py-6 space-y-6">
         <div className="w-full">

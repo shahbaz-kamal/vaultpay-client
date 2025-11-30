@@ -28,6 +28,7 @@ const ClientMessages = () => {
 
   return (
     <div>
+              <title > Client Messages || Vaultpay</title>
       <SidebarHeader heading="Dashboard" subHeading="User Management" subSubHeading="Client Message" />
 
       <div className="grid grid-cols-1  lg:grid-cols-3 gap-6 mx-auto px-8 py-6">

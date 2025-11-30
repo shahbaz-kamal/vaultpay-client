@@ -1,6 +1,6 @@
-<!-- <div align="center">
-  <img height="400" src="https://github.com/shahbaz-kamal/book-nest-with-mongoose/blob/main/src/assets/git_banner/git_banner_2.JPG"  />
-</div> -->
+<div align="center">
+  <img height="400" src="https://github.com/shahbaz-kamal/vaultPay-server/blob/development/src/app/assets/git_banner.png"  />
+</div>
 
 ###
 
@@ -10,49 +10,71 @@
 
 Users can **add balance to their wallets via SSLCommerz**, a reliable online payment gateway ensuring safe and verified transactions. Admins can manage **system balance**, **transaction charges**, and **commissions**. The platform is powered by **JWT authentication**, **Zod validation**, and **BcryptJS encryption** to ensure robust security and data integrity across all operations.
 
-## 🔗 Live deployment link
+## 🔗 Live  link
 
 ###
 
 [Click Here](https://vaultpay-by-shahbaz.netlify.app)
+## 🔗 Backend  link
+
+###
+
+[Click Here](https://vault-pay-server.vercel.app)
 
 ## 👨‍💼Login Info
 
 - **Super Admin Email** — super.vaultpay@gmail.com
 - **Super Admin Password** — 123456Aa
-- **User Email** — tamimchowdhury10@gmail.com
-- **User Password** — 123456Aa
 - **Agent Email** — shahbazkamal384@gmail.com
 - **Agent Password** — 123456Aa
+- **User Email** — tamimchowdhury120096@gmail.com
+- **User Password** — 123456Aa
 
 
 ## ✨ Features:
 
 - **Role-Based Access Control** — Separate functionalities for **Admin**, **Super Admin**, **Agent**, and **User** roles.
 - **Secure Authentication** — Implemented using **JWT** and **BcryptJS** for safe login and password protection.
-- **Add Balance via SSLCommerz** — Users can easily add money to their wallets using the **SSLCommerz payment gateway**. Also users can send money to other users.
+  - **Forget Password:** All Users can easily set new password if password is forgotten through reset option sent via email.
+  - **Set Password:** Users can set password, if initially registered with google. After setting passord he/she can use credential based login.
+  - **Change Password:** Users can change password easily by providing old password.
+  - **OTP Verification:** Users is verified via email by sending OTP upon register with email and password
+- **Add Balance via SSLCommerz** — Users can easily add money to their wallets using the SSLCommerze
+- **SSLCommerz payment gateway**. Also users can send money to other users.
 - **Cash out, send money and cash in** — Real-time transaction system for seamless fund management.
+- **Invoice via Email** — All users gets there there invoice as pdf instantly via email. Also can download transaction invoice any time from there dashboard.
 - **Admin Dashboard** — Admins can monitor total balance, manage commissions, and set transaction charges.
-- **Agent Management** — Agents can process cash in and assist users with transactions.
+  - **Analytics** — Admins can view a huge nomber of statistical information in this page via different types of chart. like user & agent overview (totaluser/agents), active vs inactive users , system information, transaction overview by type and top performers for both users and agents.
+  - **Transaction History** — Admins can view a total transaction history . Also can filter and search transaction history by user name, email , transaction date etc.
+  - **Agent and user Management** — Admins can view agent and users information and also can update the status of user and some basic information of users
+  - **Client Messages** — Admins can view client messages that came through contact us page from frontend.
+  - **NewsLetter Information** — Admins can view emails, whose users subscribed for newsletter via newsletter section.
+- **Agents Dashboard** — Agents can perform cash in and add money as well as some more operation like can get statistical data, profile info etc.
+  - **Wallet Summary** — Huge statistical data for logged in agent by using different types of chart.
+  - **Transaction History** — Logged in agent can view his/her transaction history . Can use filter and search by different parameters.
+- **Users Dashboard** — Users can perform cash out,send money and add money as well as some more operation like can get statistical data, profile info etc.
+
+  - **Wallet Insights** — Huge statistical data for logged in user through different types of chart.
+  - **Transaction History** — Logged in user can view his/her transaction history . Can use filter and search by different parameters.
+
 - **Data Validation** — Robust input validation using **Zod** to ensure clean and error-free data.
 - **Error Handling** — Centralized error management with descriptive responses for smooth debugging.
 - **TypeScript Support** — Strongly typed backend ensuring better maintainability and scalability.
 - **Database Management** — Built with **MongoDB (Mongoose)** for flexible and efficient data modeling.
 - **Users can**
-  - Add Money to their wallet from SSLCommerze   
-  - Send money to other users with a transaction charge. 
-  - Initiates cash out to agents to withdraw.  
+  - Add Money to their wallet from SSLCommerze
+  - Send money to other users with a transaction charge.
+  - Initiates cash out to agents to withdraw.
 - **Agents can**
-  - Add Money to their wallet from SSLCommerze.  
-  - Initiates cash in to user wallet. (user will receive money from agent)  
-- **Admins can** 
+  - Add Money to their wallet from SSLCommerze.
+  - Initiates cash in to user wallet. (user will receive money from agent)
+- **Admins can**
   - View all transactions.
-  - Update all users profiles certain fields. 
+  - Update all users profiles certain fields.
 - **Super Admin can**
   - View all transactions.
-  - Update users profiles as well as admin's profile . 
-
-
+  - Update users profiles as well as admin's profile .
+  - can keep track of client message, newsletter subscriber
 
 ## 🛠 Technology Used
 

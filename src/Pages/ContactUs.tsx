@@ -133,6 +133,7 @@ const ContactUs = () => {
   }, []);
   return (
     <div className="container mx-auto py-12">
+            <title > Contact Us || Vaultpay</title>
       <h2 id="Contact-us-title-title" className="animate-heading title text-3xl lg:text-4xl font-bold text-center">
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">Contact</span> Us
       </h2>

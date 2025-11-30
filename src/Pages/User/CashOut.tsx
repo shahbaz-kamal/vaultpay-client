@@ -32,6 +32,7 @@ export default function CashOut() {
   if (!myTransaction) return <LoadingPage></LoadingPage>;
   return (
     <div>
+       <title> Cash Out || Vaultpay</title>
       <SidebarHeader heading="Transaction" subHeading="Cash Out" subSubHeading=""></SidebarHeader>
       <div className="container mx-auto px-5 py-6 space-y-6">
         <div className="w-full">

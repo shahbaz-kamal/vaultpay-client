@@ -70,6 +70,7 @@ const Career = () => {
 
   return (
     <div className="space-y-20 container mx-auto">
+        <title > Career || Vaultpay</title>
       {/* ======================= HERO SECTION ======================= */}
       <section ref={heroRef} className="bg-gradient-to-b from-primary/10 to-background py-20 px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-foreground">
