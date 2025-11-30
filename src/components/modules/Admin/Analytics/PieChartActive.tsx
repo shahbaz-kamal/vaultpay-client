@@ -2,13 +2,12 @@ import * as React from "react";
 import { Label, Pie, PieChart, Sector } from "recharts";
 // import { PieSectorDataItem } from "recharts/types/polar/Pie"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type ChartConfig, ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import type { PieSectorDataItem } from "recharts/types/polar/Pie";
-import { Role } from "@/types/user.type";
-import LoadingPage from "@/components/layouts/LoadingPage";
 import { useCountUp } from "@/hooks/useCountUp";
+import { Role } from "@/types/user.type";
+import type { PieSectorDataItem } from "recharts/types/polar/Pie";
 
 export const description = "An interactive pie chart";
 

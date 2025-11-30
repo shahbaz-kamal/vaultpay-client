@@ -6,7 +6,6 @@ import { SilverLine } from "@/assets/icons/SilverLine";
 import { VertexVenture } from "@/assets/icons/VertexVenture";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { SplitText } from "gsap/all";
 
 import type { JSX } from "react";
 

@@ -14,7 +14,7 @@ import type z from "zod";
 
 export function VerifyResetPasswordForm({ className, ...props }: React.ComponentProps<"div">) {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const id = searchParams.get("id") || "";
   const token = searchParams.get("token") || "";

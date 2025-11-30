@@ -27,20 +27,14 @@ export default function TransactionOverViewUser({ requiredData }: IProps) {
       type: "money",
     },
   ];
-  const desktopData = [
-    { month: "active", desktop: 186, fill: "var(--color-active)" },
-    { month: "february", desktop: 305, fill: "var(--color-february)" },
-    // { month: "march", desktop: 237, fill: "var(--color-march)" },
-    // { month: "april", desktop: 173, fill: "var(--color-april)" },
-    // { month: "may", desktop: 209, fill: "var(--color-may)" },
-  ];
-  const numberOfTransactionByTypeData = requiredData.transactionByType.map((item, index) => ({
+  
+  const numberOfTransactionByTypeData = requiredData.transactionByType.map((item) => ({
     type: convertType(item.type) as string,
     chartData: item.count as number,
     fill: `var(--color-${item.type.toLowerCase()})` as string,
     rawType: item.type.toLowerCase()
   }));
-  const transactionAmountByTypeData = requiredData.transactionByType.map((item, index) => ({
+  const transactionAmountByTypeData = requiredData.transactionByType.map((item) => ({
     type: convertType(item.type) as string,
     chartData: item.amount as number,
     fill: `var(--color-${item.type.toLowerCase()})` as string,

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useChangePasswordMutation, useSetPasswordMutation } from "@/redux/features/auths/auth.api";
-import { setPasswordSchema } from "@/schemas/setPasswordSchema";
+import { useChangePasswordMutation } from "@/redux/features/auths/auth.api";
+import { changePasswordSchema } from "@/schemas/changePasswordSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,7 +9,6 @@ import { toast } from "sonner";
 import type z from "zod";
 import CustomModal from "./CustomModal";
 import Password from "./ui/Password";
-import  { changePasswordSchema } from "@/schemas/changePasswordSchema";
 
 type ChangePasswordFormValue = z.infer<typeof changePasswordSchema>;
 

@@ -12,7 +12,7 @@ import { useGetStatsForUserQuery } from "@/redux/features/stats/stats.api";
 import {
   TCardDisplayDataType,
   type IMonthlyActivity,
-  type IMonthlyTransactionAmount,
+
   type ITransaction,
   type ITransactionOverviewUser,
 } from "@/types";

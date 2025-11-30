@@ -1,6 +1,6 @@
-import type { ITopPerformer, ITopUsersAndAgents } from "@/types/stats.type";
-import { TopPerformerTable } from "./TopPerformerTable";
 import LoadingPage from "@/components/layouts/LoadingPage";
+import type { ITopPerformer } from "@/types/stats.type";
+import { TopPerformerTable } from "./TopPerformerTable";
 
 
 interface IPropsTopPerformer {

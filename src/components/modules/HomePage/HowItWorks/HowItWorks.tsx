@@ -1,26 +1,24 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useRef, useState, type JSX } from "react";
 
-import image from "@/assets/images/addMoney.png";
-import {
-  LogIn,
-  UserPlus,
-  CreditCard,
-  Receipt,
-  ArrowRightLeft,
-  Send,
-  UserCheck,
-  Wallet,
-  DollarSign,
-  HandCoins,
-  BadgeCheck,
-  ClipboardList,
-  CheckCircle,
-  ArrowBigLeft,
-  ArrowBigRight,
-} from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import {
+  ArrowBigLeft,
+  ArrowBigRight,
+  ArrowRightLeft,
+  BadgeCheck,
+  CheckCircle,
+  ClipboardList,
+  CreditCard,
+  DollarSign,
+  HandCoins,
+  LogIn,
+  Receipt,
+  Send,
+  UserCheck,
+  Wallet
+} from "lucide-react";
 
 interface FeatureProps {
   name: string;
@@ -143,7 +141,7 @@ const featureData: FeatureProps[] = [
 
 export const HowItWorks = () => {
 
-  const containerRef = useRef<HTMLElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const initialAnimatedRef = useRef(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 

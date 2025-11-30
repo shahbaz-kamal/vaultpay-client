@@ -2,16 +2,15 @@ import { Logo } from "@/assets/icons/Logo";
 import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ModeToggle } from "./ModeToggler";
-import { Link, useLocation } from "react-router";
-import { authApi, useGetMeQuery, useLogoutMutation } from "@/redux/features/auths/auth.api";
-import { toast } from "sonner";
-import { useAppDispatch } from "@/redux/hooks";
 import { role } from "@/constants/role";
-import { User } from "lucide-react";
+import { authApi, useGetMeQuery, useLogoutMutation } from "@/redux/features/auths/auth.api";
+import { useAppDispatch } from "@/redux/hooks";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
-import { useTheme } from "@/hooks/useTheme";
+import { User } from "lucide-react";
+import { Link, useLocation } from "react-router";
+import { toast } from "sonner";
+import { ModeToggle } from "./ModeToggler";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -30,7 +29,7 @@ export default function Navbar() {
   const { data: userData } = useGetMeQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
-  const { theme } = useTheme();
+
 
   const handleLogout = async () => {
     const toastId = toast.loading("Logging Out...");

@@ -1,6 +1,5 @@
 import { Logo } from "@/assets/icons/Logo";
 import { VerifyResetPasswordForm } from "@/components/modules/auth/ResetPasswordForm";
-import { VerifyForm } from "@/components/modules/auth/VerifyForm";
 
 export default function ResetPassword() {
   return (

@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useGetNewsLetterInfoQuery, useStoreNewsLetterMutation } from "@/redux/features/newsLetter/newLetter.api";
+import { useStoreNewsLetterMutation } from "@/redux/features/newsLetter/newLetter.api";
 
 import { newsLetterSchema } from "@/schemas/newsLetterSchema";
 import { useGSAP } from "@gsap/react";
@@ -43,7 +44,7 @@ export default function NewsLetter() {
         toast.success("NewsLetter subscription Successfull", { id: toastId });
         form.reset();
       }
-    } catch (error) {
+    } catch (error:any) {
       console.log(error);
       toast.error(error.data.message as string);
     }

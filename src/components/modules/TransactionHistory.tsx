@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  type ColumnDef,
   type ColumnFiltersState,
   flexRender,
   getCoreRowModel,
@@ -9,64 +11,18 @@ import {
   useReactTable,
   type VisibilityState,
 } from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import TransactionHistoryConstants from "@/constants/TransactionHistoryConstants";
-import type { ITransaction } from "@/types";
-import { useNavigate } from "react-router";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
-import LoadingPage from "../layouts/LoadingPage";
+import type { ITransaction } from "@/types";
+import type { TRANSACTION_SOURCE, TRANSACTION_TYPE } from "@/types/transaction.type";
 import { Role } from "@/types/user.type";
+import { useNavigate } from "react-router";
+import LoadingPage from "../layouts/LoadingPage";
 
-// const data = [
-//   {
-//     id: "1",
-//     senderEmail: "a@b.com",
-//     receiverEmail: "b@c.com",
-//     amount: 316,
-//     status: "success",
-//     type: "Add Money",
-//     // email: "ken99@example.com",
-//     transactionDate: "2025-11-04T17:02:21.080+00:00",
-//   },
-// ];
-// const data: Payment[] = [
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@example.com",
-//   },
-//   {
-//     id: "3u1reuv4",
-//     amount: 242,
-//     status: "success",
-//     email: "Abe45@example.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     amount: 837,
-//     status: "processing",
-//     email: "Monserrat44@example.com",
-//   },
-//   {
-//     id: "5kma53ae",
-//     amount: 874,
-//     status: "success",
-//     email: "Silas22@example.com",
-//   },
-//   {
-//     id: "bhqecj4p",
-//     amount: 721,
-//     status: "failed",
-//     email: "carmella@example.com",
-//   },
-// ];
 
 interface IProps {
   requiredData: Partial<ITransaction>[];
@@ -78,7 +34,19 @@ export function TransactionHistory({ requiredData }: IProps) {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const columns = TransactionHistoryConstants();
+  const columns = TransactionHistoryConstants() as ColumnDef<
+    {
+      _id?: string;
+      transactionId?: string;
+      type?: TRANSACTION_TYPE;
+      source?: TRANSACTION_SOURCE;
+      amount?: number;
+      status?: string;
+      createdAt?: Date;
+      transactionDate: Date | undefined;
+    },
+    any
+  >[];
 
   const data = requiredData.map((item, index) => ({
     id: index + 1,

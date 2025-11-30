@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { Logo } from "@/assets/icons/Logo";
 import {
   Sidebar,
   SidebarContent,
@@ -13,11 +14,10 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Link, NavLink, useLocation } from "react-router";
-import { Logo } from "@/assets/icons/Logo";
-import { getSidebarItems } from "@/utils/getSidebarItems";
-import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { cn } from "@/lib/utils";
+import { useGetMeQuery } from "@/redux/features/auths/auth.api";
+import { getSidebarItems } from "@/utils/getSidebarItems";
+import { Link, useLocation } from "react-router";
 
 // This is sample data.
 

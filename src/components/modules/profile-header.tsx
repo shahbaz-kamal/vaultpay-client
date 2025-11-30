@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import type { IUser } from "@/types";
-import { Calendar, Camera, Mail, MapPin } from "lucide-react";
+import { Calendar, Mail, MapPin } from "lucide-react";
 import LoadingPage from "../layouts/LoadingPage";
 
 import mockProfilePicture from "@/assets/images/mockProfilePicture.jpg";
 import { format } from "date-fns";
 
 import { Role } from "@/types/user.type";
-import UpdateProfileModal from "../UpdateProfileModal";
-import SetPasswordModal from "../setPasswordModal";
 import ChangePasswordModal from "../ChangePasswordModal";
+import UpdateProfileModal from "../UpdateProfileModal";
 import UpdateProfilePictureModal from "../UpdateProfilePictureModal";
+import SetPasswordModal from "../SetPasswordModal";
+
 
 export default function ProfileHeader() {
   const { data: userData } = useGetMeQuery(undefined);

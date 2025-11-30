@@ -1,17 +1,12 @@
-import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { type ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { CustomTooltip } from "@/hooks/CustomTooltip";
 
 export const description = "A bar chart with a custom label";
 
-const chartData = [
-  { source: "SSLCOMMERZE", transactionData: 186 },
-  { source: "AGENT", transactionData: 305 },
-  { source: "USER", transactionData: 237 },
-];
+
 
 const chartConfig = {
   transactionData: {

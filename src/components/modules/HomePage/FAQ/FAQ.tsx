@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem } from "@/components/ui/accordion";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { PlusIcon } from "lucide-react";

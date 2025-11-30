@@ -3,14 +3,13 @@ import gsap from "gsap";
 import { useRef, useState } from "react";
 
 const Career = () => {
-  const [openingData, setOpeningData] = useState([]);
+  const [openingData] = useState([]);
 
-
-  const heroRef = useRef(null);
-  const whyRef = useRef(null);
-  const openRef = useRef(null);
-  const cultureRef = useRef(null);
-  const ctaRef = useRef(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const whyRef = useRef<HTMLDivElement>(null);
+  const openRef = useRef<HTMLDivElement>(null);
+  const cultureRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     gsap.from(heroRef.current, {
@@ -20,42 +19,49 @@ const Career = () => {
       ease: "power2.out",
     });
 
-    gsap.from(whyRef.current.querySelectorAll(".why-animate"), {
-      opacity: 0,
-      y: 30,
-      duration: 0.7,
-      stagger: 0.12,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: whyRef.current,
-        start: "top 85%",
-      },
-    });
+    if (whyRef.current) {
+      gsap.from(whyRef.current.querySelectorAll(".why-animate"), {
+        opacity: 0,
+        y: 30,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: whyRef.current,
+          start: "top 85%",
+        },
+      });
+    }
 
-    gsap.from(openRef.current.querySelectorAll(".open-animate"), {
-      opacity: 0,
-      y: 35,
-      duration: 0.7,
-      stagger: 0.12,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: openRef.current,
-        start: "top 85%",
-      },
-    });
+    if (openRef.current) {
+      gsap.from(openRef.current.querySelectorAll(".open-animate"), {
+        opacity: 0,
+        y: 35,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: openRef.current,
+          start: "top 85%",
+        },
+      });
+    }
 
-    gsap.from(cultureRef.current.querySelectorAll(".culture-animate"), {
-      opacity: 0,
-      y: 35,
-      duration: 0.7,
-      stagger: 0.15,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: cultureRef.current,
-        start: "top 85%",
-      },
-    });
+    if (cultureRef.current) {
+      gsap.from(cultureRef.current.querySelectorAll(".culture-animate"), {
+        opacity: 0,
+        y: 35,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: cultureRef.current,
+          start: "top 85%",
+        },
+      });
+    }
 
+  if(ctaRef.current){
     gsap.from(ctaRef.current, {
       opacity: 0,
       scale: 0.95,
@@ -66,11 +72,12 @@ const Career = () => {
         start: "top 85%",
       },
     });
+  }
   }, [openingData]);
 
   return (
     <div className="space-y-20 container mx-auto">
-        <title > Career || Vaultpay</title>
+      <title> Career || Vaultpay</title>
       {/* ======================= HERO SECTION ======================= */}
       <section ref={heroRef} className="bg-gradient-to-b from-primary/10 to-background py-20 px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-foreground">
@@ -125,7 +132,7 @@ const Career = () => {
         )}
 
         {/* CONDITION 2: Show job openings */}
-        {openingData.length > 0 && (
+        {/* {openingData.length > 0 && (
           <div className="mt-10 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {openingData.map((job, index) => (
               <div key={index} className="open-animate p-6 border rounded-xl bg-background shadow-sm hover:shadow-lg transition">
@@ -138,7 +145,7 @@ const Career = () => {
               </div>
             ))}
           </div>
-        )}
+        )} */}
       </section>
 
       {/* ======================= CULTURE SECTION ======================= */}
@@ -164,7 +171,7 @@ const Career = () => {
       </section>
 
       {/* ======================= CTA SECTION ======================= */}
-      <section  ref={ctaRef} className="py-16 text-center px-6 bg-primary/10 rounded-lg max-w-5xl mx-auto">
+      <section ref={ctaRef} className="py-16 text-center px-6 bg-primary/10 rounded-lg max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-foreground">Ready to Join VaultPay?</h2>
         <p className="text-muted-foreground mt-2">Be part of a team building secure, intelligent, and next-gen payment technology.</p>
         <button className="mt-6 px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/80 transition">

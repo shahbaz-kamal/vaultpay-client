@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { TUser } from "@/components/modules/Admin/Analytics/TopPerformerTable";
+import type { ITableData } from "@/components/modules/Admin/Analytics/TopPerformer";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,7 +13,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 
 export default function AnalyticsConstants({title}:{title:string}) {
-  const columns: ColumnDef<TUser>[] = [
+  const columns: ColumnDef<ITableData>[] = [
 
     {
       accessorKey: "id",

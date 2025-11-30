@@ -1,12 +1,11 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import addMoney from "@/assets/images/addMoney.png";
-import sendMoney from "@/assets/images/sendMoney.png";
 import cashIn from "@/assets/images/cashIn.png";
 import cashOut from "@/assets/images/cashOut.png";
+import sendMoney from "@/assets/images/sendMoney.png";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { SplitText } from "gsap/all";
 
 interface FeatureProps {
   title: string;

@@ -6,9 +6,10 @@
 
 <h1 align="left"> 🏦 VaultPay - payment system</h1>
 
-**VaultPay** is a secure digital wallet and payment platform built using **React**, **TypeScript**, and **MongoDB (Mongoose)**. It enables users to **add**, **withdraw**, and **transfer** money securely with real-time transaction processing. The system includes **role-based access control** with **Admin**, **Agent**, and **User** roles — each having distinct privileges.
 
-Users can **add balance to their wallets via SSLCommerz**, a reliable online payment gateway ensuring safe and verified transactions. Admins can manage **system balance**, **transaction charges**, and **commissions**. The platform is powered by **JWT authentication**, **Zod validation**, and **BcryptJS encryption** to ensure robust security and data integrity across all operations.
+
+**VaultPay** is a secure and modern **digital wallet platform** built with **React**, **TypeScript**, **Node.js**, and **MongoDB**, enabling users to **add**, **withdraw**, and **transfer** money with seamless real-time processing. It features **role-based access control (Admin, Agent, User)**, **SSLCommerz-powered balance top-ups**, and strong security powered by **JWT authentication**, **Zod validation**, and **BcryptJS encryption**. VaultPay ensures a smooth user experience enhanced with **GSAP animations**, making financial interactions both intuitive and visually dynamic.
+
 
 ## 🔗 Live  link
 
@@ -81,13 +82,33 @@ Users can **add balance to their wallets via SSLCommerz**, a reliable online pay
 ###
 
  <div align="left">
-  <img src="https://i.ibb.co.com/KpNvmBZb/atom-1.png" height="40" alt="nodejs logo"  />
+
+   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="react logo"  />
   <img width="12" />
-  <img src="https://i.ibb.co.com/tTdS8wN9/icons8-redux-480.png" height="40" alt="express logo"  />
+  <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" height="40" alt="tailwindcss logo"  />
   <img width="12" />
-  <img src="https://i.ibb.co.com/yFgT8ftf/typescript.png" height="40" alt="typescript logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height="40" alt="redux logo"  />
   <img width="12" />
-  <img src="https://images.seeklogo.com/logo-png/51/1/shadcn-ui-logo-png_seeklogo-519786.png" height="40" alt="mongodb logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" alt="typescript logo"  />
+  <img width="12" />
+   <img src="https://images.seeklogo.com/logo-png/51/1/shadcn-ui-logo-png_seeklogo-519786.png" height="40" alt="mongodb logo"  />
+    <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" alt="nodejs logo"  />
+  <img width="12" />
+    <img src="https://skillicons.dev/icons?i=express" height="40" alt="express logo"  />
+     <img width="12" />
+  <img src="https://cdn.simpleicons.org/mongodb/47A248" height="40" alt="mongodb logo"  />
+  <img width="12" />
+  <img src="https://img.icons8.com/?size=48&id=gKfcEStXI1Hm&format=png" height="40" alt="mongodb logo"  />
+  <img width="12" />
+ <img src="https://sslcommerz.com/wp-content/uploads/2021/11/logo.png" height="40" alt="mongodb logo"  />
+  <img width="12" />
+  <img src="https://zod.dev/_next/image?url=%2Flogo%2Flogo-glow.png&w=256&q=100" height="40" alt="Zod Logo"  />
+  <img width="12" />
+  <img src="https://i0.wp.com/community.nodemailer.com/wp-content/uploads/2015/10/n2-2.png?w=422&ssl=1" height="40" alt="mongodb logo"  />
+
+
+  
 
 </div>
 
@@ -95,7 +116,9 @@ Users can **add balance to their wallets via SSLCommerz**, a reliable online pay
 
 ```json
 {
- "@hookform/resolvers": "^5.2.2",
+    "@gsap/react": "^2.1.2",
+    "@hookform/resolvers": "^5.2.2",
+    "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-checkbox": "^1.3.3",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -115,7 +138,6 @@ Users can **add balance to their wallets via SSLCommerz**, a reliable online pay
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "flowbite": "^4.0.0",
     "gsap": "^3.13.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.545.0",
@@ -126,7 +148,9 @@ Users can **add balance to their wallets via SSLCommerz**, a reliable online pay
     "react-dom": "^19.1.1",
     "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.66.0",
+    "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
+    "react-responsive": "^10.0.1",
     "react-router": "^7.9.4",
     "recharts": "^2.15.4",
     "sonner": "^2.0.7",

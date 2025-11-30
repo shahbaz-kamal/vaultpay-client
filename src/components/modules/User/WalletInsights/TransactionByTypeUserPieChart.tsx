@@ -6,17 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { type ChartConfig, ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { PieSectorDataItem } from "recharts/types/polar/Pie";
-import { CustomTooltip } from "@/hooks/CustomTooltip";
 
 export const description = "An interactive pie chart";
 
-const desktopData = [
-  { type: "add_money", chartData: 186, fill: "var(--color-active)" },
-  { type: "february", chartData: 305, fill: "var(--color-february)" },
-  // { month: "march", desktop: 237, fill: "var(--color-march)" },
-  // { month: "april", desktop: 173, fill: "var(--color-april)" },
-  // { month: "may", desktop: 209, fill: "var(--color-may)" },
-];
+
 
 const chartConfig = {
   visitors: {

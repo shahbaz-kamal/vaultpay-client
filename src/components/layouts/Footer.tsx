@@ -1,9 +1,8 @@
-import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 import { Logo } from "@/assets/icons/Logo";
-import { FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
+import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const socials = [
   {link:"https://www.facebook.com/tamim.chowdhury.543/",
