@@ -1,7 +1,7 @@
 import App from "@/App";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 
-import { About } from "@/Pages/About";
+
 
 import Login from "@/Pages/Auth/Login";
 
@@ -24,6 +24,7 @@ import SslSuccess from "@/Pages/SslCommerze/SslSuccess";
 import SslFailed from "@/Pages/SslCommerze/sslFailed";
 import ResetPassword from "@/Pages/ResetPassword";
 import ForgetPassword from "@/Pages/ForgetPassword";
+import About from "@/Pages/About";
 
 export const router = createBrowserRouter([
   {
