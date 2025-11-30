@@ -168,7 +168,7 @@ export const HowItWorks = () => {
     tl.from("#howItWorks-title", {
       opacity: 0,
       letterSpacing: "-6px",
-      duration: 1,
+      duration: 0.2,
       ease: "power2.out",
     })
       .from(
@@ -179,7 +179,7 @@ export const HowItWorks = () => {
           duration: 0.2,
           ease: "power2.out",
         },
-        "-=0.4"
+        "-=0.1"
       )
       .from(
         ".howItWorks-nav-item",
@@ -190,7 +190,7 @@ export const HowItWorks = () => {
           ease: "power2.out",
           stagger: 0.15,
         },
-        "-=0.2"
+        "-=0.1"
       )
 
       // 4️⃣ Left Arrow
@@ -202,7 +202,7 @@ export const HowItWorks = () => {
           duration: 0.2,
           ease: "power2.out",
         },
-        "-=0.2"
+        "-=0.1"
       )
       .from(
         ".howItWorks-card",

@@ -64,7 +64,7 @@ export const Features = () => {
     tl.from("#features-title", {
       opacity: 0,
       letterSpacing: "-6px",
-      duration: 1,
+      duration: 0.2,
       ease: "power2.out",
     })
       .from(
@@ -72,11 +72,11 @@ export const Features = () => {
         {
           opacity: 0,
           y: 20,
-          duration: 0.3,
+          duration: 0.2,
           ease: "power2.out",
           stagger: 0.05,
         },
-        "-=0.2"
+        "-=0.1"
       )
       .from(
         ".feature-card",
@@ -84,7 +84,7 @@ export const Features = () => {
           opacity: 0,
           y: 40,
           scale: 0.92,
-          duration: 0.5,
+          duration: 0.2,
           ease: "expo.out",
           stagger: 0.1,
         },

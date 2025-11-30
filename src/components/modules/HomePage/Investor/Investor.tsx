@@ -61,7 +61,7 @@ export const Investors = () => {
     gsap.from(".title-header", {
       opacity: 0,
       letterSpacing: "-6px",
-      duration: 1,
+      duration: 0.2,
       ease: "power2.out",
       scrollTrigger: {
         trigger: "#sponsors",
