@@ -1,4 +1,3 @@
-import CommonTransactionHistory from "@/Pages/CommonTransactionHistory";
 import Profile from "@/Pages/Profile";
 import type { ISidebarItems } from "@/types";
 import { lazy } from "react";
@@ -6,6 +5,9 @@ import { lazy } from "react";
 const Analytics = lazy(() => import("@/Pages/Admin/Analytics"));
 const ManageAgents = lazy(() => import("@/Pages/Admin/ManageAgents"));
 const ManageUsers = lazy(() => import("@/Pages/Admin/ManageUsers"));
+const ClientMessages = lazy(() => import("@/Pages/Admin/ClientMessages"));
+const NewsLetterInfo = lazy(() => import("@/Pages/Admin/NewsLetterInfo"));
+const CommonTransactionHistory = lazy(() => import("@/Pages/CommonTransactionHistory"));
 
 export const adminSidebarItems: ISidebarItems[] = [
   {
@@ -42,6 +44,16 @@ export const adminSidebarItems: ISidebarItems[] = [
         title: "Manage Agents",
         url: "/admin/manage-agents",
         component: ManageAgents,
+      },
+      {
+        title: "Client Messages",
+        url: "/admin/client-messages",
+        component: ClientMessages,
+      },
+      {
+        title: "NewsLetter Info",
+        url: "/admin/news-letter",
+        component: NewsLetterInfo,
       },
     ],
   },
