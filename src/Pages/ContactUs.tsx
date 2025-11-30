@@ -13,6 +13,8 @@ import { FaLocationDot } from "react-icons/fa6";
 import type { JSX } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useStoreContactUsMessageMutation } from "@/redux/features/contactUs/contactUs.api";
+import { toast } from "sonner";
 
 interface ContactInformation {
   name: string;
@@ -43,6 +45,8 @@ const contactInformation: ContactInformation[] = [
 ];
 
 const ContactUs = () => {
+  const [storeContactUsMessage] = useStoreContactUsMessageMutation();
+
   const form = useForm<z.infer<typeof contactUsSchema>>({
     resolver: zodResolver(contactUsSchema),
     defaultValues: {
@@ -55,13 +59,22 @@ const ContactUs = () => {
 
   const onSubmit = async (data: z.infer<typeof contactUsSchema>) => {
     const messageData: Partial<IContactUs> = {
-      name: data.name,
-      email: data.email,
-      message: data.message,
+      name: data.name as string,
+      email: data.email as string,
+      message: data.message as string,
     };
-    if (data.subject) messageData.subject = data.subject;
-
+    if (data.subject) messageData.subject = data.subject as string;
+    const toastId = toast.loading("Sending Message");
     console.log("MessageData", messageData);
+    try {
+      const result = await storeContactUsMessage(messageData).unwrap();
+      if (result.success) {
+        toast.success("Your Message Sent Successfully", { id: toastId });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed To Send Message", { id: toastId });
+    }
   };
 
   useGSAP(() => {
@@ -123,7 +136,9 @@ const ContactUs = () => {
       <h2 id="Contact-us-title-title" className="animate-heading title text-3xl lg:text-4xl font-bold text-center">
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">Contact</span> Us
       </h2>
-      <p className="animate-paragraph text-center mt-4">Send Us MEssage</p>
+      <p className="animate-paragraph text-center mt-4 text-muted-foreground">
+        Have questions or feedback? Fill out the form below and we’ll get back to you shortly.
+      </p>
       {/* ---------- Top Section (Form + Image) ---------- */}
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         {/* Form */}

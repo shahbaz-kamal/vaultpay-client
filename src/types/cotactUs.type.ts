@@ -1,7 +1,7 @@
 export interface IContactUs {
   name: string;
   email: string;
-  subject: string | null;
+  subject?: string | null;
   message: string;
-  isRead: boolean;
+  isRead?: boolean;
 }

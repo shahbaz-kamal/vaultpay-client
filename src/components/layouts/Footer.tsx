@@ -80,7 +80,7 @@ export function Footer() {
           ))}
         </ul>
         <div className="footer-animate mx-auto flex max-w-7xl justify-center px-4 mt-10  sm:px-6">
-          <p className="text-center font-medium text-balance">
+          <p className="text-center font-medium text-balance text-muted-foreground">
             {`©${new Date().getFullYear()}`} VaultPay — Made with dedication to redefine modern payments.
           </p>
         </div>
