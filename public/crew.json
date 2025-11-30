@@ -1,0 +1,90 @@
+[
+  {
+    "imageUrl": "https://i.pravatar.cc/150?img=12",
+    "name": "Aiden Clarke",
+    "position": "Product Manager",
+    "description": "Leads the product vision and roadmap. Ensures every feature aligns with user needs.",
+    "socialNetworks": [
+      { "name": "Linkedin", "url": "https://www.linkedin.com/in/shahbaz-kamal/in/shahbaz-kamal/" },
+      { "name": "Facebook", "url": "https://www.facebook.com/tamim.chowdhury.543/" },
+      { "name": "Github", "url": "https://www.instagram.com/" }
+    ]
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?img=28",
+    "name": "Sophia Turner",
+    "position": "UI/UX Designer",
+    "description": "Designs seamless and modern user experiences. Focuses on clarity, flow, and usability.",
+    "socialNetworks": [
+      { "name": "Linkedin", "url": "https://www.linkedin.com/in/shahbaz-kamal/" },
+      { "name": "Facebook", "url": "https://www.facebook.com/tamim.chowdhury.543/" },
+      { "name": "Github", "url": "https://www.instagram.com/" }
+    ]
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?img=45",
+    "name": "Noah Mitchell",
+    "position": "Frontend Developer",
+    "description": "Builds fast and responsive interfaces. Works to deliver smooth and clean interactions.",
+    "socialNetworks": [
+      { "name": "Linkedin", "url": "https://www.linkedin.com/in/shahbaz-kamal/" },
+      { "name": "Facebook", "url": "https://www.facebook.com/tamim.chowdhury.543/" },
+      { "name": "Github", "url": "https://www.instagram.com/" }
+    ]
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?img=51",
+    "name": "Isabella Reed",
+    "position": "Backend Developer",
+    "description": "Develops secure and scalable backend systems. Ensures data flow remains stable and safe.",
+    "socialNetworks": [
+      { "name": "Linkedin", "url": "https://www.linkedin.com/in/shahbaz-kamal/" },
+      { "name": "Facebook", "url": "https://www.facebook.com/tamim.chowdhury.543/" },
+      { "name": "Github", "url": "https://www.instagram.com/" }
+    ]
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?img=33",
+    "name": "Liam Hayes",
+    "position": "Full Stack Developer",
+    "description": "Handles both front and backend development. Bridges features between UI and API layers.",
+    "socialNetworks": [
+      { "name": "Linkedin", "url": "https://www.linkedin.com/in/shahbaz-kamal/" },
+      { "name": "Facebook", "url": "https://www.facebook.com/tamim.chowdhury.543/" },
+      { "name": "Github", "url": "https://www.instagram.com/" }
+    ]
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?img=16",
+    "name": "Mia Parker",
+    "position": "Marketing Lead",
+    "description": "Drives brand growth and outreach strategy. Builds campaigns that improve user engagement.",
+    "socialNetworks": [
+      { "name": "Linkedin", "url": "https://www.linkedin.com/in/shahbaz-kamal/" },
+      { "name": "Facebook", "url": "https://www.facebook.com/tamim.chowdhury.543/" },
+      { "name": "Github", "url": "https://www.instagram.com/" }
+    ]
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?img=20",
+    "name": "Ethan Brooks",
+    "position": "Operations Manager",
+    "description": "Oversees daily team and workflow operations. Ensures smooth coordination across departments.",
+    "socialNetworks": [
+      { "name": "Linkedin", "url": "https://www.linkedin.com/in/shahbaz-kamal/" },
+      { "name": "Facebook", "url": "https://www.facebook.com/tamim.chowdhury.543/" },
+      { "name": "Github", "url": "https://www.instagram.com/" }
+    ]
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?img=39",
+    "name": "Ava Collins",
+    "position": "Financial Analyst",
+    "description": "Manages financial planning and data review. Provides insights that support smart decisions.",
+    "socialNetworks": [
+      { "name": "Linkedin", "url": "https://www.linkedin.com/in/shahbaz-kamal/" },
+      { "name": "Facebook", "url": "https://www.facebook.com/tamim.chowdhury.543/" },
+      { "name": "Github", "url": "https://www.instagram.com/" }
+    ]
+  }
+]

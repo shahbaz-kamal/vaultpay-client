@@ -11,16 +11,7 @@ import { TRANSACTION_TYPE } from "@/types/transaction.type";
 import { BanknoteArrowDown, Wallet2 } from "lucide-react";
 
 export default function AddMoney() {
-  // const cashOutData = [
-  //   {
-  //     id: "INV001",
-  //     status: "Paid",
-  //     agentEmail: "a@b.com",
-  //     amount: 20,
-  //     date: "2025-11-04T17:02:21.080+00:00",
-  //     invoiceUrl: "invoice",
-  //   },
-  // ];
+ 
 
   const { data: myTransaction } = useGetMyTransactionQuery({});
   
@@ -42,6 +33,7 @@ export default function AddMoney() {
 
   return (
     <div className="overflow-x-hidden">
+       <title> Add Money || Vaultpay</title>
       <SidebarHeader heading="Transaction" subHeading="Add Money" subSubHeading=""></SidebarHeader>
       <div className="container mx-auto px-5 py-6 space-y-6">
         <div className="w-full">

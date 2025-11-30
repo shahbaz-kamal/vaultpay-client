@@ -1,5 +1,5 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useRef, useState, type JSX } from "react";
+import { useEffect, useRef, useState, type JSX } from "react";
 
 import image from "@/assets/images/addMoney.png";
 import {
@@ -120,29 +120,31 @@ const featureData: FeatureProps[] = [
       {
         title: "Login / Register",
         description: "Sign in or register using your email. Google users can skip verification.",
-        icon: <LogIn size={28} />,
+        icon: <LogIn size={28} color="#ff6900" />,
       },
       {
         title: "Go to Cash Out",
         description: "Open your dashboard and select the ‘Cash Out’ option.",
-        icon: <Wallet size={28} />,
+        icon: <Wallet size={28} color="#ff6900" />,
       },
       {
         title: "Enter Withdrawal Amount",
         description: "Type the amount you want to withdraw and provide required details.",
-        icon: <DollarSign size={28} />,
+        icon: <DollarSign size={28} color="#ff6900" />,
       },
       {
         title: "Confirm Cash Out",
         description: "Review your request and confirm to complete the process.",
-        icon: <BadgeCheck size={28} />,
+        icon: <BadgeCheck size={28} color="#ff6900" />,
       },
     ],
   },
 ];
 
 export const HowItWorks = () => {
-  const currentRef = useRef(null);
+
+  const containerRef = useRef<HTMLElement | null>(null);
+  const initialAnimatedRef = useRef(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const totalTransactionType = featureData.length;
@@ -159,13 +161,14 @@ export const HowItWorks = () => {
         trigger: "#howItWorks",
         start: "top 75%", // animation starts when 75% of the section is visible
         toggleActions: "play none none none",
+        once: true,
       },
     });
 
     tl.from("#howItWorks-title", {
       opacity: 0,
       letterSpacing: "-6px",
-      duration: 1,
+      duration: 0.2,
       ease: "power2.out",
     })
       .from(
@@ -176,18 +179,18 @@ export const HowItWorks = () => {
           duration: 0.2,
           ease: "power2.out",
         },
-        "-=0.4"
+        "-=0.1"
       )
       .from(
         ".howItWorks-nav-item",
         {
           opacity: 0,
           y: 20,
-          duration: 0.5,
+          duration: 0.2,
           ease: "power2.out",
           stagger: 0.15,
         },
-        "-=0.2"
+        "-=0.1"
       )
 
       // 4️⃣ Left Arrow
@@ -199,7 +202,7 @@ export const HowItWorks = () => {
           duration: 0.2,
           ease: "power2.out",
         },
-        "-=0.2"
+        "-=0.1"
       )
       .from(
         ".howItWorks-card",
@@ -207,7 +210,7 @@ export const HowItWorks = () => {
           opacity: 0,
           y: 40,
           scale: 0.92,
-          duration: 0.5,
+          duration: 0.2,
           ease: "expo.out",
           stagger: 0.15,
         },
@@ -221,33 +224,55 @@ export const HowItWorks = () => {
         ease: "power2.out",
       });
 
-    // Floating animation (runs continuously)
+      tl.call(() => {
+        initialAnimatedRef.current = true;
+        // ensure final visible state and remove the inline transform/opacity that GSAP applied during enter
+        // so future animations don't conflict with those inline values.
+        gsap.set(".howItWorks-card", { opacity: 1, y: 0, scale: 1, clearProps: "all" });
+        gsap.set([".left-arrow", ".right-arrow", ".howItWorks-nav-item"], { clearProps: "all" });
+      });
   }, []);
 
-  useGSAP(
-    () => {
-      const cards = gsap.utils.toArray(".howItWorks-card");
+  // useGSAP(
+  //   () => {
+  //     const cards = gsap.utils.toArray(".howItWorks-card");
   
-      // reset instantly BEFORE animation (no flicker)
-      gsap.set(cards, { opacity: 0, y: 40, scale: 0.92 });
+  //     // reset instantly BEFORE animation (no flicker)
+  //     gsap.set(cards, { opacity: 0, y: 40, scale: 0.92 });
   
-      // animate in
-      gsap.to(cards, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.35,
-        ease: "power2.out",
-        stagger: 0.1,
-      });
-    },
-    { dependencies: [currentIndex], scope: currentRef }
-  );
+  //     // animate in
+  //     gsap.to(cards, {
+  //       opacity: 1,
+  //       y: 0,
+  //       scale: 1,
+  //       duration: 0.35,
+  //       ease: "power2.out",
+  //       stagger: 0.1,
+  //     });
+  //   },
+  //   { dependencies: [currentIndex], scope: currentRef }
+  // );
   
+  useEffect(() => {
+    if (!initialAnimatedRef.current) return; 
+    const cards = gsap.utils.toArray<HTMLDivElement>(".howItWorks-card");
   
 
+    gsap.fromTo(
+      cards,
+      { y: 40 }, // do not touch opacity or scale
+      {
+        y: 0,
+        duration: 0.35,
+        ease: "power2.out",
+        stagger: 0.15,
+        overwrite: "auto",
+      }
+    );
+  }, [currentIndex]);
+
   return (
-    <section id="howItWorks" className="container  mx-auto">
+    <section id="howItWorks" className="container  mx-auto px-4 md:px-0">
       <h2 id="howItWorks-title" className="text-3xl md:text-4xl font-bold text-center">
         How It <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">Works </span>
         Step-by-Step Guide
@@ -287,19 +312,9 @@ export const HowItWorks = () => {
           <ArrowBigRight size={30} />
         </button>
 
-        <div ref={currentRef} className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-10">
+        <div ref={containerRef} className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-10">
           {featureData[currentIndex].data.map((steps, idx) => (
-            // <Card key={idx} className="">
-            //   <CardHeader>
-            //     <CardTitle>{steps.title}</CardTitle>
-            //   </CardHeader>
-
-            //   <CardContent>{steps.description}</CardContent>
-
-            //   <CardFooter>
-            //     <img src={steps.image} alt="About feature" className="feature-img w-[200px] lg:w-[300px] mx-auto" />
-            //   </CardFooter>
-            // </Card>
+            
             <Card key={idx} className="bg-muted/50 howItWorks-card">
               <CardHeader>
                 <CardTitle className="grid gap-4 place-items-center">

@@ -23,22 +23,22 @@ export const HeroCards = () => {
       .then((data) => setTestimonialData(data))
       .catch((error) => console.log(error));
   }, []);
-  useGSAP(()=>{
-    gsap.from('.sandwitch-top-card', {
+  useGSAP(() => {
+    gsap.from(".sandwitch-top-card", {
       opacity: 0,
       yPercent: -100,
       duration: 1.8,
       ease: "expo.out",
       stagger: 0.06,
-      delay:0.5,
+      delay: 0.5,
     });
-    gsap.from('.sandwitch-bottom-card', {
+    gsap.from(".sandwitch-bottom-card", {
       opacity: 0,
       yPercent: 100,
       duration: 1.8,
       ease: "expo.out",
       stagger: 0.06,
-      delay:0.5
+      delay: 0.5,
     });
 
     const vibrateConfigs = [
@@ -47,7 +47,7 @@ export const HeroCards = () => {
       { selector: ".vibrate-left-bottom", x: 6, y: 1, delay: 2.2 },
       { selector: ".vibrate-right-bottom", x: -6, y: 2, delay: 2.4 },
     ];
-  
+
     vibrateConfigs.forEach(({ selector, x, y, delay }) => {
       gsap.to(selector, {
         x,
@@ -59,16 +59,11 @@ export const HeroCards = () => {
         delay,
       });
     });
-
-
-},[])
+  }, []);
   console.log(testimonialData);
   if (!testimonialData) return <LoadingPage></LoadingPage>;
   const firstReview = testimonialData[0];
   const secondReview = testimonialData[1];
-
-
-
 
   return (
     <div className="hidden xl:flex flex-row flex-wrap gap-8 relative w-[700px] h-[500px]">
@@ -91,7 +86,7 @@ export const HeroCards = () => {
 
       {/* Team */}
       <Card className="sandwitch-top-card vibrate-right-top absolute right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10">
-        <CardHeader className="mt-8 flex justify-center items-center pb-2">
+        <CardHeader className="mt-8 flex justify-center items-center pb-2 flex-col w-full">
           <img
             src={secondReview?.photoUrl || "https://i.pravatar.cc/150?img=58"}
             alt="user avatar"
@@ -184,12 +179,13 @@ export const HeroCards = () => {
             <span className="text-3xl font-bold">৳5</span>
             <span className="text-muted-foreground"> /send Money</span>
           </div>
-
-          
         </CardHeader>
 
         <CardContent>
-         <Link to="/register"> <Button className="w-full">Start For Free</Button></Link>
+          <Link to="/register">
+            {" "}
+            <Button className="w-full">Start For Free</Button>
+          </Link>
         </CardContent>
 
         <hr className="w-4/5 m-auto mb-4" />

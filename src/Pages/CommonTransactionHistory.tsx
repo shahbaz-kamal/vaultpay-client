@@ -24,6 +24,7 @@ export default function CommonTransactionHistory() {
   return (
     <div>
       <SidebarHeader heading="Dashboard" subHeading="Overview" subSubHeading="Transaction History" />
+      <title > Transaction History || Vaultpay</title>
       <div className="container mx-auto px-5 py-6">
         <DashboardTitle title={dashboardTitle} icon={<Wallet size={20} />}></DashboardTitle>
         <CommonTransactionHistoryTable></CommonTransactionHistoryTable>

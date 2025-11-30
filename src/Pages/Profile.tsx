@@ -6,6 +6,7 @@ export default function Profile() {
   return (
     <div>
       {" "}
+      <title > Profile || Vaultpay</title>
       <SidebarHeader heading="Dashboard" subHeading="Overview" subSubHeading="Profile" />
       <div className="container mx-auto space-y-6 px-5 py-6 ">
         <ProfileHeader />

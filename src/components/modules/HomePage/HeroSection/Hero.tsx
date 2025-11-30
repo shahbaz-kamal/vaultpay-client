@@ -36,7 +36,7 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="container grid xl:grid-cols-2 place-items-center py-0 xl:py-10 gap-10 px-4 md:px-0 ">
+    <section className="container mx-auto grid xl:grid-cols-2 place-items-center py-0 xl:py-10 gap-10 px-4 md:px-0 ">
       <div className="text-center xl:text-start space-y-6 ">
         <main className="text-5xl md:text-6xl font-bold sandwitch-top">
           <h1 className="inline">

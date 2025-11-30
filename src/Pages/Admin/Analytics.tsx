@@ -22,6 +22,7 @@ export default function Analytics() {
 
   return (
     <div>
+      <title > Analytics || Vaultpay</title>
       <SidebarHeader heading="Dashboard" subHeading="Analytics" subSubHeading="" />
 
       <div className=" mx-auto px-8 py-6">
