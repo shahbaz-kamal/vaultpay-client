@@ -10,12 +10,12 @@ export const contactUsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["CONTACTUS"],
     }),
-    updateContactUsMessage: builder.query<IResponse<null>, { id: string }>({
+    updateContactUsMessage: builder.mutation<IResponse<null>, { id: string }>({
       query: ({ id }) => ({
         url: `/client-message/${id}`,
         method: "PATCH",
       }),
-      providesTags: ["CONTACTUS"],
+      invalidatesTags: ["CONTACTUS"],
     }),
     getContactUsMessage: builder.query<IResponse<IContactUs[]>, undefined>({
       query: () => ({
@@ -27,4 +27,4 @@ export const contactUsApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useStoreContactUsMessageMutation, useUpdateContactUsMessageQuery, useGetContactUsMessageQuery } = contactUsApi;
+export const { useStoreContactUsMessageMutation, useUpdateContactUsMessageMutation, useGetContactUsMessageQuery } = contactUsApi;
