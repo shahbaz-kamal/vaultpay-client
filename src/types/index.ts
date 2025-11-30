@@ -1,3 +1,4 @@
+
 import type { ComponentType, JSX } from "react";
 
 export type { ISendOtp, ILogin, IRegister, IVerifyOtp,IForgetPassword,IResetPassword,ISetPassword,IChangePassword } from "./auth.type";
@@ -21,6 +22,7 @@ export type {
   IWalletOverviewAgent,
   IAgentStats
 } from "./stats.type.ts";
+export type {INewsLetter} from './newsLetter.type.ts'
 
 export interface INavigationLink {
   href: string;
