@@ -26,6 +26,7 @@ import ResetPassword from "@/Pages/ResetPassword";
 import ForgetPassword from "@/Pages/ForgetPassword";
 import About from "@/Pages/About";
 import ContactUs from "@/Pages/ContactUs";
+import Career from "@/Pages/Career";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
       { index: true, Component: Homepage },
       { path: "about", Component: About },
       { path: "contact-us", Component: ContactUs },
+      { path: "career", Component: Career },
 
       // Protected Routes
     ],

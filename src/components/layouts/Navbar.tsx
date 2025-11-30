@@ -22,6 +22,7 @@ const navigationLinks = [
   { href: "/user", label: "Dashboard", role: role.user },
   { href: "/agent", label: "Dashboard", role: role.agent },
   { href: "/contact-us", label: "Contact Us", role: "PUBLIC" },
+  { href: "/career", label: "Career", role: "PUBLIC" },
 ];
 
 export default function Navbar() {
