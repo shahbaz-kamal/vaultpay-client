@@ -1,11 +1,12 @@
 
+
 import type { ComponentType, JSX } from "react";
 
 export type { ISendOtp, ILogin, IRegister, IVerifyOtp,IForgetPassword,IResetPassword,ISetPassword,IChangePassword } from "./auth.type";
 export type { IAddMoney, ITransaction, ICashOut } from "./transaction.type";
 export type { IUser, IUpdateUser } from "./user.type";
 export type { ITestimonial} from './testimonial.type.ts'
-
+export type {IContactUs} from "./cotactUs.type.ts"
 export type {
   IAdminStats,
   IUserAndAgentOverview,

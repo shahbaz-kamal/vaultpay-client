@@ -25,6 +25,7 @@ import SslFailed from "@/Pages/SslCommerze/sslFailed";
 import ResetPassword from "@/Pages/ResetPassword";
 import ForgetPassword from "@/Pages/ForgetPassword";
 import About from "@/Pages/About";
+import ContactUs from "@/Pages/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
       // public routes
       { index: true, Component: Homepage },
       { path: "about", Component: About },
+      { path: "contact-us", Component: ContactUs },
 
       // Protected Routes
     ],
