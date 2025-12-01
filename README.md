@@ -97,6 +97,8 @@
   <img width="12" />
     <img src="https://skillicons.dev/icons?i=express" height="40" alt="express logo"  />
      <img width="12" />
+    <img src="https://i.ibb.co.com/HfWYSJ4M/passport-logo-png-seeklogo-273785.png" height="40" alt="express logo"  />
+     <img width="12" />
   <img src="https://cdn.simpleicons.org/mongodb/47A248" height="40" alt="mongodb logo"  />
   <img width="12" />
   <img src="https://img.icons8.com/?size=48&id=gKfcEStXI1Hm&format=png" height="40" alt="mongodb logo"  />
