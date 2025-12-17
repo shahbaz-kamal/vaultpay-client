@@ -23,7 +23,7 @@ export default function ProfilePictureUploader({ initialProfilePicture = null, o
   const previewUrl = files[0]?.preview || initialImage || null;
 
   const fileName = files[0]?.file.name || null;
-console.log("Inside image uploader",files)
+// console.log("Inside image uploader",files)
   useEffect(() => {
     if (files.length > 0) onChange(files[0].file);
     else onChange(null);

@@ -1,5 +1,15 @@
 import { baseApi } from "@/redux/baseApi";
-import type { IChangePassword, IForgetPassword, ILogin, IRegister, IResetPassword, IResponse, ISendOtp, ISetPassword, IVerifyOtp } from "@/types";
+import type {
+  IChangePassword,
+  IForgetPassword,
+  ILogin,
+  IRegister,
+  IResetPassword,
+  IResponse,
+  ISendOtp,
+  ISetPassword,
+  IVerifyOtp
+} from "@/types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -60,10 +70,10 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["USER"],
     }),
     changePassword: builder.mutation<IResponse<null>, IChangePassword>({
-      query: ({ oldPassword,newPassword }) => ({
+      query: ({ oldPassword, newPassword }) => ({
         url: "/auth/change-password",
         method: "POST",
-        data: { oldPassword,newPassword },
+        data: { oldPassword, newPassword },
       }),
       invalidatesTags: ["USER"],
     }),
@@ -95,5 +105,5 @@ export const {
   useForgetPasswordMutation,
   useResetPasswordMutation,
   useSetPasswordMutation,
-  useChangePasswordMutation
+  useChangePasswordMutation,
 } = authApi;

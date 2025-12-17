@@ -23,7 +23,7 @@ export default function ProfileHeader() {
 
   const { name, email, role, profilePicture, address, createdAt, auths } = userData?.data as IUser;
   const onlyGoogleAuthenticated = auths.length === 1 && auths.map((auth) => auth.provider.includes("google"));
-  console.log(onlyGoogleAuthenticated);
+  // console.log(onlyGoogleAuthenticated);
   return (
     <Card>
       <CardContent className="p-6">

@@ -40,9 +40,9 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
     };
     const toastId = toast.loading("Please Wait");
     try {
-      console.log(addMOneyInfo);
+      // console.log(addMOneyInfo);
       const result = await addMOney(addMOneyInfo).unwrap();
-      console.log(result.data);
+      // console.log(result.data);
       if (result.success) {
         window.open(result.data.payment, "_self");
         toast.success("Please Complete the Payment Process", { id: toastId });
@@ -50,7 +50,7 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.data.message, { id: toastId });
     }
   };

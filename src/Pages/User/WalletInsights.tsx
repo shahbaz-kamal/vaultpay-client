@@ -23,7 +23,7 @@ export default function WalletInsights() {
   const { data: statsData, isLoading: statsLoading } = useGetStatsForUserQuery(undefined);
 
   if (userLoading || statsLoading) return <LoadingPage></LoadingPage>;
-  console.log(statsData);
+  // console.log(statsData);
 
   const cardObject = [
     {

@@ -24,7 +24,7 @@ export function CommonTransactionHistoryTable() {
 
   const { data: userData, isLoading: userLoading } = useGetMeQuery(undefined);
 
-  console.log("My transaction", userData);
+  // console.log("My transaction", userData);
   const params = {
     searchTerm: searchText,
     to: toDate,
@@ -44,8 +44,8 @@ export function CommonTransactionHistoryTable() {
   });
 
   const transactionList: ITransaction[] = isUserOrAgent ? myTransactions?.data ?? [] : allTransactions?.data ?? [];
-  console.log("My Transaction", myTransactions);
-  console.log("All Transacxtion", allTransactions);
+  // console.log("My Transaction", myTransactions);
+  // console.log("All Transacxtion", allTransactions);
 
   console.log(transactionList);
   // useEffect(() => {

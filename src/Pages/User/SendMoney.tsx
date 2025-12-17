@@ -12,7 +12,7 @@ import { BanknoteArrowUp } from "lucide-react";
 export default function SendMoney() {
   const { data: myTransaction } = useGetMyTransactionQuery({});
 
-  console.log(myTransaction?.data);
+  // console.log(myTransaction?.data);
 
   const sendMoneyData: ITransactionItem[] =
     myTransaction?.data
@@ -27,7 +27,7 @@ export default function SendMoney() {
       }))
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 5) || [];
-  console.log(sendMoneyData);
+  // console.log(sendMoneyData);
 
   if (!myTransaction) return <LoadingPage></LoadingPage>;
   return (

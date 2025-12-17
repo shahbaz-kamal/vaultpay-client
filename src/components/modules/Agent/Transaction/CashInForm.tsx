@@ -25,7 +25,7 @@ export function CashInForm({ className, ...props }: React.ComponentProps<"div">)
   const [cashIn] = useCashInMutation();
   const { data: userData } = useGetMeQuery(undefined);
 
-    console.log(userData);
+    // console.log(userData);
   const form = useForm<CashInFormValues>({
     resolver: zodResolver(cashInSchema),
     defaultValues: {
@@ -43,16 +43,16 @@ export function CashInForm({ className, ...props }: React.ComponentProps<"div">)
     };
     const toastId = toast.loading("Cash In is Processing");
     try {
-      console.log(cashInInfo);
+      // console.log(cashInInfo);
       const result = await cashIn(cashInInfo).unwrap();
-      console.log(result.data);
+      // console.log(result.data);
       if (result.success) {
         toast.success("Cash In Successfull", { id: toastId });
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.data.message, { id: toastId });
     }
   };

@@ -51,7 +51,7 @@ export default function RecentTransactionTable<T extends ITransactionItem>({
         <TableCaption>
           <Button
             onClick={() => {
-              console.log(viewAlllink);
+              // console.log(viewAlllink);
             }}
           >
             <Link to={viewAlllink}>View All Transactions </Link>{" "}

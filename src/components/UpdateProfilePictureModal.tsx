@@ -39,7 +39,7 @@ const [profilePicture,setProfilePicture]=useState<File | null>(null)
         toast.success("Profile Picture Updated Successfully", { id: toastId });
       }
 
-      console.log("responseee", res);
+      // console.log("responseee", res);
       setOpen(false);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -48,7 +48,7 @@ const [profilePicture,setProfilePicture]=useState<File | null>(null)
   };
 
   // ✅ check if admin or super admin
-  console.log("Inside Update",profilePicture)
+  // console.log("Inside Update",profilePicture)
   return (
     <>
       <Button

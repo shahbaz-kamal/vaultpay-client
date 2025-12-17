@@ -23,7 +23,6 @@ import { Role } from "@/types/user.type";
 import { useNavigate } from "react-router";
 import LoadingPage from "../layouts/LoadingPage";
 
-
 interface IProps {
   requiredData: Partial<ITransaction>[];
 }
@@ -48,7 +47,7 @@ export function TransactionHistory({ requiredData }: IProps) {
     any
   >[];
 
-  const data = requiredData.map((item, index) => ({
+  const data = (requiredData || []).map((item, index) => ({
     id: index + 1,
     transactionDate: item.createdAt,
     ...item,
@@ -84,7 +83,6 @@ export function TransactionHistory({ requiredData }: IProps) {
   if (!userData) return <LoadingPage></LoadingPage>;
   return (
     <div className="w-full">
-
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>

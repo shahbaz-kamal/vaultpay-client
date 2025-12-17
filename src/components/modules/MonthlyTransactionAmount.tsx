@@ -43,7 +43,7 @@ interface IProps {
 export function MonthlyTransactionAmount({ chartData }: IProps) {
   // console.log("From Monthly Transaction Amount", chartData);
   const lengthOfChartData = chartData.length;
-  console.log(lengthOfChartData);
+  // console.log(lengthOfChartData);
   const fromDate = {
     month: chartData[0].month,
     year: chartData[0].year,
@@ -54,7 +54,7 @@ export function MonthlyTransactionAmount({ chartData }: IProps) {
   };
 
   const trendingUpPercantage = calculateTrendingUpPercantageFromLastMonth(chartData, lengthOfChartData);
-  console.log(trendingUpPercantage);
+  // console.log(trendingUpPercantage);
   return (
     <Card>
       <CardHeader>

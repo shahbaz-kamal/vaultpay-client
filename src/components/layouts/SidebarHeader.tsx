@@ -74,7 +74,7 @@ export default function SidebarHeader({ heading, subHeading, subSubHeading }: IP
             </Button>
           )}
           {userData?.data?.email && (
-            <Button onClick={handleLogout} variant="outline" size="sm" className="text-sm ">
+            <Button onClick={handleLogout} variant="outline" size="sm" className="text-sm hover:cursor-pointer">
               Logout
             </Button>
           )}

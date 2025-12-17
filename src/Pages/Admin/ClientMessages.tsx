@@ -10,7 +10,7 @@ const ClientMessages = () => {
   const [updateContactUsMessage] = useUpdateContactUsMessageMutation();
 
   if (!clientMessageData?.success) return <LoadingPage />;
-  console.log(clientMessageData);
+  // console.log(clientMessageData);
   const handleMarkAsRead = async (messageId: string) => {
     const toastId = toast.loading("Marking as read...");
     try {
@@ -22,7 +22,7 @@ const ClientMessages = () => {
       }
     } catch (error) {
       toast.error("Failed to mark as read", { id: toastId });
-      console.log("Failed to mark as read", error);
+      // console.log("Failed to mark as read", error);
     }
   };
 

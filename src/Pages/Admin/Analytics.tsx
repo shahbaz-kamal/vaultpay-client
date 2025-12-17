@@ -14,15 +14,15 @@ import type { ITopPerformer } from "@/types/stats.type";
 import { BadgeDollarSign, Medal, RefreshCcw, Users } from "lucide-react";
 
 export default function Analytics() {
-  const { data: userData, isLoading } = useGetMeQuery(undefined);
+  const { data: userData } = useGetMeQuery(undefined);
   const { data: analyticsData, isLoading: analyticsLoading } = useGetStatsForAdminQuery(undefined);
-  if (isLoading || analyticsLoading) return <LoadingPage></LoadingPage>;
-  console.log(userData);
-  console.log(analyticsData)
+  if (!userData || analyticsLoading) return <LoadingPage></LoadingPage>;
+  // console.log(userData);
+  // console.log(analyticsData)
 
   return (
     <div>
-      <title > Analytics || Vaultpay</title>
+      <title> Analytics || Vaultpay</title>
       <SidebarHeader heading="Dashboard" subHeading="Analytics" subSubHeading="" />
 
       <div className=" mx-auto px-8 py-6">
@@ -33,7 +33,9 @@ export default function Analytics() {
         {/* 💰 System Balance & Revenue */}
         <div className="mt-6"></div>
         <DashboardTitle title="System Balance & Revenue" icon={<BadgeDollarSign size={20} />}></DashboardTitle>
-        <SystemBalanceAndRevenue requiredData={analyticsData?.data.systemBalanceAndRevenue as ISystemBalanceAndRevenue}></SystemBalanceAndRevenue>
+        <SystemBalanceAndRevenue
+          requiredData={analyticsData?.data.systemBalanceAndRevenue as ISystemBalanceAndRevenue}
+        ></SystemBalanceAndRevenue>
 
         {/* 🔄 Transaction Overview*/}
         <div className="mt-6"></div>

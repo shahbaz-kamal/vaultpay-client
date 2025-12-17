@@ -12,7 +12,7 @@ import { BanknoteArrowUp } from "lucide-react";
 export default function CashOut() {
   const { data: myTransaction } = useGetMyTransactionQuery({});
 
-  console.log(myTransaction?.data);
+  // console.log(myTransaction?.data);
 
   const cashOutData: ITransactionItem[] =
     myTransaction?.data
@@ -27,7 +27,7 @@ export default function CashOut() {
       }))
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 5) || [];
-  console.log(cashOutData);
+  // console.log(cashOutData);
 
   if (!myTransaction) return <LoadingPage></LoadingPage>;
   return (

@@ -34,16 +34,21 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
       email: data.email,
       password: data.password,
     };
+    const toastId = toast.loading("Registering");
     try {
-      console.log(userInfo);
+      // console.log(userInfo);
       const result = await register(userInfo).unwrap();
-      console.log(result);
-      toast.success("Registration successful! Please check your email to verify your account.");
-      navigate("/verify");
+      // console.log("From RegisterPage", result);
+      if (result.success) {
+        toast.success("Registration successful! Please click send OTP  to verify your account.", { id: toastId, duration: 3000 });
+        navigate("/verify", {
+          state: { email: result?.data?.email },
+        });
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
-      toast.error(error.messagee);
+      // console.log(error);
+      toast.error(error.data.message, { id: toastId });
     }
   };
 
@@ -121,7 +126,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"div"
                   <Link to="/login">Login now</Link>
                 </span>
               </FieldDescription>
-              <Button className=" w-full" type="submit">
+              <Button className=" w-full hover:cursor-pointer" type="submit">
                 Register
               </Button>
             </form>

@@ -28,7 +28,7 @@ export default function ChangePasswordModal() {
   const onSubmit = async (data: ChangePasswordFormValue) => {
     const toastId = toast.loading("Changing Password");
 
-    console.log("FORM SUBMITTED:", data);
+    // console.log("FORM SUBMITTED:", data);
 
     try {
       const res = await changePassword({
@@ -40,7 +40,7 @@ export default function ChangePasswordModal() {
         toast.success("Password changed successfully", { id: toastId });
       }
 
-        console.log("responseee", res);
+        // console.log("responseee", res);
       setOpen(false);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

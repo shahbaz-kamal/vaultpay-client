@@ -20,7 +20,7 @@ export function VerifyResetPasswordForm({ className, ...props }: React.Component
   const token = searchParams.get("token") || "";
 
   
-  console.log(id, token);
+  // console.log(id, token);
 
 
   const [resetPassword] = useResetPasswordMutation();
@@ -35,7 +35,7 @@ export function VerifyResetPasswordForm({ className, ...props }: React.Component
   const onSubmit = async (data: z.infer<typeof resetPasswordSchema>) => {
     const toastId = toast.loading("Resetting Password");
     try {
-      console.log(data);
+      // console.log(data);
       const userInfo = {
         newPassword: data.newPassword,
         id,
@@ -48,7 +48,7 @@ export function VerifyResetPasswordForm({ className, ...props }: React.Component
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };

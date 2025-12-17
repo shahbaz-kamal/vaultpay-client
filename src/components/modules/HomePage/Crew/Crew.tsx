@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useState } from "react";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import { toast } from "sonner";
 
 interface TeamProps {
   imageUrl: string;
@@ -96,9 +97,9 @@ export const Crew = () => {
     fetch("crew.json")
       .then((res) => res.json())
       .then((data) => setTeamList(data))
-      .catch((error) => console.log(error));
+      .catch((error) => toast.error(error));
   }, []);
-// if(!teamList) return <LoadingPage></LoadingPage>
+  // if(!teamList) return <LoadingPage></LoadingPage>
   const socialIcon = (iconName: string) => {
     switch (iconName) {
       case "Linkedin":
@@ -153,7 +154,7 @@ export const Crew = () => {
       </h2>
 
       <p className="team-description text-center mt-4 mb-10 text-xl text-muted-foreground">
-      Meet the passionate people who drive VaultPay forward with innovation, dedication, and teamwork.
+        Meet the passionate people who drive VaultPay forward with innovation, dedication, and teamwork.
       </p>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 gap-y-10">

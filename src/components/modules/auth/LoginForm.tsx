@@ -33,15 +33,18 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       password: data.password,
     };
     try {
-      console.log(userInfo);
+      // console.log(userInfo);
+
       const result = await login(userInfo).unwrap();
-      console.log(result);
-      toast.success("Login successful!");
-      navigate("/");
+      // console.log(result);
+      if (result.success) {
+        toast.success("Login successful!");
+        navigate("/");
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
       if (error.data.message === "User is Not Verified") {
         toast.error(error.data.message);
         navigate("/verify", { state: data.email });
@@ -102,8 +105,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                   <Link to="/register">Register now</Link>
                 </span>
               </FieldDescription>
-              
-              <Button className=" w-full" type="submit">
+
+              <Button className=" w-full hover:cursor-pointer" type="submit">
                 Login
               </Button>
             </form>

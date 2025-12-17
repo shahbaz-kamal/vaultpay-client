@@ -71,8 +71,8 @@ export default function UpdateProfileModal({ userData, currentUserRole, buttonTe
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
 
-    console.log("FORM SUBMITTED:", data);
-    console.log("from formdata", formData.get("data"));
+    // console.log("FORM SUBMITTED:", data);
+    // console.log("from formdata", formData.get("data"));
 
     try {
       const res = await updateUser({

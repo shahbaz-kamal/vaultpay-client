@@ -12,7 +12,7 @@ import { BanknoteArrowUp } from "lucide-react";
 export default function CashIn() {
   const { data: myTransaction } = useGetMyTransactionQuery({});
 
-  console.log(myTransaction?.data);
+  // console.log(myTransaction?.data);
 
   const cashInData: ITransactionItem[] =
     myTransaction?.data

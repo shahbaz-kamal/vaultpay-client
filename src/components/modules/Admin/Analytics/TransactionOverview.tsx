@@ -20,7 +20,7 @@ interface IChartDataSource {
   transactionData: number;
 }
 export default function TransactionOverview({ requiredData }: ITransactionOverviewProps) {
-  console.log("TRO", requiredData);
+  // console.log("TRO", requiredData);
   const cardObject = [
     {
       title: "Total Transactions",

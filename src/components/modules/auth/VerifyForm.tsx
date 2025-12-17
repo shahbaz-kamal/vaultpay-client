@@ -22,8 +22,19 @@ export function VerifyForm({ className, ...props }: React.ComponentProps<"div">)
   const [sendOtp] = useSendOtpMutation();
   const [verifyOtp] = useVerifyOtpMutation();
 
-  const [email] = useState(location.state || "");
+  const getInitialEmail = () => {
+    if (!location.state) return "";
+    if (typeof location.state === "string") return location.state;
+    if (typeof location.state === "object" && location.state.email) {
+      return location.state.email;
+    }
+    return "";
+  };
 
+  const [email] = useState(getInitialEmail());
+
+  // console.log("From verify page", location);
+  // console.log("From verify Page", email);
   const form = useForm<z.infer<typeof otpSchema>>({
     resolver: zodResolver(otpSchema),
     defaultValues: { otp: "" },
@@ -32,19 +43,19 @@ export function VerifyForm({ className, ...props }: React.ComponentProps<"div">)
   const onSubmit = async (data: z.infer<typeof otpSchema>) => {
     const toastId = toast.loading("Verifying OTP");
     try {
-      console.log(data);
+      // console.log(data);
       const userInfo = {
         email,
         otp: data.otp,
       };
       const result = await verifyOtp(userInfo).unwrap();
       if (result.success) {
-        toast.success("OTP verified successfully.", { id: toastId });
+        toast.success("OTP verified successfully. PLease Login to continue", { id: toastId, duration: 3000 });
         navigate("/login");
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };

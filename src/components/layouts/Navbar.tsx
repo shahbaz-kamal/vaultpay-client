@@ -40,7 +40,7 @@ export default function Navbar() {
       toast.success("Log Out Successful", { id: toastId });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.data.message);
     }
   };
@@ -186,7 +186,7 @@ export default function Navbar() {
             </Button>
           )}
           {userData?.data?.email && (
-            <Button onClick={handleLogout} variant="outline" size="sm" className="text-sm ">
+            <Button onClick={handleLogout} variant="outline" size="sm" className="text-sm cursor-pointer">
               Logout
             </Button>
           )}

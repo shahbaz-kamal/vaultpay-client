@@ -65,14 +65,14 @@ const ContactUs = () => {
     };
     if (data.subject) messageData.subject = data.subject as string;
     const toastId = toast.loading("Sending Message");
-    console.log("MessageData", messageData);
+    // console.log("MessageData", messageData);
     try {
       const result = await storeContactUsMessage(messageData).unwrap();
       if (result.success) {
         toast.success("Your Message Sent Successfully", { id: toastId });
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Failed To Send Message", { id: toastId });
     }
   };

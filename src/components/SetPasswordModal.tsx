@@ -27,7 +27,7 @@ export default function SetPasswordModal() {
   const onSubmit = async (data: SetPasswordFormValue) => {
     const toastId = toast.loading("Setting Password");
 
-    console.log("FORM SUBMITTED:", data);
+    // console.log("FORM SUBMITTED:", data);
 
     try {
       const res = await setPassword({

@@ -17,7 +17,7 @@ export default function WalletSummary() {
   const { data: statsData, isLoading: statsLoading } = useGetStatsForAgentQuery(undefined);
 
   if (userLoading || statsLoading) return <LoadingPage></LoadingPage>;
-  console.log(statsData);
+  // console.log(statsData);
 
   const cardObject = [
     {

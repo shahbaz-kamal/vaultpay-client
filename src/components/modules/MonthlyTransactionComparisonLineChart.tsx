@@ -40,10 +40,10 @@ interface IProps {
   chartData: IMonthlyTransactionAmountByType[];
 }
 export function MonthlyTransactionComparisonLineChart({ chartData }: IProps) {
-  console.log("From line chart", chartData);
+  // console.log("From line chart", chartData);
 
   const lengthOfChartData = chartData.length;
-  console.log(lengthOfChartData);
+  // console.log(lengthOfChartData);
   const fromDate = {
     month: chartData[0].month,
     year: chartData[0].year,
@@ -53,7 +53,7 @@ export function MonthlyTransactionComparisonLineChart({ chartData }: IProps) {
     year: chartData[lengthOfChartData - 1].year,
   };
   const isSendMoneyExist: boolean = chartData.some((item) => item.SEND_MONEY !== undefined);
-  console.log(isSendMoneyExist);
+  // console.log(isSendMoneyExist);
   return (
     <Card>
       <CardHeader>

@@ -30,7 +30,7 @@ export default function UserManageMentTable({ role }: IProps) {
   });
 
   const { data: currentUserData } = useGetMeQuery(undefined);
-  console.log(allUsers);
+  // console.log(allUsers);
   if (!allUsers || allLoading) return <LoadingPage />;
 
   return (

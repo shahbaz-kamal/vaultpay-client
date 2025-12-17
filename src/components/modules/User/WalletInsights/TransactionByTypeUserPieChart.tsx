@@ -9,8 +9,6 @@ import type { PieSectorDataItem } from "recharts/types/polar/Pie";
 
 export const description = "An interactive pie chart";
 
-
-
 const chartConfig = {
   visitors: {
     label: "Visitors",
