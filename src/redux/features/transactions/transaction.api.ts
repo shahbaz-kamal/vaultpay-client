@@ -5,7 +5,7 @@ import type { IAddMoney, ICashOut, IResponse, ITransaction } from "@/types";
 import type { ICashIn, ISendMOney } from "@/types/transaction.type";
 export const transactionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    addMOney: builder.mutation<IResponse<any>, IAddMoney>({
+    addMOney: builder.mutation<IResponse<{ payment: string; result: ITransaction }>, IAddMoney>({
       query: (addMOneyInfo) => ({
         url: "/transaction/add-money",
         method: "POST",

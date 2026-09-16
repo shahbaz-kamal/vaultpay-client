@@ -20,7 +20,7 @@ import { useAppDispatch } from "@/redux/hooks";
 interface IProps {
   heading: string;
   subHeading: string;
-  subSubHeading: string;
+  subSubHeading?: string;
 }
 export default function SidebarHeader({ heading, subHeading, subSubHeading }: IProps) {
   const { data: userData } = useGetMeQuery(undefined);

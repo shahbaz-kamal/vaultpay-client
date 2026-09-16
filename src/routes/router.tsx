@@ -1,8 +1,6 @@
 import App from "@/App";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 
-
-
 import Login from "@/Pages/Auth/Login";
 
 import Register from "@/Pages/Auth/Register";

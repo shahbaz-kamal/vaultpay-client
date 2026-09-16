@@ -8,7 +8,7 @@ import type {
   IResponse,
   ISendOtp,
   ISetPassword,
-  IVerifyOtp
+  IVerifyOtp,
 } from "@/types";
 
 export const authApi = baseApi.injectEndpoints({

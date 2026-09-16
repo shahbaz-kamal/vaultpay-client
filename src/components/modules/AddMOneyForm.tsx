@@ -43,9 +43,11 @@ export function AddMoneyForm({ className, ...props }: React.ComponentProps<"div"
       // console.log(addMOneyInfo);
       const result = await addMOney(addMOneyInfo).unwrap();
       // console.log(result.data);
-      if (result.success) {
+      if (result.success && result.data?.payment) {
+        toast.success("Redirecting to payment gateway...", { id: toastId });
         window.open(result.data.payment, "_self");
-        toast.success("Please Complete the Payment Process", { id: toastId });
+      } else {
+        toast.error("Could not start the payment process. Please try again.", { id: toastId });
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

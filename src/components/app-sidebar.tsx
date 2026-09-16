@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Logo } from "@/assets/icons/Logo";
+
 import {
   Sidebar,
   SidebarContent,
@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { useGetMeQuery } from "@/redux/features/auths/auth.api";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 import { Link, useLocation } from "react-router";
+import { Logo } from "@/assets/icons/Logo";
 
 // This is sample data.
 

@@ -30,7 +30,6 @@ export default function Navbar() {
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
 
-
   const handleLogout = async () => {
     const toastId = toast.loading("Logging Out...");
     try {
@@ -47,7 +46,6 @@ export default function Navbar() {
 
   useGSAP(() => {
     gsap.set("header", {
-    
       backdropFilter: "blur(0px)",
       y: -100, // Set the starting position instantly
     });
@@ -65,7 +63,6 @@ export default function Navbar() {
         start: "bottom top",
         // end: "top top-=-1",
         toggleActions: "play none none reverse",
-   
       },
     });
 
@@ -78,10 +75,9 @@ export default function Navbar() {
         backdropFilter: "blur(10px)",
         duration: 0.5,
         ease: "power1.inOut",
-     
       }
     );
-}, []);
+  }, []);
 
   return (
     <header className=" border-b px-4 fixed w-full top-0 left-0 right-0 z-50 bg-background/50">
